@@ -91,7 +91,7 @@ void PastureProperties::serialize( QVariantMap& out ) const
 Pasture::Pasture( QList<QPair<Position, bool>> tiles, Game* game ) :
 	WorldObject( game )
 {
-	m_name = "Pasture";
+	m_name = "Пастбище";
 
 	for ( auto p : tiles )
 	{

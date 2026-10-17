@@ -545,7 +545,7 @@ void AggregatorInventory::updateWatchedItem( QString cat, QString group, QString
 		if( gwi.category == cat && gwi.group == group && gwi.item == item && gwi.material == mat )
 		{
 			gwi.count = g->inv()->itemCount( item, mat );
-			gwi.guiString = S::s( "$MaterialName_" + mat ) + " " + S::s( "$ItemName_" + item ) + ": " + QString::number( gwi.count );
+			gwi.guiString = S::materialItem( mat, item ) + ": " + QString::number( gwi.count );
 			break;
 		}
 	}

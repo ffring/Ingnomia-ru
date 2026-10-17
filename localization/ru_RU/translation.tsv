@@ -1,0 +1,1228 @@
+id	en	ru
+$Floor	floor	пол
+$Wall	wall	стена
+$PileOf	Pile of	Груда
+$Stockpile	Stockpile	Склад
+$Stockpiles	Stockpiles	Склады
+$Grove	Grove	Роща
+$Farm	Farm	Поле
+$Pasture	Pasture	Пастбище
+$Room	Room	Комната
+$Door	Door	Дверь
+$Population	Population	Население
+$Kingdom	Kingdom	Королевство
+$GnomeList	Gnome List	Список гномов
+$Professions	Professions	Профессии
+$Skills	Skills	Навыки
+$Inventory	Inventory	Инвентарь
+$Build	Build	Строительство
+$Gnome	Gnome	Гном
+$Workshop	Workshop	Мастерская
+$Debug	Debug	Отладка
+$Overview	Overview	Обзор
+$LastActions	Last Actions	Последние действия
+$PlantTree	Plant Tree	Посадить дерево
+$BuildStorage	Build Storage	Построить хранилище
+$BuildFurniture	Build Furniture	Поставить мебель
+$BuildDoor	Build Door	Поставить дверь
+$BuildUtility	Build Utility	Обустроить
+$BuildItem	Build Item	Построить предмет
+$Utility	Utility	Обустройство
+$ItemHistory	Item History	История предмета
+$ButtonBack	Back	Назад
+$TechName_TechWood	wood tech	обработка дерева
+$TechName_TechStone	stone tech	обработка камня
+$TechName_TechMetal	metal tech	металлургия
+$TechName_TechEngineer	engineering tech	инженерное дело
+$TechName_TechCloth	cloth tech	ткачество
+$TechName_TechFood	food tech	кулинария
+$TechName_TechMilitary	military tech	военное дело
+$TechName_TechMagic	magic tech	магия
+$TechName_TechLeather	leather tech	кожевенное дело
+$SeasonName_Spring	Spring	Весна
+$SeasonName_Summer	Summer	Лето
+$SeasonName_Autumn	Autumn	Осень
+$SeasonName_Winter	Winter	Зима
+$WorkshopName_Crude	crude workbench	простой верстак
+$WorkshopName_Carpenter	carpenter	столярная мастерская
+$WorkshopName_Sawmill	sawmill	лесопилка
+$WorkshopName_Kitchen	kitchen	кухня
+$WorkshopName_Stonecutter	stonecutter	мастерская камнереза
+$WorkshopName_Stonemason	stonemason	мастерская каменщика
+$WorkshopName_Distillery	distillery	винокурня
+$WorkshopName_Forge	forge	горн
+$WorkshopName_Furnace	furnace	плавильная печь
+$WorkshopName_Kiln	kiln	обжиговая печь
+$WorkshopName_Blacksmith	blacksmith	кузница
+$WorkshopName_Metalworker	metal worker	слесарная мастерская
+$WorkshopName_Gemcutter	gem cutter	гранильная мастерская
+$WorkshopName_Loom	loom	ткацкий станок
+$WorkshopName_Stonecarver	stone carver	мастерская резчика по камню
+$WorkshopName_Woodcarver	wood carver	мастерская резчика по дереву
+$WorkshopName_Jeweler	jeweler	ювелирная мастерская
+$WorkshopName_Tailor	tailor	швейная мастерская
+$WorkshopName_Bonecarver	bone carver	мастерская резчика по кости
+$WorkshopName_Butcher	butcher	бойня
+$WorkshopName_MarketStall	market stall	рыночный прилавок
+$WorkshopName_Prospector	prospector	мастерская рудознатца
+$WorkshopName_Dyer	dyer	красильня
+$WorkshopName_Fishery	fishery	рыбный промысел
+$JobName_HauleItem	Haule item	Перенести предмет
+$JobName_HauleMultipleItems	Haule multiple items	Перенести несколько предметов
+$JobName_Fish	Fish	Ловить рыбу
+$JobName_Mine	Mine	Копать
+$JobName_DigHole	Dig hole	Выкопать яму
+$JobName_ExplorativeMine	Explorative mine	Копать по жиле
+$JobName_RemoveRamp	Remove ramp	Убрать пандус
+$JobName_RemoveFloor	Remove floor	Убрать пол
+$JobName_Deconstruct	Deconstruct	Разобрать
+$JobName_RemovePlant	Remove plant	Убрать растение
+$JobName_MineStairsUp	Mine stairs up	Вырубить лестницу вверх
+$JobName_DigStairsDown	Dig stairs down	Выкопать лестницу вниз
+$JobName_DigRampDown	Dig ramp down	Выкопать пандус вниз
+$JobName_BuildWall	Build wall	Построить стену
+$JobName_BuildFence	Build fence	Построить ограду
+$JobName_BuildFloor	Build floor	Настелить пол
+$JobName_BuildWallFloor	Build wall with floor	Построить стену с полом
+$JobName_BuildStairs	Build stairs	Построить лестницу
+$JobName_BuildScaffold	Build scaffolding	Построить леса
+$JobName_BuildRamp	Build ramp	Построить пандус
+$JobName_BuildRampCorner	Build ramp corner	Построить угловой пандус
+$JobName_BuildWorkshop	Build workshop	Построить мастерскую
+$JobName_BuildStorage	Build storage	Построить хранилище
+$JobName_BuildFurniture	build furniture	поставить мебель
+$JobName_BuildItem	Build item	Построить предмет
+$JobName_BuildDoor	Build door	Поставить дверь
+$JobName_BuildTorch	Build torch	Поставить факел
+$JobName_Harvest	Harvest	Собрать урожай
+$JobName_HarvestTree	harvest tree	собрать плоды с дерева
+$JobName_PlantTree	Plant tree	Посадить дерево
+$JobName_PlantTreeGrove	Plant tree in grove	Посадить дерево в роще
+$JobName_Till	Till	Вспахать
+$JobName_Plant	Plant	Посадить
+$JobName_PlantFarm	Plant farm	Засеять поле
+$JobName_FellTree	Fell tree	Срубить дерево
+$JobName_CraftAtWorkshop	Craft at workshop	Работать в мастерской
+$JobName_ManMarketStall	Man market stall	Встать за прилавок
+$JobName_ButcherFish	Butcher fish	Разделать рыбу
+$JobName_LeadAnimalToPasture	Lead animal to pasture	Отвести животное на пастбище
+$JobName_HarvestAnimal	Harvest animal	Собрать продукты с животного
+$JobName_ButcherAnimal	Butcher animal	Забить животное
+$JobName_Magic_Nature_SpeedGrowth	Cast nature spell,speed up growth	Магия природы: ускорить рост
+$JobName_Magic_Geomancy_RevealOre	Cast geomancy spell,reveal ore	Геомантия: найти руду
+$ItemName_AlarmBell	alarm bell	тревожный колокол
+$ItemName_AlarmBellBase	alarm bell base	основание тревожного колокола
+$ItemName_AlarmBellBell	alarm bell bell	чаша колокола
+$ItemName_AmmoPouch	ammo pouch	подсумок
+$ItemName_Anvil	anvil	наковальня
+$ItemName_AppleTree	apple tree	яблоня
+$ItemName_Bag	bag	сумка
+$ItemName_BallPeenHammer	ballpeen hammer	слесарный молоток
+$ItemName_Bandage	bandage	бинт
+$ItemName_Bar	bar	слиток
+$ItemName_Barrel	barrel	бочка
+$ItemName_Beans	beans	бобы
+$ItemName_Bed	bed	кровать
+$ItemName_WoodBedFrame	wood bed frame	каркас деревянной кровати
+$ItemName_Beer	beer	пиво
+$ItemName_Bellows	bellows	мехи
+$ItemName_Berries	berries	ягоды
+$ItemName_Block	block	блок
+$ItemName_Brick	brick	кирпич
+$ItemName_Bolt	bolt of cloth	рулон ткани
+$ItemName_Bone	bone	кость
+$ItemName_BoneShirt	bone shirt	костяная рубаха
+$ItemName_Bread	bread	хлеб
+$ItemName_Bucket	bucket	ведро
+$ItemName_Cabinet	cabinet	шкаф
+$ItemName_Chair	chair	стул
+$ItemName_Cheese	cheese	сыр
+$ItemName_CheeseOmelette	cheese omelette	омлет с сыром
+$ItemName_Chisel	chisel	долото
+$ItemName_Clipping	clipping	черенок
+$ItemName_Coin	coin	монета
+$ItemName_Crate	crate	ящик
+$ItemName_CuttingWheel	cutting wheel	отрезной круг
+$ItemName_Door	door	дверь
+$ItemName_Dresser	dresser	комод
+$ItemName_Dye	dye	краситель
+$ItemName_Egg	egg	яйцо
+$ItemName_FancyBed	four poster bed	кровать с балдахином
+$ItemName_FancyBedFrame	four poster bed frame	каркас кровати с балдахином
+$ItemName_FellingAxeBase	felling axe base	топорище
+$ItemName_FellingAxeHead	felling axe head	лезвие топора
+$ItemName_FellingAxe	felling axe	топор лесоруба
+$ItemName_File	file	напильник
+$ItemName_FishBone	fish bone	рыбья кость
+$ItemName_Fruit	fruit	фрукт
+$ItemName_Furnace	furnace	печь
+$ItemName_Gem	gem	самоцвет
+$ItemName_GemmedRing	gemmed ring	кольцо с самоцветом
+$ItemName_GemmedNecklace	gemmed necklace	ожерелье с самоцветом
+$ItemName_Grain	grain	зерно
+$ItemName_Haft	haft	рукоять
+$ItemName_Hearth	hearth	очаг
+$ItemName_Hide	hide	шкура
+$ItemName_Hilt	hilt	эфес
+$ItemName_Knife	knife	нож
+$ItemName_KnifeBlade	knife blade	клинок ножа
+$ItemName_KnifeHilt	knife hilt	рукоять ножа
+$ItemName_LeatherStrap	leather strap	кожаный ремень
+$ItemName_Leaves	leaves	листья
+$ItemName_LogFloor	log floor	бревенчатый пол
+$ItemName_LogWall	log wall	бревенчатая стена
+$ItemName_Loom	loom	ткацкий станок
+$ItemName_Mattress	mattress	матрас
+$ItemName_Meat	meat	мясо
+$ItemName_Milk	milk	молоко
+$ItemName_Mold	mold	литейная форма
+$ItemName_Mushroom	mushroom	гриб
+$ItemName_MushroomOmelette	mushroom omelette	омлет с грибами
+$ItemName_Necklace	necklace	ожерелье
+$ItemName_Needle	needle	игла
+$ItemName_OrangeTree	orange tree	апельсиновое дерево
+$ItemName_Padding	padding	подкладка
+$ItemName_PetRock	pet rock	камень-питомец
+$ItemName_Pickaxe	pickaxe	кирка
+$ItemName_PickaxeBase	pickaxe base	черенок кирки
+$ItemName_PickaxeHead	pickaxe head	наконечник кирки
+$ItemName_Pillar	pillar	колонна
+$ItemName_OakTree	oak tree	дуб
+$ItemName_WillowTree	willow tree	ива
+$ItemName_PineTree	pine tree	сосна
+$ItemName_Plank	plank	доска
+$ItemName_PlankStairs	plank stairs	дощатая лестница
+$ItemName_BlockStairs	block stairs	блочная лестница
+$ItemName_PuzzleBox	puzzle box	шкатулка-головоломка
+$ItemName_Radish	fruit	плод
+$ItemName_RawCloth	raw cloth	сырая ткань
+$ItemName_RawCoal	raw coal	уголь
+$ItemName_RawGem	raw gem	неогранённый самоцвет
+$ItemName_RawOre	raw ore	руда
+$ItemName_RawSoil	raw soil	грунт
+$ItemName_RawStone	raw stone	камень
+$ItemName_RawWood	raw wood	бревно
+$ItemName_Ring	ring	кольцо
+$ItemName_Sandwich	sandwich	бутерброд
+$ItemName_Sack	sack	мешок
+$ItemName_Sawblade	sawblade	пильный диск
+$ItemName_Seed	seed	семена
+$ItemName_Skull	skull	череп
+$ItemName_SkullHelmet	skull helmet	шлем из черепа
+$ItemName_SoilFloor	soil floor	земляной пол
+$ItemName_SoilStairs	soil stairs	земляная лестница
+$ItemName_SoilWall	soil wall	земляная стена
+$ItemName_Statue	statue	статуя
+$ItemName_Statuette	statuette	статуэтка
+$ItemName_Stick	stick	палка
+$ItemName_StoneFloor	stone floor	каменный пол
+$ItemName_StoneStairs	stone stairs	каменная лестница
+$ItemName_StoneWall	stone wall	каменная стена
+$ItemName_Straw	straw	солома
+$ItemName_String	string	нить
+$ItemName_Sausage	sausage	колбаса
+$ItemName_SausageOmelette	sausage omelette	омлет с колбасой
+$ItemName_Table	table	стол
+$ItemName_Torch	torch	факел
+$ItemName_TrainingDummy	training dummy	тренировочное чучело
+$ItemName_Trough	trough	кормушка
+$ItemName_Vegetable	vegetable	овощ
+$ItemName_Wheelbarrow	wheelbarrow	тачка
+$ItemName_Wheat	wheat	пшеница
+$ItemName_Wine	wine	вино
+$ItemName_WoodBed	bed	кровать
+$ItemName_WoodBedSheets	bed sheets	постельное бельё
+$ItemName_Workbench	workbench	верстак
+$ItemName_FishingRod	fishing rod	удочка
+$ItemName_Fish	fish	рыба
+$ItemName_AnimalCorpse	corpse	труп
+$ItemName_GoblinCorpse	corpse	труп
+$ItemName_Painting	painting	картина
+$ItemName_BeeHive	bee hive	улей
+$ItemName_Shed	shed	сарай
+$ItemName_Cone	cone	шишка
+$ItemName_Oak	acorn	жёлудь
+$ItemName_WillowSeed	willow seed	семя ивы
+$CraftName_AlarmBell	alarm bell	тревожный колокол
+$CraftName_AmmoPouch	ammo pouch	подсумок
+$CraftName_Anvil	anvil	наковальня
+$CraftName_ArmorPlate	armor plate	бронепластина
+$CraftName_ArtificialArm	artificial arm	протез руки
+$CraftName_ArtificialFoot	artificial foot	протез стопы
+$CraftName_ArtificialHand	artificial hand	протез кисти
+$CraftName_ArtificialLeg	artificial leg	протез ноги
+$CraftName_Axle	axle	вал
+$CraftName_Bag	bag	сумка
+$CraftName_BallPeenHammer	ball peen hammer	слесарный молоток
+$CraftName_Bandage	bandage	бинт
+$CraftName_Bar	bar	слиток
+$CraftName_Barrel	barrel	бочка
+$CraftName_BattleAxe	battle axe	боевой топор
+$CraftName_BattleAxeHead	battle axe head	лезвие боевого топора
+$CraftName_Bed	bed	кровать
+$CraftName_BedFrame	bed frame	каркас кровати
+$CraftName_Beer	beer	пиво
+$CraftName_Bellows	bellows	мехи
+$CraftName_BladeTrap	blade trap	ловушка с лезвиями
+$CraftName_Block	block	блок
+$CraftName_Blunderbuss	blunderbuss	мушкетон
+$CraftName_BlunderbussBarrel	blunderbuss barrel	ствол мушкетона
+$CraftName_BlunderbussStock	blunderbuss stock	приклад мушкетона
+$CraftName_Bolt	bolt	рулон ткани
+$CraftName_BoneChair	bone chair	костяной стул
+$CraftName_BoneShirt	bone shirt	костяная рубаха
+$CraftName_BoneStatuette	bone statuette	костяная статуэтка
+$CraftName_BoneTable	bone table	костяной стол
+$CraftName_Boot	boot	сапог
+$CraftName_Bread	bread	хлеб
+$CraftName_Breastplate	breastplate	нагрудник
+$CraftName_Brick	brick block	кирпичный блок
+$CraftName_BronzeBar	bronze bar	бронзовый слиток
+$CraftName_Bucket	bucket	ведро
+$CraftName_Cabinet	cabinet	шкаф
+$CraftName_Cheese	cheese	сыр
+$CraftName_CheeseOmelette	cheese omelette	омлет с сыром
+$CraftName_Chisel	chisel	долото
+$CraftName_ClayStatuette	clay statuette	глиняная статуэтка
+$CraftName_Claymore	claymore	клеймор
+$CraftName_ClaymoreBlade	claymore blade	клинок клеймора
+$CraftName_Coin	coin	монета
+$CraftName_Crate	crate	ящик
+$CraftName_Crossbow	crossbow	арбалет
+$CraftName_CrossbowBow	crossbow bow	дуга арбалета
+$CraftName_CrossbowStock	crossbow stock	ложе арбалета
+$CraftName_CuttingWheel	cutting wheel	отрезной круг
+$CraftName_Cylinder	cylinder	цилиндр
+$CraftName_Dresser	dresser	комод
+$CraftName_FancyBed	fancy bed	кровать с балдахином
+$CraftName_FancyBedFrame	fancy bed frame	каркас кровати с балдахином
+$CraftName_FellingAxe	felling axe	топор лесоруба
+$CraftName_FellingAxeHead	felling axe head	лезвие топора
+$CraftName_File	file	напильник
+$CraftName_Furnace	furnace	печь
+$CraftName_FruitWine	fruit wine	фруктовое вино
+$CraftName_HoneyWine	honey wine	медовуха
+$CraftName_Gauntlet	gauntlet	латная рукавица
+$CraftName_Gear	gear	шестерня
+$CraftName_Gearbox	gearbox	редуктор
+$CraftName_Gem	gem	самоцвет
+$CraftName_GemmedNecklace	gemmed necklace	ожерелье с самоцветом
+$CraftName_GemmedRing	gemmed ring	кольцо с самоцветом
+$CraftName_Greave	greave	поножи
+$CraftName_Haft	haft	рукоять
+$CraftName_Hammer	hammer	молот
+$CraftName_HammerHead	hammer head	боёк молота
+$CraftName_HandAxe	hand axe	ручной топор
+$CraftName_HandAxeHead	hand axe head	лезвие ручного топора
+$CraftName_Handcrank	handcrank	ручной ворот
+$CraftName_Hatch	hatch	люк
+$CraftName_Hearth	hearth	очаг
+$CraftName_Helmet	helmet	шлем
+$CraftName_Hilt	hilt	эфес
+$CraftName_Knife	knife	нож
+$CraftName_KnifeBlade	knife blade	клинок ножа
+$CraftName_LeatherArmorPanel	leather armor panel	кожаная броневая накладка
+$CraftName_LeatherBoot	leather boot	кожаный сапог
+$CraftName_LeatherBracer	leather bracer	кожаный наруч
+$CraftName_LeatherCuirass	leather cuirass	кожаная кираса
+$CraftName_LeatherGlove	leather glove	кожаная перчатка
+$CraftName_LeatherGreave	leather greave	кожаные поножи
+$CraftName_LeatherHelm	leather helm	кожаный шлем
+$CraftName_LeatherStrap	leather strap	кожаный ремень
+$CraftName_Lever	lever	рычаг
+$CraftName_Loom	loom	ткацкий станок
+$CraftName_Mattress	mattress	матрас
+$CraftName_MechanicalWall	mechanical wall	механическая стена
+$CraftName_MechanismBase	mechanism base	основание механизма
+$CraftName_MetalCrossbowBolt	crossbow bolt	арбалетный болт
+$CraftName_MetalMusketRound	musket round	мушкетная пуля
+$CraftName_MetalStatue	statue	статуя
+$CraftName_MetalStatuette	statuette	статуэтка
+$CraftName_Mold	mold	литейная форма
+$CraftName_MushroomOmelette	mushroom omelette	омлет с грибами
+$CraftName_Necklace	necklace	ожерелье
+$CraftName_Needle	needle	игла
+$CraftName_MetalNeedle	needle	игла
+$CraftName_Padding	padding	подкладка
+$CraftName_Pauldron	pauldron	наплечник
+$CraftName_PetRock	pet rock	камень-питомец
+$CraftName_Pickaxe	pickaxe	кирка
+$CraftName_PickaxeBaseWood	pickaxe base	черенок кирки
+$CraftName_PickaxeHeadFlintStone	pickaxe head	наконечник кирки
+$CraftName_PickaxeHeadStone	pickaxe head	наконечник кирки
+$CraftName_PickaxeHeadWood	pickaxe head	наконечник кирки
+$CraftName_Pistol	pistol	пистоль
+$CraftName_PistolBarrel	pistol barral	ствол пистоля
+$CraftName_PistolStock	pistol stock	рукоять пистоля
+$CraftName_Plank	plank	доска
+$CraftName_PressurePlate	pressure plate	нажимная плита
+$CraftName_PuzzleBox	puzzle box	шкатулка-головоломка
+$CraftName_Quiver	quiver	колчан
+$CraftName_RawCoal	coal	уголь
+$CraftName_Ring	ring	кольцо
+$CraftName_Rod	rod	стержень
+$CraftName_RoseGoldBar	rosegold bar	слиток розового золота
+$CraftName_Sack	sack	мешок
+$CraftName_Sandwich	sandwich	бутерброд
+$CraftName_Sausage	sausage	колбаса
+$CraftName_SausageOmelette	sausage omelette	омлет с колбасой
+$CraftName_Screw	screw	винт
+$CraftName_Shield	shield	щит
+$CraftName_ShieldBacking	shield backing	основа щита
+$CraftName_ShieldBoss	shield boss	умбон
+$CraftName_SkullHelmet	skull helmet	шлем из черепа
+$CraftName_SliverBar	bar	слиток
+$CraftName_Spike	spike	шип
+$CraftName_SpikeTrap	spike trap	ловушка с шипами
+$CraftName_Spring	spring	пружина
+$CraftName_SteelBar	steel bar	стальной слиток
+$CraftName_Stick	stick	палка
+$CraftName_StoneChair	chair	стул
+$CraftName_StoneCrossbowBolt	crossbow bolt	арбалетный болт
+$CraftName_StoneDoor	door	дверь
+$CraftName_StoneHammer	hammer	молот
+$CraftName_StoneHandAxe	hand axe	ручной топор
+$CraftName_StoneMusketRound	musket round	мушкетная пуля
+$CraftName_StonePillar	pillar	колонна
+$CraftName_StoneSawblade	saw blade	пильный диск
+$CraftName_StoneStatue	statue	статуя
+$CraftName_StoneStatuette	statuette	статуэтка
+$CraftName_StoneSword	sword	меч
+$CraftName_StoneTable	table	стол
+$CraftName_String	string	нить
+$CraftName_Sword	sword	меч
+$CraftName_SwordBlade	sword blade	клинок меча
+$CraftName_Tea	tea	чай
+$CraftName_Tile	tile	плитка
+$CraftName_Torch	torch	факел
+$CraftName_TowerShield	tower shield	башенный щит
+$CraftName_TowerShieldBacking	tower shield backing	основа башенного щита
+$CraftName_TrainingDummy	training dummy	тренировочное чучело
+$CraftName_TrapBase	trap base	основание ловушки
+$CraftName_Trough	trough	кормушка
+$CraftName_Warhammer	warhammer	боевой молот
+$CraftName_WarhammerHead	warhammer head	боёк боевого молота
+$CraftName_Wheelbarrow	wheelbarrow	тачка
+$CraftName_WindmillBlade	windmill blade	лопасть мельницы
+$CraftName_Wine	wine	вино
+$CraftName_WoodChair	chair	стул
+$CraftName_WoodDoor	door	дверь
+$CraftName_WoodStatue	statue	статуя
+$CraftName_WoodStatuette	statuette	статуэтка
+$CraftName_WoodTable	table	стол
+$CraftName_WoodenShield	shield	щит
+$CraftName_Workbench	workbench	верстак
+$CraftName_Wrench	wrench	гаечный ключ
+$CraftName_FishingRod	fishing rod	удочка
+$CraftName_DyedTable	dye table	покрасить стол
+$CraftName_DyedPlank	dye plank	покрасить доску
+$CraftName_RedDye	red dye	красная краска
+$CraftName_GreenDye	green dye	зелёная краска
+$CraftName_YellowDye	yellow dye	жёлтая краска
+$CraftName_BlueDye	blue dye	синяя краска
+$CraftName_PurpleDye	purple dye	фиолетовая краска
+$CraftName_CyanDye	cyan dye	голубая краска
+$CraftName_DyeHair	dye hair	покрасить волосы
+$CraftName_AlarmBellBase	alarm bell base	основание тревожного колокола
+$CraftName_AlarmBellBell	alarm bell bell	чаша колокола
+$CategoryName_Materials	Materials	Материалы
+$CategoryName_Grown	Grown	Урожай
+$CategoryName_Workshop	Workshop	Мастерская
+$CategoryName_Food	Food	Еда
+$CategoryName_Containers	Containers	Ёмкости
+$CategoryName_Furniture	Furniture	Мебель
+$CategoryName_Cloth	Cloth	Ткани
+$CategoryName_Butchery	Butchery	Разделка
+$CategoryName_Drinks	Drinks	Напитки
+$GroupName_Gem	gem	самоцвет
+$GroupName_Coal	coal	уголь
+$GroupName_Soil	soil	грунт
+$GroupName_Metal	metal	металл
+$GroupName_Stone	stone	камень
+$GroupName_Wood	wood	дерево
+$GroupName_Tree	tree	дерево
+$GroupName_Plant	plant	растение
+$GroupName_Tools	tools	инструменты
+$GroupName_Workplaces	workplaces	рабочие места
+$GroupName_Raw	raw	сырьё
+$GroupName_Pastry	pastry	выпечка
+$GroupName_Drinks	drinks	напитки
+$GroupName_Immovable	immovable	стационарное
+$GroupName_Movable	movable	переносное
+$GroupName_Living	living	живое
+$GroupName_Unprocessed	unprocessed	необработанное
+$GroupName_Bones	bones	кости
+$GroupName_Meats	meats	мясо
+$GroupName_Hides	hides	шкуры
+$GroupName_Fruit	fruits	фрукты
+$GroupName_Vegetable	vegetables	овощи
+$GroupName_Alcoholic	alcoholics	алкоголь
+$GroupName_Chairs	chairs	стулья
+$GroupName_Tables	tables	столы
+$GroupName_Beds	beds	кровати
+$GroupName_Doors	doors	двери
+$GroupName_Cabinets	cabinets	шкафы
+$GroupName_ClothProducts	products	изделия
+$GroupName_LeatherProducts	products	изделия
+$GroupName_JewelryProducts	products	изделия
+$GroupName_Misc	misc	разное
+$GroupName_MiscMaterials	misc materials	прочие материалы
+$GroupName_Corpses	corpses	трупы
+$MaterialName_None	none	нет
+$MaterialName_any	any	любой
+$MaterialName_Grass	grass	трава
+$MaterialName_Dirt	dirt	земля
+$MaterialName_Sand	sand	песок
+$MaterialName_Clay	clay	глина
+$MaterialName_Granite	granite	гранит
+$MaterialName_Basalt	basalt	базальт
+$MaterialName_Marble	marble	мрамор
+$MaterialName_Sandstone	sandstone	песчаник
+$MaterialName_Bauxite	bauxite	боксит
+$MaterialName_Serpentine	serpentine	змеевик
+$MaterialName_LapisLazuli	lapislazuli	лазурит
+$MaterialName_Obsidian	obsidian	обсидиан
+$MaterialName_ClayBrick	clay brick	глиняный кирпич
+$MaterialName_SandBrick	sand brick	песчаный кирпич
+$MaterialName_Water	water	вода
+$MaterialName_Lava	lava	лава
+$MaterialName_Pine	pine	сосна
+$MaterialName_Oak	oak	дуб
+$MaterialName_Willow	willow	ива
+$MaterialName_AppleWood	applewood	яблоня
+$MaterialName_Birch	birch	берёза
+$MaterialName_Coal	coal	уголь
+$MaterialName_Copper	copper	медь
+$MaterialName_Malachite	malachite	малахит
+$MaterialName_Tin	tin	олово
+$MaterialName_Bronze	bronze	бронза
+$MaterialName_Iron	iron	железо
+$MaterialName_Steel	steel	сталь
+$MaterialName_Lead	lead	свинец
+$MaterialName_Silver	silver	серебро
+$MaterialName_Gold	gold	золото
+$MaterialName_RoseGold	rosegold	розовое золото
+$MaterialName_Platinum	platinum	платина
+$MaterialName_Emerald	emerald	изумруд
+$MaterialName_Sapphire	sapphire	сапфир
+$MaterialName_Amethyst	amethyst	аметист
+$MaterialName_Diamond	diamond	алмаз
+$MaterialName_Ruby	ruby	рубин
+$MaterialName_FlintStone	flintstone	кремень
+$MaterialName_Amber	amber	янтарь
+$MaterialName_Beryll	beryll	берилл
+$MaterialName_Topaz	topaz	топаз
+$MaterialName_Wool	wool	шерсть
+$MaterialName_Chicken	chicken	курица
+$MaterialName_Yak	yak	як
+$MaterialName_Emu	emu	эму
+$MaterialName_Sheep	sheep	овца
+$MaterialName_Pig	pig	свинья
+$MaterialName_Cow	cow	корова
+$MaterialName_Rabbit	rabbit	кролик
+$MaterialName_Llama	llama	лама
+$MaterialName_Duck	duck	утка
+$MaterialName_Goose	goose	гусь
+$MaterialName_Dog	dog	собака
+$MaterialName_Cat	cat	кошка
+$MaterialName_Porcupine	porcupine	дикобраз
+$MaterialName_Fox	fox	лиса
+$MaterialName_Wolf	wolf	волк
+$MaterialName_Deer	deer	олень
+$MaterialName_Badger	badger	барсук
+$MaterialName_BlackBear	black bear	чёрный медведь
+$MaterialName_Goat	goat	коза
+$MaterialName_Squirrel	squirrel	белка
+$MaterialName_GreenFish	green	зелёная рыба
+$MaterialName_GreyFish	grey	серая рыба
+$MaterialName_Panda	panda	панда
+$MaterialName_Spider	spider	паук
+$MaterialName_Woodlouse	woodlouse	мокрица
+$MaterialName_ChickenBone	chicken bone	куриная кость
+$MaterialName_YakBone	yak bone	кость яка
+$MaterialName_EmuBone	emu bone	кость эму
+$MaterialName_SheepBone	sheep bone	овечья кость
+$MaterialName_PigBone	pig bone	свиная кость
+$MaterialName_CowBone	cow bone	коровья кость
+$MaterialName_RabbitBone	rabbit bone	кроличья кость
+$MaterialName_LlamaBone	llama bone	кость ламы
+$MaterialName_DuckBone	duck bone	утиная кость
+$MaterialName_GooseBone	goose bone	гусиная кость
+$MaterialName_DogBone	dog bone	собачья кость
+$MaterialName_CatBone	cat bone	кошачья кость
+$MaterialName_PorcupineBone	porcupine bone	кость дикобраза
+$MaterialName_FoxBone	fox bone	лисья кость
+$MaterialName_WolfBone	wolf bone	волчья кость
+$MaterialName_DeerBone	deer bone	оленья кость
+$MaterialName_GoatBone	goat bone	козья кость
+$MaterialName_BadgerBone	badger bone	барсучья кость
+$MaterialName_BlackBearBone	black bear bone	кость чёрного медведя
+$MaterialName_SquirrelBone	squirrel bone	беличья кость
+$MaterialName_GreenFishBone	green bone	кость зелёной рыбы
+$MaterialName_GreyFishBone	grey bone	кость серой рыбы
+$MaterialName_PandaBone	panda bone	кость панды
+$MaterialName_SpiderBone	spider bone	кость паука
+$MaterialName_WoodlouseBone	woodlouse bone	кость мокрицы
+$MaterialName_OrangeWood	orangewood	апельсиновое дерево
+$MaterialName_Mushroom	mushroom	гриб
+$MaterialName_Silica	silica	кремнезём
+$MaterialName_Ceramic	ceramic	керамика
+$MaterialName_Glass	glass	стекло
+$MaterialName_Strawberry	strawberry	клубника
+$MaterialName_Apple	apple	яблоко
+$MaterialName_Wheat	wheat	пшеница
+$MaterialName_Cotton	cotton	хлопок
+$MaterialName_Orange	orange	апельсин
+$MaterialName_Carrot	carrot	морковь
+$MaterialName_Onion	onion	лук
+$MaterialName_Potato	potato	картофель
+$MaterialName_Cabbage	cabbage	капуста
+$MaterialName_Asparagus	asparagus	спаржа
+$MaterialName_Broccoli	broccoli	брокколи
+$MaterialName_Cauliflower	cauliflower	цветная капуста
+$MaterialName_Cucumber	cucumber	огурец
+$MaterialName_Garlic	garlic	чеснок
+$MaterialName_Parsnip	parsnip	пастернак
+$MaterialName_Radish	radish	редис
+$MaterialName_Turnip	turnip	репа
+$MaterialName_Lettuce	lettuce	салат-латук
+$MaterialName_Melon	melon	дыня
+$MaterialName_Sugarbeet	sugar	сахарная свёкла
+$MaterialName_Pumpkin	pumpkin	тыква
+$MaterialName_Peas	pea	горох
+$MaterialName_Tea	tea	чай
+$MaterialName_Tobacco	tobacco	табак
+$MaterialName_Pineapple	pineapple	ананас
+$MaterialName_Corn	corn	кукуруза
+$MaterialName_Leek	leek	лук-порей
+$MaterialName_Beans	beans	бобы
+$MaterialName_Blackberry	blackberry	ежевика
+$MaterialName_Artichoke	artichoke	артишок
+$MaterialName_Bottlegourd	bottle gourd	горлянка
+$MaterialName_Tomato	tomato	томат
+$MaterialName_Capsicum	capsicum	перец
+$MaterialName_Grape	grape	виноград
+$MaterialName_BeetRoot	beet root	свёкла
+$MaterialName_Woad	woad	вайда
+$MaterialName_DyersWeed	dyers weed	резеда красильная
+$MaterialName_Barley	barley	ячмень
+$MaterialName_Oat	oat	овёс
+$MaterialName_Millet	millet	просо
+$MaterialName_Red	red	красный
+$MaterialName_Green	green	зелёный
+$MaterialName_Blue	blue	синий
+$MaterialName_Purple	purple	фиолетовый
+$MaterialName_Yellow	yellow	жёлтый
+$MaterialName_Cyan	cyan	голубой
+$MaterialName_WoolBag	wool	шерсть
+$MaterialName_CottonBag	cotton	хлопок
+$MaterialName_Goblin	goblin	гоблин
+$MaterialName_Mushroom1	mushroom	гриб
+$MaterialName_Mushroom2	mushroom	гриб
+$MaterialName_Mushroom3	mushroom	гриб
+$MaterialName_StrawMushroom	mushroom	гриб
+$MaterialName_WoodMushroom	mushroom	гриб
+$MaterialName_FibreMushroom	mushroom	гриб
+$MaterialName_GrainMushroom	mushroom	гриб
+$ERROR_TranslationKeyUnknown	***ERROR*** unknown string	***ОШИБКА*** неизвестная строка
+$Tree	tree	дерево
+$Plant	plant	растение
+$AttributeName_Str	Strength	Сила
+$AttributeName_Dex	Dexterity	Ловкость
+$AttributeName_Con	Constitution	Телосложение
+$AttributeName_Int	Intelligence	Интеллект
+$AttributeName_Wis	Wisdom	Мудрость
+$AttributeName_Cha	Charisma	Харизма
+$NeedName_Hunger	Hunger	Голод
+$NeedName_Thirst	Thirst	Жажда
+$NeedName_Sleep	Sleep	Сон
+$NeedName_Happiness	Happiness	Счастье
+$CreatureName_Panda	Panda	Панда
+$CreatureName_Rabbit	Rabbit	Кролик
+$CreatureName_Chicken	Chicken	Курица
+$CreatureName_Pig	Pig	Свинья
+$CreatureName_PigPink	Pig	Свинья
+$CreatureName_PigYellow	Pig	Свинья
+$CreatureName_Sheep	Sheep	Овца
+$CreatureName_Woodlouse	Woodlouse	Мокрица
+$CreatureName_Dragon	Dragon	Дракон
+$CreatureName_Badger	Badger	Барсук
+$CreatureName_Lizzard	Lizzard	Ящерица
+$CreatureName_BlackBear	Black Bear	Чёрный медведь
+$CreatureName_Llama	Llama	Лама
+$CreatureName_Yak	Yak	Як
+$CreatureName_Cow	Cow	Корова
+$CreatureName_Emu	Emu	Эму
+$CreatureName_Spider	Spider	Паук
+$CreatureName_Beetle	Beetle	Жук
+$CreatureName_BeetleEgg	Beetle egg	Яйцо жука
+$CreatureName_Duck	Duck	Утка
+$CreatureName_Goose	Goose	Гусь
+$CreatureName_Shepherd	Shepherd Dog	Овчарка
+$CreatureName_CatTabby	Tabby Cat	Полосатая кошка
+$CreatureName_CatBlack	Black Cat	Чёрная кошка
+$CreatureName_Porcupine	Porcupine	Дикобраз
+$CreatureName_Fox	Fox	Лиса
+$CreatureName_Wolf	Wolf	Волк
+$CreatureName_Stag	Stag	Олень
+$CreatureName_Roe	Roe	Косуля
+$CreatureName_Goat	Goat	Коза
+$CreatureName_Snake	Snake	Змея
+$CreatureName_Squirrel	Squirrel	Белка
+$CreatureName_GreyFish	Grey Fish	Серая рыба
+$CreatureName_GreenFish	Green Fish	Зелёная рыба
+$CreatureName_CrystalSnake	Crystal Snake	Кристальная змея
+$CreatureName_ZygYoung	Young Zyg	Юный зиг
+$CreatureName_ZygYouth	Zyg Youth	Молодой зиг
+$CreatureName_ZygAdult	Adult Zyg	Взрослый зиг
+$CreatureName_ZygSenior	Senior Zyg	Старый зиг
+$SkillName_Mining	Mining	Горное дело
+$SkillTitle_Mining	Miner	Шахтёр
+$SkillName_Masonry	Masonry	Каменная кладка
+$SkillTitle_Masonry	Mason	Каменщик
+$SkillName_Stonecarving	Stonecarving	Резьба по камню
+$SkillTitle_Stonecarving	Stonecarver	Резчик по камню
+$SkillName_Woodcutting	Woodcutting	Рубка леса
+$SkillTitle_Woodcutting	Woodcutter	Лесоруб
+$SkillName_Carpentry	Carpentry	Столярное дело
+$SkillTitle_Carpentry	Carpenter	Столяр
+$SkillName_Woodcarving	Woodcarving	Резьба по дереву
+$SkillTitle_Woodcarving	Woodcarver	Резчик по дереву
+$SkillName_Smelting	Smelting	Плавка
+$SkillTitle_Smelting	Smelter	Плавильщик
+$SkillName_Blacksmithing	Blacksmithing	Кузнечное дело
+$SkillTitle_Blacksmithing	Blacksmith	Кузнец
+$SkillName_Metalworking	Metalworking	Слесарное дело
+$SkillTitle_Metalworking	Metalworker	Слесарь
+$SkillName_WeaponCrafting	Weapon Crafting	Оружейное дело
+$SkillTitle_WeaponCrafting	Weaponsmith	Оружейник
+$SkillName_ArmorCrafting	Armor Crafting	Бронное дело
+$SkillTitle_ArmorCrafting	Armorer	Бронник
+$SkillName_Gemcutting	Gemcutting	Огранка
+$SkillTitle_Gemcutting	Gemcutter	Огранщик
+$SkillName_JewelryMaking	Jewelry Making	Ювелирное дело
+$SkillTitle_JewelryMaking	Jeweler	Ювелир
+$SkillName_Weaving	Weaving	Ткачество
+$SkillTitle_Weaving	Weaver	Ткач
+$SkillName_Tailoring	Tailoring	Шитьё
+$SkillTitle_Tailoring	Tailor	Портной
+$SkillName_Dyeing	Dyeing	Крашение
+$SkillTitle_Dyeing	Dyer	Красильщик
+$SkillName_Pottery	Pottery	Гончарное дело
+$SkillTitle_Pottery	Potter	Гончар
+$SkillName_Leatherworking	Leatherworking	Кожевенное дело
+$SkillTitle_Leatherworking	Leatherworker	Кожевник
+$SkillName_Tinkering	Tinkering	Мастеровое дело
+$SkillTitle_Tinkering	Tinkerer	Мастеровой
+$SkillName_Machining	Machining	Станочное дело
+$SkillTitle_Machining	Machinist	Станочник
+$SkillName_Engineering	Engineering	Инженерия
+$SkillTitle_Engineering	Engineer	Инженер
+$SkillName_Mechanic	Mechanic	Механика
+$SkillTitle_Mechanic	Mechanic	Механик
+$SkillName_AnimalHusbandry	Animal Husbandry	Животноводство
+$SkillTitle_AnimalHusbandry	Rancher	Животновод
+$SkillName_Butchery	Butchery	Разделка туш
+$SkillTitle_Butchery	Butcher	Мясник
+$SkillName_Horticulture	Horticulture	Садоводство
+$SkillTitle_Horticulture	Gardener	Садовник
+$SkillName_Farming	Farming	Земледелие
+$SkillTitle_Farming	Farmer	Фермер
+$SkillName_Cooking	Cooking	Кулинария
+$SkillTitle_Cooking	Chef	Повар
+$SkillName_Brewing	Brewing	Пивоварение
+$SkillTitle_Brewing	Brewer	Пивовар
+$SkillName_Construction	Construction	Строительство
+$SkillTitle_Construction	Builder	Строитель
+$SkillName_Hauling	Hauling	Переноска
+$SkillTitle_Hauling	Hauler	Носильщик
+$SkillName_NaturalAttack	Fighting	Бой
+$SkillTitle_NaturalAttack	Fighter	Боец
+$SkillName_Brawling	Brawling	Драка
+$SkillTitle_Brawling	Brawler	Драчун
+$SkillName_Sword	Sword	Меч
+$SkillTitle_Sword	Swords	Мечник
+$SkillName_Axe	Axe	Топор
+$SkillTitle_Axe	Axe	Рубака
+$SkillName_Hammer	Hammer	Молот
+$SkillTitle_Hammer	Hammer	Молотобоец
+$SkillName_Dodge	Dodge	Уклонение
+$SkillTitle_Dogde	Dodger	Ловкач
+$SkillName_Shield	Shield	Щит
+$SkillTitle_Shield	Shielder	Щитоносец
+$SkillName_Armor	Armor	Доспехи
+$SkillTitle_Armor	Knight	Рыцарь
+$SkillName_Discipline	Discipline	Дисциплина
+$SkillTitle_Discipline	Discipline	Дисциплина
+$SkillName_Crossbow	Crossbow	Арбалет
+$SkillTitle_Crossbow	Crossbow	Арбалетчик
+$SkillName_Gun	Gun	Огнестрел
+$SkillTitle_Gun	Gun	Стрелок
+$SkillName_Medic	Medic	Медицина
+$SkillTitle_Medic	Medic	Лекарь
+$SkillName_Caretaking	Caretaking	Уход
+$SkillTitle_Caretaking	Caretaker	Сиделка
+$SkillName_Bonecarving	Bonecarving	Резьба по кости
+$SkillTitle_Bonecarving	Bonecarver	Резчик по кости
+$SkillName_Prospecting	Prospecting	Поиск руды
+$SkillTitle_Prospecting	Prospector	Рудознатец
+$SkillName_Fishing	Fishing	Рыбалка
+$SkillTitle_Fishing	Fisher	Рыбак
+$SkillName_MagicNature	Nature	Природа
+$SkillTitle_MagicNature	Nature mage	Маг природы
+$SkillName_MagicGeomancy	Geomancy	Геомантия
+$SkillTitle_MagicGeomancy	Geomancer	Геомант
+$StateName_Hungry	hungry	голод
+$StateName_VeryHungry	very hungry	сильный голод
+$StateName_Starving	starving	истощение
+$StateName_StarvedToDeath	dead	смерть
+$StateName_Thirsty	thirsty	жажда
+$StateName_VeryThirsty	very thirsty	сильная жажда
+$StateName_Dehydrated	dehydrated	обезвоживание
+$StateName_DiedFromThirst	dead	смерть
+$StateName_Sleepy	sleepy	сонливость
+$StateName_VerySleepy	very sleepy	сильная сонливость
+$StateName_DeadTired	dead tired	изнеможение
+$QualityName_Bad	bad	плохое
+$QualityName_Acceptable	acceptable	сносное
+$QualityName_Average	average	среднее
+$QualityName_Good	good	хорошее
+$QualityName_Excellent	excellent	отличное
+$QualityName_Outstanding	outstanding	превосходное
+$QualityName_Legendary	legendary	легендарное
+$CraftName_SliverFromStone	metal sliver	кусочек металла
+$ItemName_Sliver	metal sliver	кусочек металла
+$CraftName_SliverFromDirt	metal sliver	кусочек металла
+$Military	Military	Армия
+$MilitaryPositionPerk_Highlander	Highlander	Горец
+$MilitaryPositionPerk_Frenzy	Frenzy	Ярость
+$MilitaryPositionPerk_WayOfGnome	Way of the gnome	Путь гнома
+$MilitaryPositionPerk_Marksman	Marksgnome	Меткий гном
+$MilitaryPositionPerk_Scout	Scout	Разведчик
+$MilitaryPositionPerk_Guard	Guard	Страж
+$MilitaryFormationPerk_EyesOpen	Keep your eyes open	Смотреть в оба
+$MilitaryFormationPerk_ShieldWall	Shieldwall	Стена щитов
+$MilitaryFormationPerk_MeleeOffense	The best defense...	Лучшая защита...
+$MilitaryFormationPerk_FiringSquad	Firing squad	Стрелковый строй
+$WorkshopName_Leatherworker	Leatherworker	Кожевенная мастерская
+$WorkshopName_Weaponsmith	Weaponsmith	Оружейная мастерская
+$WorkshopName_Armorer	Armorer	Бронная мастерская
+$ItemName_RawHide	raw hide	сырая шкура
+$ItemName_LeatherArmorPanel	leather panel	кожаная накладка
+$ItemName_LeatherHelm	leather helm	кожаный шлем
+$ItemName_LeatherCuirass	leather cuirass	кожаная кираса
+$ItemName_LeatherPants	leather pants	кожаные штаны
+$ItemName_LeatherBoot	leather boot	кожаный сапог
+$ItemName_LeatherBracer	leather bracer	кожаный наруч
+$ItemName_LeatherGlove	leather glove	кожаная перчатка
+$MaterialName_EmuLeather	emu	кожа эму
+$MaterialName_CowLeather	cow	коровья кожа
+$MaterialName_YakLeather	yak	кожа яка
+$CraftName_ChainBoots	chainmail boots	кольчужные сапоги
+$CraftName_ChainBracers	chainmail bracers	кольчужные наручи
+$CraftName_ChainGloves	chainmail gloves	кольчужные перчатки
+$CraftName_ChainHelm	chainmail helm	кольчужный шлем
+$CraftName_ChainPants	chainmail pants	кольчужные штаны
+$CraftName_ChainShirt	chainmail shirt	кольчуга
+$CraftName_PlateBoots	plate boots	латные сапоги
+$CraftName_PlateChest	plate chest	латный нагрудник
+$CraftName_PlateGloves	plate gloves	латные рукавицы
+$CraftName_PlateGreaves	plate greaves	латные поножи
+$CraftName_PlateHelm	plate helm	латный шлем
+$CraftName_PlatePauldrons	plate pauldrons	латные наплечники
+$CraftName_HeavyPlateBoots	heavy plate boots	тяжёлые латные сапоги
+$CraftName_HeavyPlateChest	heavy plate chest	тяжёлый латный нагрудник
+$CraftName_HeavyPlateGloves	heavy plate gloves	тяжёлые латные рукавицы
+$CraftName_HeavyPlateGreaves	heavy plate greaves	тяжёлые латные поножи
+$CraftName_HeavyPlateHelm	heavy plate helm	тяжёлый латный шлем
+$CraftName_HeavyPlatePauldrons	heavy plate pauldrons	тяжёлые латные наплечники
+$ItemName_ArmorPlate	armor plate	бронепластина
+$ItemName_ChainBoot	chainmail boot	кольчужный сапог
+$ItemName_ChainBracer	chainmail bracer	кольчужный наруч
+$ItemName_ChainGlove	chainmail glove	кольчужная перчатка
+$ItemName_ChainHelm	chainmail helm	кольчужный шлем
+$ItemName_ChainPants	chainmail pants	кольчужные штаны
+$ItemName_ChainShirt	chainmail shirt	кольчуга
+$ItemName_Corpse	corpse	труп
+$ItemName_CrystalMushroom	crystal mushroom	кристальный гриб
+$ItemName_FishMeat	fish meat	рыбное филе
+$ItemName_HeavyPlateBoot	heavy plate boot	тяжёлый латный сапог
+$ItemName_HeavyPlateChest	heavy plate chest	тяжёлый латный нагрудник
+$ItemName_HeavyPlateGlove	heavy plate glove	тяжёлая латная рукавица
+$ItemName_HeavyPlateGreaves	heavy plate greaves	тяжёлые латные поножи
+$ItemName_HeavyPlateHelm	heavy plate helm	тяжёлый латный шлем
+$ItemName_HeavyPlatePauldron	heavy plate pauldron	тяжёлый латный наплечник
+$ItemName_PlateBoot	plate boot	латный сапог
+$ItemName_PlateChest	plate chest	латный нагрудник
+$ItemName_PlateGlove	plate glove	латная рукавица
+$ItemName_PlateGreaves	plate greaves	латные поножи
+$ItemName_PlateHelm	plate helm	латный шлем
+$ItemName_PlatePauldron	plate pauldron	латный наплечник
+$ItemName_Tea	tea	чай
+$ItemName_WoodTub	wood tub	деревянная кадка
+$GroupName_Chainmail	chainmail	кольчуга
+$GroupName_Plate	plate	латы
+$GroupName_HeavyPlate	heavy plate	тяжёлые латы
+$ItemName_Sword	sword	меч
+$ItemName_SwordBase	sword base	основа меча
+$ItemName_SwordBlade	sword blade	клинок меча
+$CategoryName_Weapons	Weapons	Оружие
+$GroupName_WeaponsComponents	components	детали
+$GroupName_WeaponsMetal	metal	металл
+$SkillName_Unarmed	Unarmed	Без оружия
+$SkillName_Melee	Melee	Ближний бой
+$SkillName_Ranged	Ranged	Дальний бой
+$SkillName_Thrown	Thrown	Метание
+$SkillName_Block	Block	Блок
+$WorkshopName_MeleeTraining	training ground	тренировочная площадка
+$ItemName_Acorn	acorn	жёлудь
+$GroupName_Parts	parts	детали
+$GroupName_Lights	lights	освещение
+$GroupName_BoneArmor	bone	кость
+$GroupName_NonAlcoholic	non alcoholic	безалкогольное
+$GroupName_Cooked	cooked	готовое
+$GroupName_Meat	meat	мясо
+$GroupName_Other	other	прочее
+$GroupName_Leather	leather	кожа
+$CategoryName_Armor	Armor	Броня
+$CategoryName_Jewelry	Jewelry	Украшения
+$GroupName_Materials	materials	материалы
+$CraftName_PickaxeHeadMetal	pickaxe head	наконечник кирки
+$ItemName_GearBox	gear box	редуктор
+$ItemName_GearBoxBase	gear box  base	основание редуктора
+$ItemName_GearBoxFrame	gear box frame	корпус редуктора
+$ItemName_SteamEngine	steam engine	паровой двигатель
+$ItemName_Gear	gear	шестерня
+$ItemName_Rod	rod	стержень
+$ItemName_Spring	spring	пружина
+$ItemName_Axle	axle	вал
+$ItemName_VerticalAxle	vertical axle	вертикальный вал
+$Containers	containers	ёмкости
+$Furniture	furniture	мебель
+$Mechanism	mechanism	механизм
+$FarmUtils	farm utilities	хозяйственные постройки
+$CategoryName_Utility	Utility	Обустройство
+$GroupName_Mechanism	mechanisms	механизмы
+$ItemName_Cylinder	cylinder	цилиндр
+$CraftName_DyedBolt	dye bolt of cloth	покрасить рулон ткани
+$Hydraulics	hydraulics	гидравлика
+$ItemName_Pipe	pipe	труба
+$ItemName_PipeCenter	pipe	труба
+$ItemName_PipeExit	pipe exit	выход трубы
+$ItemName_Pump	pump	насос
+$GroupName_Hydraulics	hydraulics	гидравлика
+$ItemName_Lever	lever	рычаг
+$ItemName_LeverBase	lever base	основание рычага
+$ItemName_LeverHandle	lever handle	ручка рычага
+$WorkshopName_Engineer	engineer	инженерная мастерская
+$WorkshopName_MachineShop	machine shop	механический цех
+$ItemName_Wrench	wrench	гаечный ключ
+$ItemName_Spike	spike	шип
+$ItemName_Screw	screw	винт
+$ItemName_MechanismBase	mechanism base	основание механизма
+$ItemName_Gearbox	gear box	редуктор
+$ItemName_Handcrank	handcrank	ручной ворот
+$ItemName_TrapBase	trap base	основание ловушки
+$ItemName_SpikeTrap	spike trap	ловушка с шипами
+$ItemName_MechanicalWall	mechanical wall	механическая стена
+$ItemName_WindmillBlade	windmill blade	лопасть мельницы
+$ItemName_PressurePlate	pressure plate	нажимная плита
+$ItemName_Hatch	hatch	люк
+$GroupName_Automaton	automaton	автоматон
+$WorkshopName_Automaton	automaton maker	мастерская автоматонов
+$ItemName_Automaton	automaton	автоматон
+$ItemName_AutomatonHead	automaton head	голова автоматона
+$ItemName_AutomatonTorso	automaton torso	торс автоматона
+$ItemName_AutomatonArm	automaton arm	рука автоматона
+$ItemName_AutomatonLeg	automaton leg	нога автоматона
+$ItemName_AutomatonCoreMark1	automaton core mark 1	ядро автоматона, модель 1
+$ItemName_AutomatonCoreMark2	automaton core mark 2	ядро автоматона, модель 2
+$CraftName_Automaton	automaton	автоматон
+$CraftName_AutomatonHead	automaton head	голова автоматона
+$CraftName_AutomatonTorso	automaton torso	торс автоматона
+$CraftName_AutomatonLeg	automaton leg	нога автоматона
+$CraftName_AutomatonArm	automaton arm	рука автоматона
+$CraftName_AutomatonCoreMark1	automaton core mark 1	ядро автоматона, модель 1
+$CraftName_AutomatonCoreMark2	automaton core mark 2	ядро автоматона, модель 2
+$NeedName_Fuel	Fuel	Топливо
+$WorkshopName_Windmill	windmill	ветряная мельница
+$CraftName_Flour	flour	мука
+$ItemName_Flour	flour	мука
+$CraftName_FlourKitchen	flour	мука
+$CraftName_BoneBedFrame	bone bed frame	каркас костяной кровати
+$CraftName_BoneBed	bone bed	костяная кровать
+$ItemName_BoneBedFrame	bone bed frame	каркас костяной кровати
+$GUI_Continue	Continue	Продолжить
+$GUI_NewGame	New Game	Новая игра
+$GUI_Resume	Resume	Вернуться в игру
+$GUI_Join	Join	Присоединиться
+$GUI_Mods	Mods	Моды
+$GUI_Save	Save	Сохранить
+$GUI_Load	Load	Загрузить
+$GUI_Exit	Exit	Выход
+$GUI_MainMenu	Main Menu	Главное меню
+$GUI_Settings	Settings	Настройки
+$GUI_SettingsVideo	Video	Видео
+$GUI_SettingsAudio	Audio	Звук
+$GUI_SettingsBindings	Key Bindings	Управление
+$GUI_SettingsGame	Game	Игра
+$GUI_Random	Random	Случайно
+$GUI_New	New	Создать
+$GUI_Delete	Delete	Удалить
+$GUI_Back	Back	Назад
+$GUI_StartGame	Start Game	Начать игру
+$GUI_KingdomName	Kingdom Name	Название королевства
+$GUI_Seed	Seed	Зерно мира
+$GUI_Size	Size	Размер
+$GUI_zLevels	z-Levels	Уровни по высоте
+$GUI_Ground	Ground	Уровень земли
+$GUI_Flatness	Flatness	Равнинность
+$GUI_Presets	Presets	Наборы
+$GUI_AddItem	Add Item	Добавить предмет
+$GUI_AddAnimals	Add Animals	Добавить животных
+$GUI_Remove	Remove	Убрать
+$GUI_FaunaFlora	Fauna Flora	Фауна и флора
+$GUI_TreeDensity	Tree Density	Плотность деревьев
+$GUI_PlantDensity	Plant Density	Плотность растений
+$GUI_WildAnimals	Wild Animals	Дикие животные
+$GUI_MaxPerType	Max per type	Максимум на вид
+$GUI_StartingZone	Starting Zone	Стартовая зона
+$GUI_AllowedTrees	Allowed Trees	Разрешённые деревья
+$GUI_AllowedPlants	Allowed Wild Plants	Разрешённые дикие растения
+$GUI_Enemies	Enemies	Враги
+$GUI_PeacefulMode	No enemies (peaceful mode)	Без врагов (мирный режим)
+$GUI_Gnomes	Gnomes	Гномы
+$GUI_NewPreset	New Preset	Новый набор
+$GUI_SavePreset	Save Preset	Сохранить набор
+$GUI_DeletePreset	Delete Preset	Удалить набор
+$GUI_AllowedAnimals	Allowed Animals	Разрешённые животные
+$GUI_Embark	Embark	Высадиться
+$GUI_World	World	Мир
+$ItemName_BirchTree	birch tree	берёза
+$GUI_Kingdom	Kingdom	Королевство
+$GUI_Stocks	Stocks	Запасы
+$GUI_Population	Population	Население
+$GUI_Military	Military	Армия
+$GUI_Events	Events	События
+$GUI_Overview	Overview	Обзор
+$GUI_Technology	Technology	Технологии
+$GUI_TechTree	Tech tree	Дерево технологий
+$GUI_Skills	Skills	Навыки
+$GUI_Schedule	Schedule	Распорядок
+$GUI_Name	Name	Имя
+$GUI_Profession	Profession	Профессия
+$GUI_Schedule_none	none	свободно
+$GUI_Schedule_eat	eat	еда
+$GUI_Schedule_sleep	sleep	сон
+$GUI_Schedule_training	training	тренировка
+$GUI_Threats	Threats	Угрозы
+$GUI_Squads	Squads	Отряды
+$GUI_Formations	Formations	Построения
+$GUI_Positions	Positions	Позиции
+$GUI_Uniforms	Uniforms	Комплекты снаряжения
+$GUI_Perk	Perk	Особенность
+$GUI_Uniform	Uniform	Снаряжение
+$GUI_Leader	Leader	Командир
+$GUI_MaintainDistance	Maintain distance	Держать дистанцию
+$GUI_RetreatBleeding	Retreat if bleeding	Отступать при кровотечении
+$GUI_AvoidEnemies	Avoid enemies	Избегать врагов
+$GUI_Formation	Formation	Построение
+$UniformSlot_HeadArmor	head armor	защита головы
+$UniformSlot_ChestArmor	chest armor	защита груди
+$UniformSlot_ArmArmor	arm armor	защита рук
+$UniformSlot_HandArmor	hand armor	защита кистей
+$UniformSlot_LegArmor	leg armor	защита ног
+$UniformSlot_FootArmor	foot armor	защита стоп
+$UniformSlot_LeftHandHeld	held in left hand	в левой руке
+$UniformSlot_RightHandHeld	held in right hand	в правой руке
+$GUI_Neighbors	Neighbors	Соседи
+$GUI_Missions	Missions	Миссии
+$GUI_Action_Improve	Improve relationship	Улучшить отношения
+$GUI_Action_Insult	Insult	Оскорбить
+$GUI_Action_InviteTrader	Invite trader	Пригласить торговца
+$GUI_Action_InviteAmbassador	Invite ambassador (not implemented yet)	Пригласить посла (пока не работает)
+$GUI_Action_Select	Select Action	Выберите действие
+$CraftName_LeatherPants	leather pants	кожаные штаны
+$CraftName_Shed	shed	сарай
+$StockOverlay	Overlay	Наложение
+$SelectCategory	select category	выберите категорию
+$SelectGroup	select group	выберите группу
+$SelectItem	select item	выберите предмет
+$SelectMaterial	select material	выберите материал
+$WorkshopName_WasteDisposal	waste disposal	печь для отходов
+$CraftName_BurnFishBone	burn fish bones	сжечь рыбьи кости
+$CraftName_BurnBone	burn bones	сжечь кости
+$CraftName_BurnStraw	burn straw	сжечь солому
+$CraftName_BurnSeeds	burn seeds	сжечь семена
+$GroupName_Farm	farm	хозяйство
+$ItemName_BladeTrap	blade trap	ловушка с лезвиями
+$ItemName_Hay	hay	сено
+$ItemName_Flower1	flower	цветок
+$ItemName_Flower2	flower	цветок
+$ItemName_Flower3	flower	цветок
+$ItemName_Flower4	flower	цветок
+$ItemName_Flower5	flower	цветок
+$ItemName_Flower6	flower	цветок
+$ItemName_Flower7	flower	цветок
+$ItemName_Flower8	flower	цветок
+$MaterialName_Flower1	orange flower	оранжевый цветок
+$MaterialName_Flower2	yellow flower	жёлтый цветок
+$MaterialName_Flower3	white flower	белый цветок
+$MaterialName_Flower4	pink flower	розовый цветок
+$MaterialName_Flower5	red flower	красный цветок
+$MaterialName_Flower6	purple flower	фиолетовый цветок
+$MaterialName_Flower7	blue flower	синий цветок
+$MaterialName_Flower8	yellow flower 2	жёлтый цветок 2
+$ItemName_Honey	honey	мёд
+$MaterialName_Bee	bee	пчела
+$ItemName_HandAxeHead	hand axe head	лезвие ручного топора
+$ItemName_HandAxe	hand axe	ручной топор
+$ItemName_HammerHead	hammer head	боёк молота
+$ItemName_Hammer	hammer	молот
+$ItemName_ClaymoreBlade	claymore blade	клинок клеймора
+$ItemName_Claymore	claymore	клеймор
+$ItemName_BattleAxeHead	battle axe head	лезвие боевого топора
+$ItemName_BattleAxe	battle axe	боевой топор
+$ItemName_WarhammerHead	warhammer head	боёк боевого молота
+$ItemName_Warhammer	warhammer	боевой молот
+$GroupName_AlarmBell	alarm bells	тревожные колокола
+$JobName_SoundAlarm	sound the alarm	поднять тревогу
+$CraftName_BeeHive	bee hive	улей
+$ItemName_WallTorch	wall torch	настенный факел
+$CraftName_Chest	chest	сундук
+$ItemName_Chest	chest	сундук
+$CraftName_Bookshelf	book shelf	книжная полка
+$ItemName_Bookshelf	book shelf	книжная полка
+$ItemName_BigTorch	big torch	большой факел
+$ItemName_Brazier	brazier	жаровня
+$CraftName_BigTorch	big torch	большой факел
+$CraftName_Brazier	brazier	жаровня
+$CreatureName_Sabretooth	Sabretooth tiger	Саблезубый тигр
+$CreatureName_Mammoth	Woolly Mammoth	Шерстистый мамонт
+$MaterialName_BearLeather	bear	медвежья кожа
+$ItemName_Backpack	backpack	рюкзак
+$ItemName_Quiver	quiver	колчан
+$CraftName_Backpack	backpack	рюкзак
+$MaterialName_WolfLeather	wolf	волчья кожа
+$MaterialName_StagLeather	stag	оленья кожа
+$WorkshopName_GlassMaker	glass maker	стеклодувная мастерская
+$WorkshopName_GlassFurnace	glass furnace	стекловаренная печь
+$SkillName_GlassMaking	Glass Making	Стеклоделие
+$ItemName_GlassIngot	ingot	слиток
+$CraftName_GlassIngot	glass ingot	стеклянный слиток
+$ItemName_RoughGlassGem	rough gem	грубый самоцвет
+$CraftName_RoughGlassGem	rough glass gem	грубый стеклянный самоцвет
+$ItemName_MosaicTile	mosaic tile	мозаичная плитка
+$CraftName_MosaicTile	mosaic tile	мозаичная плитка
+$ConstructionName_SoilStairs	soil stairs	земляная лестница
+$ConstructionName_StoneStairs	stone stairs	каменная лестница
+$ConstructionName_SoilRamp	soil ramp	земляной пандус
+$ConstructionName_StoneRamp	stone ramp	каменный пандус
+$ConstructionName_Scaffold	scaffold	леса
+$ConstructionName_Palisade	palisade	частокол
+$ConstructionName_StoneWall	stone wall	каменная стена
+$ConstructionName_SoilWallFloor	soil wall and floor	земляная стена с полом
+$ConstructionName_StoneWallFloor	stone wall and floor	каменная стена с полом
+$ConstructionName_PlankWallFloor	plank wall and floor	дощатая стена с полом
+$ConstructionName_BlockWall	block wall	блочная стена
+$ConstructionName_BrickWall	brick wall	кирпичная стена
+$ConstructionName_PlankWall	plank wall	дощатая стена
+$ConstructionName_PlankFloor	plank floor	дощатый пол
+$ConstructionName_SoilWall	soil wall	земляная стена
+$ConstructionName_LogWall	log wall	бревенчатая стена
+$ConstructionName_ThatchWall	thatch wall	соломенная стена
+$ConstructionName_ThatchFloor	thatch floor	соломенный пол
+$ConstructionName_ThatchRamp	thatch ramp	соломенный пандус
+$ConstructionName_Roof	roof	крыша
+$ConstructionName_SoilCornerRamp	soil corner ramp	земляной угловой пандус
+$ConstructionName_StoneCornerRamp	stone corner ramp	каменный угловой пандус
+$ConstructionName_ThatchCornerRamp	thatch corner ramp	соломенный угловой пандус
+$ConstructionName_BlockFloor	block floor	блочный пол
+$ConstructionName_StoneFloor	stone floor	каменный пол
+$ConstructionName_BrickFloor	brick floor	кирпичный пол
+$ConstructionName_SoilFloor	soil floor	земляной пол
+$ConstructionName_LogFloor	log floor	бревенчатый пол
+$ConstructionName_FancyWall1	fancy wall 1	узорная стена 1
+$ConstructionName_FancyWall2	fancy wall 2	узорная стена 2
+$ConstructionName_FancyWall3	fancy wall 3	узорная стена 3
+$ConstructionName_FancyWall4	fancy wall 4	узорная стена 4
+$ConstructionName_FancyWall5	fancy wall 5	узорная стена 5
+$ConstructionName_FancyWall6	fancy wall 6	узорная стена 6
+$ConstructionName_FancyFloor1	fancy floor 1	узорный пол 1
+$ConstructionName_FancyFloor2	fancy floor 2	узорный пол 2
+$ConstructionName_FancyFloor3	fancy floor 3	узорный пол 3
+$ConstructionName_FancyFloor4	fancy floor 4	узорный пол 4
+$ConstructionName_FancyFloor5	fancy floor 5	узорный пол 5
+$ConstructionName_FancyFloor6	fancy floor 6	узорный пол 6
+$ConstructionName_BlockFence	block fence	блочная ограда
+$ConstructionName_CobbleStoneFence	cobble stone fence	ограда из булыжника
+$ConstructionName_WoodFence	wood fence	деревянная ограда
+$ConstructionName_VerticalAxle	vertical axle	вертикальный вал
+$ConstructionName_Pipe	pipe	труба
+$ConstructionName_PipeExit	pipe exit	выход трубы
+$ConstructionName_BoneWall	bone wall	костяная стена
+$ConstructionName_SkullWall	skull wall	стена из черепов
+$ConstructionName_BoneFloor	bone floor	костяной пол
+$ConstructionName_WallTorch	wall torch	настенный факел
+$ConstructionName_PlankStairs	plank stairs	дощатая лестница
+$ConstructionName_BlockStairs	block stairs	блочная лестница
+$ConstructionName_MosaicWall	mosaic wall	мозаичная стена
+$ConstructionName_MosaicFloor	mosaic floor	мозаичный пол
+$GroupName_Sand	soil	грунт
+$GroupName_Clay	soil	грунт
+$MaterialName_any (same)	any (same)	любой (тот же)
+$CreatureName_Goblin	Goblin	Гоблин
+$CreatureName_MantSoldier	Mant soldier	Мант-воин
+$CreatureName_MantWorker	Mant worker	Мант-рабочий
+$CreatureName_MantQueen	Mant queen	Мант-королева
+$ItemName_Cider	cider	сидр
+$ItemName_Vinegar	vinegar	уксус
+$ItemName_Sugar	sugar	сахар
+$ItemName_DropCandy	drop candy	леденец
+$ItemName_ShepherdsPie	shepherds pie	пастуший пирог
+$ItemName_Biscuit	biscuit	печенье
+$ItemName_PickledFruit	pickled fruit	маринованные фрукты
+$ItemName_FruitPreserve	fruit preserve	варенье
+$ItemName_SmokedMeat	smoked meat	копчёное мясо
+$ItemName_SmokedSausage	smoked sausage	копчёная колбаса
+$ItemName_FruitBread	fruit bread	фруктовый хлеб
+$ItemName_FreshCheese	fresh cheese	свежий сыр
+$ItemName_HardCheese	hard cheese	твёрдый сыр
+$ItemName_MeatPie	meat pie	мясной пирог
+$ItemName_PickledVegetable	pickled vegetable	маринованные овощи
+$ItemName_PickledEgg	pickled egg	маринованное яйцо
+$ItemName_VegetablePreserve	vegetable preserve	овощные консервы
+$ItemName_SmokedBird	smoked bird	копчёная птица
+$ItemName_SmokedFish	smoked fish	копчёная рыба
+$ItemName_FlatBread	flat bread	лепёшка
+$ItemName_FruitPie	fruit pie	фруктовый пирог
+$ItemName_VeggiePie	veggie pie	овощной пирог
+$ItemName_FineMeatPie	fine meat pie	изысканный мясной пирог
+$CraftName_Cider	cider	сидр
+$CraftName_Vinegar	vinegar	уксус
+$CraftName_Sugar	sugar	сахар
+$CraftName_DropCandy	drop candy	леденец
+$CraftName_ShepherdsPie	shepherds pie	пастуший пирог
+$CraftName_Biscuit	biscuit	печенье
+$CraftName_PickledFruit	pickled fruit	маринованные фрукты
+$CraftName_FruitPreserve	fruit preserve	варенье
+$CraftName_SmokedMeat	smoked meat	копчёное мясо
+$CraftName_SmokedSausage	smoked sausage	копчёная колбаса
+$CraftName_FruitBread	fruit bread	фруктовый хлеб
+$CraftName_FreshCheese	fresh cheese	свежий сыр
+$CraftName_HardCheese	hard cheese	твёрдый сыр
+$CraftName_MeatPie	meat pie	мясной пирог
+$CraftName_PickledVegetable	pickled vegetable	маринованные овощи
+$CraftName_PickledEgg	pickled egg	маринованное яйцо
+$CraftName_VegetablePreserve	vegetable preserve	овощные консервы
+$CraftName_SmokedBird	smoked bird	копчёная птица
+$CraftName_SmokedFish	smoked fish	копчёная рыба
+$CraftName_FlatBread	flat bread	лепёшка
+$CraftName_FruitPie	fruit pie	фруктовый пирог
+$CraftName_VeggiePie	veggie pie	овощной пирог
+$CraftName_FineMeatPie	fine meat pie	изысканный мясной пирог
+$ItemName_GlassJar	jar	банка
+$ItemName_GlassBottle	bottle	бутылка
+$CraftName_GlassJar	jar	банка
+$CraftName_GlassBottle	bottle	бутылка
+$MaterialName_GlowShroom	mushroom	гриб

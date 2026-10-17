@@ -61,7 +61,7 @@ const char* WsPriority::GetName() const
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 WsAvailableMaterial::WsAvailableMaterial( QString sid, int amount, QString item )
 {
-	_name   = ( S::s( "$MaterialName_" + sid ) + " " + S::s( "$ItemName_" + item ) ).toStdString().c_str();
+	_name   = S::materialItem( sid, item ).toStdString().c_str();
 	_sid    = sid.toStdString().c_str();
 	_amount = QString::number( amount ).toStdString().c_str();
 }
@@ -225,7 +225,7 @@ WsCraftJob::WsCraftJob( CraftJob cj, WorkshopProxy* proxy ) :
 	//
 	if ( cj.requiredItems.size() )
 	{
-		m_name = ( S::s( "$MaterialName_" + cj.requiredItems.first().materialSID ) + " " + S::s( "$ItemName_" + cj.itemSID ) ).toStdString().c_str();
+		m_name = S::materialItem( cj.requiredItems.first().materialSID, cj.itemSID ).toStdString().c_str();
 	}
 	else
 	{
@@ -364,7 +364,7 @@ WorkshopModel::WorkshopModel()
 	m_prios = *new ObservableCollection<WsPriority>();
 	for ( int i = 0; i < 2; ++i )
 	{
-		m_prios->Add( MakePtr<WsPriority>( ( QString( "Priority " ) + QString::number( i + 1 ) ).toStdString().c_str() ) );
+		m_prios->Add( MakePtr<WsPriority>( ( QString( "Приоритет " ) + QString::number( i + 1 ) ).toStdString().c_str() ) );
 	}
 	SetSelectedPriority( m_prios->Get( 0 ) );
 
@@ -399,7 +399,7 @@ void WorkshopModel::onUpdateInfo( const GuiWorkshopInfo& info )
 	m_prios->Clear();
 	for ( int i = 0; i < info.maxPriority; ++i )
 	{
-		m_prios->Add( MakePtr<WsPriority>( ( QString( "Priority " ) + QString::number( i + 1 ) ).toStdString().c_str() ) );
+		m_prios->Add( MakePtr<WsPriority>( ( QString( "Приоритет " ) + QString::number( i + 1 ) ).toStdString().c_str() ) );
 	}
 	SetSelectedPriority( m_prios->Get( qMin( qMax( 0, info.priority ), m_prios->Count() ) ) );
 

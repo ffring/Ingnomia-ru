@@ -46,9 +46,9 @@ void AggregatorSettings::onRequestSettings()
     m_settings.fullscreen = Global::cfg->get( "fullscreen" ).toBool();
     m_settings.scale = qMax( 0.5f, Global::cfg->get( "uiscale" ).toFloat() );
     m_settings.keyboardSpeed = qMax( 0, qMin( Global::cfg->get( "keyboardMoveSpeed" ).toInt(), 200) );
+    // Russian-first fork: the string table and all pages load ru_RU, there is no runtime switch
     m_settings.languages.clear();
-    m_settings.languages.append( "en_US" );
-    m_settings.languages.append( "fr_FR" );
+    m_settings.languages.append( "ru_RU" );
 
     m_settings.language = Global::cfg->get( "language" ).toString();
 

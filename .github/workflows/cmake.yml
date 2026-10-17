@@ -1,27 +1,58 @@
 name: CMake
 
-on: [push, workflow_dispatch]
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      noesis:
+        description: "Noesis mode for the native build: evaluation (no key) or licensed (repository secrets)"
+        type: choice
+        options:
+          - evaluation
+          - licensed
+        default: evaluation
 
 env:
   # CMake build type (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: RelWithDebInfo
   # Base URL for prebuilt dependency packages
   DEPS_URL: https://github.com/rschurade/IngnomiaBuildDeps/raw/master
+  # Upstream Ingnomia v0.9.0 source commit; its database is the English reference
+  UPSTREAM_SHA: 4f99266c0f95faa847ca0db2af18cf59aff07f4b
+  # Pinned official release; the packager re-checks size and SHA-256 from packaging/windows/upstream-release.json
+  RELEASE_URL: https://github.com/rschurade/Ingnomia/releases/download/v0.9.0/Ingnomia-0.9.0-windows-x64.zip
 
 jobs:
-  build:
+  localization:
+    # Runs on every push/PR, needs no secrets
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0   # the upstream reference commit must be reachable
+
+    - name: Upstream reference database
+      run: git show "${UPSTREAM_SHA}:content/db/ingnomia.db.sql" > "${RUNNER_TEMP}/upstream.db.sql"
+
+    - name: Localization checks
+      run: python3 tools/l10n/ru_locale.py check --repo . --reference-sql "${RUNNER_TEMP}/upstream.db.sql" --allow-missing-theme-fonts
+
+    - name: English literal audit in C++ (report only)
+      run: python3 tools/l10n/ru_locale.py scan-cpp --repo .
+
+  windows-native:
     # Windows-only for 0.9.0. The Qt6 + GLAD + Noesis 3.0.12 + C++23 stack has not
-    # been validated on Linux yet; a Linux job belongs with the future SDL2/GLFW
-    # windowing work, not the release build.
+    # been validated on Linux yet. Started manually so ordinary pushes never fail on
+    # a missing Noesis license.
+    if: github.event_name == 'workflow_dispatch'
+    needs: localization
     runs-on: windows-2022
 
     steps:
     - uses: actions/checkout@v4
       with:
         submodules: recursive   # src/base/beehive
-
-    - name: Get latest CMake
-      uses: lukka/get-cmake@latest
 
     - name: Install Qt
       uses: jurplel/install-qt-action@v4
@@ -48,6 +79,7 @@ jobs:
         Get-Dep "$env:DEPS_URL/openal-1.25.1.zip"                    openal.zip   openal_sdk
         Get-Dep "$env:DEPS_URL/tilesheet.zip"                        tiles.zip    content
         Get-Dep "$env:DEPS_URL/audio.zip"                            audio.zip    content
+        Invoke-WebRequest -Uri $env:RELEASE_URL -OutFile "$env:RUNNER_TEMP\Ingnomia-0.9.0-windows-x64.zip"
 
     - name: Create build directory
       run: cmake -E make_directory build
@@ -56,11 +88,22 @@ jobs:
       working-directory: ${{ github.workspace }}/build
       shell: pwsh
       env:
-        NOESIS_LICENSE_KEY: ${{ secrets.NOESIS_LICENSE_KEY }}
-        NOESIS_LICENSE_NAME: ${{ secrets.NOESIS_LICENSE_NAME }}
+        NOESIS_MODE: ${{ inputs.noesis }}
+        NOESIS_LICENSE_KEY: ${{ inputs.noesis == 'licensed' && secrets.NOESIS_LICENSE_KEY || '' }}
+        NOESIS_LICENSE_NAME: ${{ inputs.noesis == 'licensed' && secrets.NOESIS_LICENSE_NAME || '' }}
       run: |
         # BugSplat is intentionally disabled: its SDK header uses set_unexpected,
         # removed in C++23. Matches the local/release build, which omits BUGSPLAT_DB.
+        $ErrorActionPreference = 'Stop'
+        $evaluation = 'OFF'
+        if ($env:NOESIS_MODE -eq 'licensed') {
+          if ([string]::IsNullOrEmpty($env:NOESIS_LICENSE_KEY) -or [string]::IsNullOrEmpty($env:NOESIS_LICENSE_NAME)) {
+            throw "noesis=licensed needs the NOESIS_LICENSE_NAME and NOESIS_LICENSE_KEY repository secrets"
+          }
+        } else {
+          $evaluation = 'ON'
+          Write-Host "Noesis evaluation build: no license key is used"
+        }
         $ws = "${{ github.workspace }}".Replace('\','/')
         cmake -S .. -B . `
           -DCMAKE_BUILD_TYPE=$env:BUILD_TYPE `
@@ -69,6 +112,7 @@ jobs:
           -DSTEAM_SDK_ROOT="$ws/steamworks_sdk/sdk" `
           -DNOESIS_ROOT="$ws/noesis_sdk" `
           -DOPENAL_ROOT="$ws/openal_sdk" `
+          -DINGNOMIA_NOESIS_EVALUATION="$evaluation" `
           -DNOESIS_LICENSE_NAME="$env:NOESIS_LICENSE_NAME" `
           -DNOESIS_LICENSE_KEY="$env:NOESIS_LICENSE_KEY" `
           -DGIT_REPO="${{ github.repository }}" `
@@ -84,10 +128,64 @@ jobs:
       working-directory: ${{ github.workspace }}/build
       run: cmake --install . --prefix ../install --config ${{ env.BUILD_TYPE }}
 
+    - name: Package
+      shell: pwsh
+      run: |
+        $ErrorActionPreference = 'Stop'
+        $eval = @()
+        if ('${{ inputs.noesis }}' -ne 'licensed') { $eval = @('--noesis-evaluation') }
+        python tools/package/make_windows_package.py --mode install --install-dir install `
+          --asset-zip "$env:RUNNER_TEMP\Ingnomia-0.9.0-windows-x64.zip" `
+          --source-rev "${{ github.sha }}" --out dist @eval
+        if ($LASTEXITCODE -ne 0) { throw "packaging failed" }
+
     - uses: actions/upload-artifact@v4
       with:
-        name: "windows-${{ github.run_id }}"
+        name: "Ingnomia-ru-windows-${{ inputs.noesis }}-${{ github.run_id }}"
         path: |
-          install/
-          !**/*.iobj
-          !**/*.ipdb
+          dist/*.zip
+          dist/*.zip.sha256
+
+    # Runtime proof: launch the packaged game once and capture its window. This shows that
+    # the executable starts and opens a window on the runner; it does not test gameplay.
+    # The test-only Mesa driver goes into a separate copy, never into dist/ or install/.
+    - name: Runtime proof (window launch, software OpenGL)
+      shell: pwsh
+      env:
+        MESA_URL: https://github.com/pal1000/mesa-dist-win/releases/download/26.2.4/mesa3d-26.2.4-release-msvc.7z
+        MESA_SHA256: 351fc8c8b695878ffb3eaa044b3ead08672a48b1a045e3c3e3975811df0f6695
+      run: |
+        $ErrorActionPreference = 'Stop'
+        $zip = Get-ChildItem dist -Filter 'Ingnomia-ru-*.zip' | Select-Object -First 1
+        if (-not $zip) { throw "no package ZIP in dist/" }
+        $runtime = Join-Path $env:RUNNER_TEMP 'runtime'
+        if (Test-Path $runtime) { Remove-Item -Recurse -Force $runtime }
+        Expand-Archive -Path $zip.FullName -DestinationPath $runtime
+        $game = Join-Path $runtime 'Ingnomia-ru'
+        if (-not (Test-Path (Join-Path $game 'Ingnomia.exe'))) { throw "Ingnomia.exe missing after extracting $($zip.Name)" }
+
+        $mesa7z = Join-Path $env:RUNNER_TEMP 'mesa3d.7z'
+        Invoke-WebRequest -Uri $env:MESA_URL -OutFile $mesa7z
+        $hash = (Get-FileHash -Algorithm SHA256 $mesa7z).Hash.ToLowerInvariant()
+        if ($hash -ne $env:MESA_SHA256) { throw "Mesa archive SHA256 mismatch: $hash" }
+        $mesa = Join-Path $env:RUNNER_TEMP 'mesa3d'
+        7z x $mesa7z "-o$mesa" -y | Out-Null
+        if ($LASTEXITCODE -ne 0) { throw "7z failed to extract the Mesa archive" }
+        foreach ($dll in @('opengl32.dll', 'libgallium_wgl.dll', 'libglapi.dll')) {
+          $src = Join-Path $mesa "x64\$dll"
+          if (Test-Path $src) { Copy-Item $src $game -Force; Write-Host "app-local test driver: $dll" }
+          elseif ($dll -ne 'libglapi.dll') { throw "Mesa archive has no x64\$dll" }
+        }
+
+        $env:GALLIUM_DRIVER = 'llvmpipe'
+        $env:LIBGL_ALWAYS_SOFTWARE = '1'
+        $env:QT_OPENGL = 'desktop'
+        & ./tools/qa/verify_windows.ps1 -GameRoot $game -OutputDir (Join-Path $env:RUNNER_TEMP 'runtime-proof')
+
+    - name: Upload runtime proof
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: "Ingnomia-ru-runtime-proof-${{ inputs.noesis }}-${{ github.run_id }}"
+        path: ${{ runner.temp }}/runtime-proof/
+        if-no-files-found: warn

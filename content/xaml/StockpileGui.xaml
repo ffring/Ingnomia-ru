@@ -15,7 +15,7 @@
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceDictionary Source="styles/mainmenu/styles.xaml" />
 				<!--<ResourceDictionary Source="localization/_.xaml" />-->
-				<ResourceDictionary Source="localization/en_US.xaml" />
+				<ResourceDictionary Source="localization/ru_RU.xaml" />
 				<!--<ResourceDictionary Source="localization/fr_FR.xaml" />-->
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
@@ -39,7 +39,7 @@
 								ItemTemplate="{StaticResource ItemTemplate}" />
 					<CheckBox x:Name="CBSuspend" Content="{StaticResource StockpileGui_Suspend}" IsChecked="{Binding Suspended, Mode=TwoWay}" Margin="10,5,10,5">
 						<CheckBox.ToolTip>
-							<StackPanel Width="500" Background="#FF365264">
+							<StackPanel MinWidth="500" MaxWidth="900" Background="#FF365264">
 								<TextBlock Text="{StaticResource StockpileGui_StockpileSuspend}" FontSize="18" FontWeight="Bold" Foreground="#FF365264" Background="LightSkyBlue" Padding="0,2" TextAlignment="Center" />
 								<TextBlock Text="{StaticResource StockpileGui_StockpilePushable}" FontSize="18" FontWeight="Bold" Foreground="#FF365264" Background="LightSkyBlue" Padding="0,2" TextAlignment="Center" />
 								<TextBlock Text="{StaticResource StockpileGui_StockpilePullable}" FontSize="18" FontWeight="Bold" Foreground="#FF365264" Background="LightSkyBlue" Padding="0,2" TextAlignment="Center" />
@@ -48,7 +48,7 @@
 					</CheckBox>
 					<CheckBox x:Name="CBAllowPull" Content="{StaticResource StockpileGui_PullFromHere}" IsChecked="{Binding PullFromHere, Mode=TwoWay}" Margin="10,5,10,5">
 						<CheckBox.ToolTip>
-							<StackPanel Width="500" Background="#FF365264">
+							<StackPanel MinWidth="500" MaxWidth="900" Background="#FF365264">
 								<TextBlock Text="{StaticResource StockpileGui_StockpilePullFromHere}" FontSize="18" FontWeight="Bold" Foreground="#FF365264" Background="LightSkyBlue" Padding="0,2" TextAlignment="Center" />
 								<TextBlock Text="{StaticResource StockpileGui_StockpilePullFromHigher}" FontSize="18" FontWeight="Bold" Foreground="#FF365264" Background="LightSkyBlue" Padding="0,2" TextAlignment="Center" />
 							</StackPanel>
@@ -56,7 +56,7 @@
 					</CheckBox>
 					<CheckBox x:Name="CBPullFrom" Content="{StaticResource StockpileGui_PullFromOther}" IsChecked="{Binding PullFromOther, Mode=TwoWay}" Margin="10,5,10,5">
 						<CheckBox.ToolTip>
-							<StackPanel Width="500" Background="#FF365264">
+							<StackPanel MinWidth="500" MaxWidth="900" Background="#FF365264">
 								<TextBlock Text="{StaticResource StockpileGui_StockpilePullFromOther}" FontSize="18" FontWeight="Bold" Foreground="#FF365264" Background="LightSkyBlue" Padding="0,2" TextAlignment="Center" />
 								<TextBlock Text="{StaticResource StockpileGui_StockpilePullFromLower}" FontSize="18" FontWeight="Bold" Foreground="#FF365264" Background="LightSkyBlue" Padding="0,2" TextAlignment="Center" />
 							</StackPanel>

@@ -12,4 +12,10 @@
 static const char licenseName[] = "@NOESIS_LICENSE_NAME@";
 static const char licenseKey[]  = "@NOESIS_LICENSE_KEY@";
 
+// Set by -DINGNOMIA_NOESIS_EVALUATION=ON: empty values are passed to Noesis::GUI::Init,
+// which runs Noesis in its evaluation mode with its own on-screen warning.
+#cmakedefine01 INGNOMIA_NOESIS_EVALUATION
+
+#if !INGNOMIA_NOESIS_EVALUATION
 static_assert( sizeof( licenseName ) > 1 && sizeof( licenseKey ) > 1, "Please provide a working Noesis license or Noesis will stop working after a few minutes" );
+#endif

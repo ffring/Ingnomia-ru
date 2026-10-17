@@ -1,0 +1,42 @@
+table	key_column	key	column	en	ru
+Events_OnSuccess	ID	EventTrader	Message	A trader has arrived!	Прибыл торговец!
+Events_OnSuccess	ID	EventTrader	Title	Trader!	Торговец!
+Events_OnSuccess	ID	EventInvasion	Message	A force of $Num goblin has arrived.	Нападение гоблинов! Их число: $Num.
+Events_OnSuccess	ID	EventInvasion	Title	Invasion	Вторжение
+Events_OnFailure	ID	EventMigration	Message	Unfortunately those gnomes didn't find an entry to your base.	Увы, эти гномы не нашли дорогу к вашему поселению.
+Events_OnFailure	ID	EventMigration	Title	Gnomes got lost.	Гномы заблудились.
+Events_OnFailure	ID	EventInvasion	Message	Luckily for you those goblins didn't find a way to your base.	К счастью, эти гоблины не нашли дорогу к вашему поселению.
+Events_OnFailure	ID	EventInvasion	Title	Goblins got lost.	Гоблины заблудились.
+Events_Init	ID	EventMigration	Title	New Gnomes	Новые гномы
+Events_Init	ID	EventMigration	Message	$Num new gnomes have arrived. Do you accept them into your base?	Пришли новые гномы: $Num. Принять их в поселение?
+Events_Expires	ID	EventMigration	Title	You waited too long	Вы ждали слишком долго
+Events_Expires	ID	EventMigration	Message	Unfortunately your decision took too long and they are looking elsewhere.	Вы слишком долго думали, и гномы ушли искать другое место.
+Words_Numbers	Number	0	Word	zero	ноль
+Words_Numbers	Number	1	Word	one	один
+Words_Numbers	Number	2	Word	two	два
+Words_Numbers	Number	3	Word	three	три
+Words_Numbers	Number	4	Word	four	четыре
+Words_Numbers	Number	5	Word	five	пять
+Words_Numbers	Number	6	Word	six	шесть
+Words_Numbers	Number	7	Word	seven	семь
+Words_Numbers	Number	8	Word	eight	восемь
+Words_Numbers	Number	9	Word	nine	девять
+Words_Numbers	Number	10	Word	ten	десять
+Words_Numbers	Number	11	Word	eleven	одиннадцать
+Words_Numbers	Number	12	Word	dwelve	двенадцать
+Words_Numbers	Number	13	Word	thirteen	тринадцать
+Words_Numbers	Number	14	Word	fourteen	четырнадцать
+Words_Numbers	Number	15	Word	fifteen	пятнадцать
+Words_Numbers	Number	16	Word	sixteen	шестнадцать
+Words_Numbers	Number	17	Word	seventeen	семнадцать
+Words_Numbers	Number	18	Word	eighteen	восемнадцать
+Words_Numbers	Number	19	Word	nineteen	девятнадцать
+Words_Numbers	Number	20	Word	twenty	двадцать
+Words_Numbers	Number	30	Word	thirty	тридцать
+Words_Numbers	Number	40	Word	fourty	сорок
+Words_Numbers	Number	50	Word	fifty	пятьдесят
+Words_Numbers	Number	60	Word	sixty	шестьдесят
+Words_Numbers	Number	70	Word	seventy	семьдесят
+Words_Numbers	Number	80	Word	eighty	восемьдесят
+Words_Numbers	Number	90	Word	ninety	девяносто
+Words_Numbers	Number	100	Word	one hundred	сто

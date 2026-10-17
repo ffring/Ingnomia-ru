@@ -370,7 +370,7 @@ QString MilitaryManager::roleName( unsigned int id )
 	{
 		return m_roles[id].name;
 	}
-	return "Position doesn't exist.";
+	return "Такой роли нет.";
 }
 
 /// @brief Sets the armor type and material for a specific slot in a role's uniform.

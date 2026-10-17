@@ -244,7 +244,7 @@ AvailableMaterial* NRequiredItem::GetSelectedMaterial() const
 /// @brief Constructs a (material, count) entry for a required-component dropdown.
 AvailableMaterial::AvailableMaterial( QString sid, int amount, QString item )
 {
-	_name   = ( S::s( "$MaterialName_" + sid ) + " " + S::s( "$ItemName_" + item ) ).toStdString().c_str();
+	_name   = S::materialItem( sid, item ).toStdString().c_str();
 	_sid    = sid.toStdString().c_str();
 	_amount = QString::number( amount ).toStdString().c_str();
 }
@@ -283,8 +283,8 @@ GameModel::GameModel()
 
 	m_messageButtonCmd.SetExecuteFunc( MakeDelegate( this, &GameModel::onMessageButtonCmd ) );
 
-	m_messageHeader = "Message header";
-	m_messageText = "Message text Message text Message text Message text Message text Message text Message text Message text Message text Message text Message text Message text Message text";
+	m_messageHeader = "";
+	m_messageText = "";
 
 	m_proxy = new ProxyGameView;
 	m_proxy->setParent( this );
@@ -296,12 +296,12 @@ GameModel::GameModel()
 	_buildItems     = *new ObservableCollection<BuildItem>();
 	m_watchList		= *new Noesis::ObservableCollection<GameItem>();
 
-	m_year  = "*Year*";
-	m_day   = "*Day*";
-	m_time  = "*Time*";
-	m_level = "*Level*";
+	m_year  = "";
+	m_day   = "";
+	m_time  = "";
+	m_level = "";
 
-	m_kingdomName = "*Kingdom Name*";
+	m_kingdomName = "";
 
 	setShowTileInfo( 0 );
 }
@@ -324,7 +324,7 @@ void GameModel::updateKingdomInfo( QString name, QString info1, QString info2, Q
 void GameModel::setTimeAndDate( int minute, int hour, int day, QString season, int year, QString sunStatus )
 {
 	{
-		const auto tmp = ( "Year " + QString::number( year ) ).toStdString();
+		const auto tmp = ( "Год " + QString::number( year ) ).toStdString();
 		if ( tmp.compare( m_year.Str() ) != 0 )
 		{
 			m_year = tmp.c_str();
@@ -333,24 +333,7 @@ void GameModel::setTimeAndDate( int minute, int hour, int day, QString season, i
 	}
 
 	{
-		QString dayString;
-
-		switch ( day )
-		{
-			case 1:
-				dayString = "1st day of ";
-				break;
-			case 2:
-				dayString = "2nd day of ";
-				break;
-			case 3:
-				dayString = "3rd day of ";
-				break;
-			default:
-				dayString = QString::number( day ) + "th day of ";
-				break;
-		}
-		const auto tmp = ( dayString + season ).toStdString();
+		const auto tmp = ( season + ", день " + QString::number( day ) ).toStdString();
 		if ( tmp.compare( m_year.Str() ) != 0 )
 		{
 			m_day = tmp.c_str();
@@ -373,12 +356,13 @@ void GameModel::setTimeAndDate( int minute, int hour, int day, QString season, i
 	}
 
 	{
+		// season arrives already translated, so compare against the localized names
 		QString path = "Images/clock/";
-		if ( season == "Spring" )
+		if ( season == S::s( "$SeasonName_Spring" ) )
 			path += "s";
-		else if ( season == "Summer" )
+		else if ( season == S::s( "$SeasonName_Summer" ) )
 			path += "u";
-		else if ( season == "Autumn" )
+		else if ( season == S::s( "$SeasonName_Autumn" ) )
 			path += "v";
 		else
 			path += "w";
@@ -400,7 +384,7 @@ void GameModel::setTimeAndDate( int minute, int hour, int day, QString season, i
 /// @brief Updates the displayed view-level z-coordinate string.
 void GameModel::setViewLevel( int level )
 {
-	m_level = ( "Level: " + QString::number( level ) ).toStdString().c_str();
+	m_level = ( "Уровень: " + QString::number( level ) ).toStdString().c_str();
 	OnPropertyChanged( "Level" );
 }
 
@@ -979,48 +963,48 @@ void GameModel::OnCmdButtonCommand( BaseComponent* param )
 		case BuildSelection::Floor:
 		case BuildSelection::Stairs:
 		case BuildSelection::Ramps:
-			_buildButtons->Add( MakePtr<BuildButton>( "Wood", "Wood", "buttons/wood.png" ) );
-			_buildButtons->Add( MakePtr<BuildButton>( "Soil", "Soil", "buttons/build-all.png" ) );
-			_buildButtons->Add( MakePtr<BuildButton>( "Stone", "Stone", "buttons/stone.png" ) );
-			_buildButtons->Add( MakePtr<BuildButton>( "Metal", "Metal", "buttons/metal.png" ) );
-			_buildButtons->Add( MakePtr<BuildButton>( "Other", "Other", "buttons/build-all.png" ) );
+			_buildButtons->Add( MakePtr<BuildButton>( "Дерево", "Wood", "buttons/wood.png" ) );
+			_buildButtons->Add( MakePtr<BuildButton>( "Грунт", "Soil", "buttons/build-all.png" ) );
+			_buildButtons->Add( MakePtr<BuildButton>( "Камень", "Stone", "buttons/stone.png" ) );
+			_buildButtons->Add( MakePtr<BuildButton>( "Металл", "Metal", "buttons/metal.png" ) );
+			_buildButtons->Add( MakePtr<BuildButton>( "Прочее", "Other", "buttons/build-all.png" ) );
 			setCategory( "Wood" );
 			break;
 		case BuildSelection::Fence:
-			_buildButtons->Add( MakePtr<BuildButton>( "Wood", "Wood", "buttons/wood.png" ) );
-			_buildButtons->Add( MakePtr<BuildButton>( "Stone", "Stone", "buttons/stone.png" ) );
+			_buildButtons->Add( MakePtr<BuildButton>( "Дерево", "Wood", "buttons/wood.png" ) );
+			_buildButtons->Add( MakePtr<BuildButton>( "Камень", "Stone", "buttons/stone.png" ) );
 			setCategory( "Wood" );
 			break;
 
 		case BuildSelection::Workshop:
-			_buildButtons->Add( MakePtr<BuildButton>( "Wood", "Wood", "buttons/woodwork.png" ) );
-			_buildButtons->Add( MakePtr<BuildButton>( "Stone", "Stone", "buttons/stonework.png" ) );
-			_buildButtons->Add( MakePtr<BuildButton>( "Metal", "Metal", "buttons/metalwork.png" ) );
-			_buildButtons->Add( MakePtr<BuildButton>( "Food", "Food", "buttons/food.png" ) );
-			_buildButtons->Add( MakePtr<BuildButton>( "Crafts", "Craft", "buttons/crafts.png" ) );
-			_buildButtons->Add( MakePtr<BuildButton>( "Mechanics", "Mechanics", "buttons/mechanics.png" ) );
-			_buildButtons->Add( MakePtr<BuildButton>( "Misc", "Misc", "buttons/crafts.png" ) );
+			_buildButtons->Add( MakePtr<BuildButton>( "Дерево", "Wood", "buttons/woodwork.png" ) );
+			_buildButtons->Add( MakePtr<BuildButton>( "Камень", "Stone", "buttons/stonework.png" ) );
+			_buildButtons->Add( MakePtr<BuildButton>( "Металл", "Metal", "buttons/metalwork.png" ) );
+			_buildButtons->Add( MakePtr<BuildButton>( "Еда", "Food", "buttons/food.png" ) );
+			_buildButtons->Add( MakePtr<BuildButton>( "Ремёсла", "Craft", "buttons/crafts.png" ) );
+			_buildButtons->Add( MakePtr<BuildButton>( "Механика", "Mechanics", "buttons/mechanics.png" ) );
+			_buildButtons->Add( MakePtr<BuildButton>( "Разное", "Misc", "buttons/crafts.png" ) );
 			setCategory( "Wood" );
 			break;
 		case BuildSelection::Containers:
-			_buildButtons->Add( MakePtr<BuildButton>( "All", "Containers", "buttons/stockpile.png" ) );
+			_buildButtons->Add( MakePtr<BuildButton>( "Все", "Containers", "buttons/stockpile.png" ) );
 			setCategory( "Containers" );
 			break;
 		case BuildSelection::Furniture:
-			_buildButtons->Add( MakePtr<BuildButton>( "Chairs", "Chairs", "buttons/chair.png" ) );
-			_buildButtons->Add( MakePtr<BuildButton>( "Tables", "Tables", "buttons/table.png" ) );
-			_buildButtons->Add( MakePtr<BuildButton>( "Beds", "Beds", "buttons/bed.png" ) );
-			_buildButtons->Add( MakePtr<BuildButton>( "Cabinets", "Cabinets", "buttons/cabinet.png" ) );
-			_buildButtons->Add( MakePtr<BuildButton>( "Misc", "Misc", "buttons/woodwork.png" ) );
+			_buildButtons->Add( MakePtr<BuildButton>( "Стулья", "Chairs", "buttons/chair.png" ) );
+			_buildButtons->Add( MakePtr<BuildButton>( "Столы", "Tables", "buttons/table.png" ) );
+			_buildButtons->Add( MakePtr<BuildButton>( "Кровати", "Beds", "buttons/bed.png" ) );
+			_buildButtons->Add( MakePtr<BuildButton>( "Шкафы", "Cabinets", "buttons/cabinet.png" ) );
+			_buildButtons->Add( MakePtr<BuildButton>( "Разное", "Misc", "buttons/woodwork.png" ) );
 			setCategory( "Chairs" );
 			break;
 		case BuildSelection::Utility:
-			_buildButtons->Add( MakePtr<BuildButton>( "Doors", "Doors", "buttons/door.png" ) );
-			_buildButtons->Add( MakePtr<BuildButton>( "Lights", "Lights", "buttons/light.png" ) );
-			_buildButtons->Add( MakePtr<BuildButton>( "Farm", "Farm", "buttons/farm.png" ) );
-			_buildButtons->Add( MakePtr<BuildButton>( "Mechanism", "Mechanism", "buttons/mechanism.png" ) );
-			_buildButtons->Add( MakePtr<BuildButton>( "Hydraulics", "Hydraulics", "buttons/hydro.png" ) );
-			_buildButtons->Add( MakePtr<BuildButton>( "Other", "Other", "buttons/woodwork.png" ) );
+			_buildButtons->Add( MakePtr<BuildButton>( "Двери", "Doors", "buttons/door.png" ) );
+			_buildButtons->Add( MakePtr<BuildButton>( "Свет", "Lights", "buttons/light.png" ) );
+			_buildButtons->Add( MakePtr<BuildButton>( "Хозяйство", "Farm", "buttons/farm.png" ) );
+			_buildButtons->Add( MakePtr<BuildButton>( "Механизмы", "Mechanism", "buttons/mechanism.png" ) );
+			_buildButtons->Add( MakePtr<BuildButton>( "Гидравлика", "Hydraulics", "buttons/hydro.png" ) );
+			_buildButtons->Add( MakePtr<BuildButton>( "Прочее", "Other", "buttons/woodwork.png" ) );
 			setCategory( "Doors" );
 			break;
 	}
@@ -1168,52 +1152,52 @@ void GameModel::CmdLeftCommandButton( BaseComponent* param )
 	switch ( m_selectedButtons )
 	{
 		case ButtonSelection::Build:
-			_commandButtons->Add( MakePtr<CommandButton>( "Workshop", "Workshop" ) );
-			_commandButtons->Add( MakePtr<CommandButton>( "Wall", "Wall" ) );
-			_commandButtons->Add( MakePtr<CommandButton>( "Floor", "Floor" ) );
-			_commandButtons->Add( MakePtr<CommandButton>( "Stairs", "Stairs" ) );
-			_commandButtons->Add( MakePtr<CommandButton>( "Ramp", "Ramp" ) );
-			_commandButtons->Add( MakePtr<CommandButton>( "Fence", "Fence" ) );
-			_commandButtons->Add( MakePtr<CommandButton>( "Containers", "Containers" ) );
-			_commandButtons->Add( MakePtr<CommandButton>( "Furniture", "Furniture" ) );
-			_commandButtons->Add( MakePtr<CommandButton>( "Utilities", "Utility" ) );
-			_commandButtons->Add( MakePtr<CommandButton>( "Deconstruct", "Deconstruct" ) );
+			_commandButtons->Add( MakePtr<CommandButton>( "Мастерская", "Workshop" ) );
+			_commandButtons->Add( MakePtr<CommandButton>( "Стена", "Wall" ) );
+			_commandButtons->Add( MakePtr<CommandButton>( "Пол", "Floor" ) );
+			_commandButtons->Add( MakePtr<CommandButton>( "Лестница", "Stairs" ) );
+			_commandButtons->Add( MakePtr<CommandButton>( "Пандус", "Ramp" ) );
+			_commandButtons->Add( MakePtr<CommandButton>( "Ограда", "Fence" ) );
+			_commandButtons->Add( MakePtr<CommandButton>( "Ёмкости", "Containers" ) );
+			_commandButtons->Add( MakePtr<CommandButton>( "Мебель", "Furniture" ) );
+			_commandButtons->Add( MakePtr<CommandButton>( "Обустройство", "Utility" ) );
+			_commandButtons->Add( MakePtr<CommandButton>( "Разобрать", "Deconstruct" ) );
 			break;
 		case ButtonSelection::Mine:
-			_commandButtons->Add( MakePtr<CommandButton>( "Mine", "Mine" ) );
-			_commandButtons->Add( MakePtr<CommandButton>( "Explorative Mine", "ExplorativeMine" ) );
-			_commandButtons->Add( MakePtr<CommandButton>( "Remove floor", "RemoveFloor" ) );
-			_commandButtons->Add( MakePtr<CommandButton>( "Stairs down", "DigStairsDown" ) );
-			_commandButtons->Add( MakePtr<CommandButton>( "Stairs up", "MineStairsUp" ) );
-			_commandButtons->Add( MakePtr<CommandButton>( "Ramp", "DigRampDown" ) );
-			_commandButtons->Add( MakePtr<CommandButton>( "Hole", "DigHole" ) );
+			_commandButtons->Add( MakePtr<CommandButton>( "Выкопать", "Mine" ) );
+			_commandButtons->Add( MakePtr<CommandButton>( "По жиле", "ExplorativeMine" ) );
+			_commandButtons->Add( MakePtr<CommandButton>( "Убрать пол", "RemoveFloor" ) );
+			_commandButtons->Add( MakePtr<CommandButton>( "Лестница вниз", "DigStairsDown" ) );
+			_commandButtons->Add( MakePtr<CommandButton>( "Лестница вверх", "MineStairsUp" ) );
+			_commandButtons->Add( MakePtr<CommandButton>( "Пандус вниз", "DigRampDown" ) );
+			_commandButtons->Add( MakePtr<CommandButton>( "Яма", "DigHole" ) );
 			break;
 		case ButtonSelection::Agriculture:
-			_commandButtons->Add( MakePtr<CommandButton>( "Cut tree", "FellTree" ) );
-			_commandButtons->Add( MakePtr<CommandButton>( "Plant tree", "" ) );
-			_commandButtons->Add( MakePtr<CommandButton>( "Harvest tree", "HarvestTree" ) );
-			_commandButtons->Add( MakePtr<CommandButton>( "Forage", "Forage" ) );
-			_commandButtons->Add( MakePtr<CommandButton>( "Remove plant", "RemovePlant" ) );
+			_commandButtons->Add( MakePtr<CommandButton>( "Срубить", "FellTree" ) );
+			_commandButtons->Add( MakePtr<CommandButton>( "Посадить дерево", "" ) );
+			_commandButtons->Add( MakePtr<CommandButton>( "Собрать плоды", "HarvestTree" ) );
+			_commandButtons->Add( MakePtr<CommandButton>( "Собирательство", "Forage" ) );
+			_commandButtons->Add( MakePtr<CommandButton>( "Убрать растение", "RemovePlant" ) );
 			break;
 		case ButtonSelection::Designation:
-			_commandButtons->Add( MakePtr<CommandButton>( "Stockpile", "CreateStockpile" ) );
-			_commandButtons->Add( MakePtr<CommandButton>( "Farm", "CreateFarm" ) );
-			_commandButtons->Add( MakePtr<CommandButton>( "Grove", "CreateGrove" ) );
-			_commandButtons->Add( MakePtr<CommandButton>( "Pasture", "CreatePasture" ) );
-			_commandButtons->Add( MakePtr<CommandButton>( "Personal Room", "CreateRoom" ) );
-			_commandButtons->Add( MakePtr<CommandButton>( "Dormitory", "CreateDorm" ) );
-			_commandButtons->Add( MakePtr<CommandButton>( "Dining Hall", "CreateDining" ) );
-			_commandButtons->Add( MakePtr<CommandButton>( "Hospital", "CreateHospital" ) );
-			_commandButtons->Add( MakePtr<CommandButton>( "Forbidden", "CreateNoPass" ) );
-			_commandButtons->Add( MakePtr<CommandButton>( "Guard", "CreateGuardArea" ) );
-			_commandButtons->Add( MakePtr<CommandButton>( "Remove", "RemoveDesignation" ) );
+			_commandButtons->Add( MakePtr<CommandButton>( "Склад", "CreateStockpile" ) );
+			_commandButtons->Add( MakePtr<CommandButton>( "Поле", "CreateFarm" ) );
+			_commandButtons->Add( MakePtr<CommandButton>( "Роща", "CreateGrove" ) );
+			_commandButtons->Add( MakePtr<CommandButton>( "Пастбище", "CreatePasture" ) );
+			_commandButtons->Add( MakePtr<CommandButton>( "Своя комната", "CreateRoom" ) );
+			_commandButtons->Add( MakePtr<CommandButton>( "Спальня", "CreateDorm" ) );
+			_commandButtons->Add( MakePtr<CommandButton>( "Столовая", "CreateDining" ) );
+			_commandButtons->Add( MakePtr<CommandButton>( "Лазарет", "CreateHospital" ) );
+			_commandButtons->Add( MakePtr<CommandButton>( "Запрет прохода", "CreateNoPass" ) );
+			_commandButtons->Add( MakePtr<CommandButton>( "Охрана", "CreateGuardArea" ) );
+			_commandButtons->Add( MakePtr<CommandButton>( "Снять зону", "RemoveDesignation" ) );
 			break;
 		case ButtonSelection::Job:
-			_commandButtons->Add( MakePtr<CommandButton>( "Suspend", "SuspendJob" ) );
-			_commandButtons->Add( MakePtr<CommandButton>( "Resume", "ResumeJob" ) );
-			_commandButtons->Add( MakePtr<CommandButton>( "Cancel", "CancelJob" ) );
-			_commandButtons->Add( MakePtr<CommandButton>( "Lower priority", "LowerPrio" ) );
-			_commandButtons->Add( MakePtr<CommandButton>( "Raise priority", "RaisePrio" ) );
+			_commandButtons->Add( MakePtr<CommandButton>( "Приостановить", "SuspendJob" ) );
+			_commandButtons->Add( MakePtr<CommandButton>( "Возобновить", "ResumeJob" ) );
+			_commandButtons->Add( MakePtr<CommandButton>( "Отменить", "CancelJob" ) );
+			_commandButtons->Add( MakePtr<CommandButton>( "Понизить приоритет", "LowerPrio" ) );
+			_commandButtons->Add( MakePtr<CommandButton>( "Повысить приоритет", "RaisePrio" ) );
 			break;
 		case ButtonSelection::Magic:
 			break;

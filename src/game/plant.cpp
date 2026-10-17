@@ -415,13 +415,13 @@ QString Plant::getDesignation()
 	if ( m_isTree )
 	{
 		QString materialID = DB::select( "Material", "Plants", m_plantID ).toString();
-		return S::s( "$MaterialName_" + materialID ) + " " + S::s( "$Tree" );
+		return S::s( "$Tree" ) + " (" + S::s( "$MaterialName_" + materialID ) + ")";
 	}
 	else if ( m_isPlant || m_isMushroom )
 	{
-		return S::s( "$MaterialName_" + m_plantID ) + " " + S::s( "$Plant" );
+		return S::s( "$Plant" ) + " (" + S::s( "$MaterialName_" + m_plantID ) + ")";
 	}
-	return "error: unset plant designation";
+	return "ошибка: тип растения не задан";
 }
 
 /// @brief Steps a tree back one growth level (e.g. after partial harvesting or damage).

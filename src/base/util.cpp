@@ -1156,11 +1156,13 @@ QString Util::addDyeMaterial( QString sourceMaterial, QString dyeMaterial )
 		DB::addRow( "Materials", sourceRow );
 		//DB::addTranslation( "$MaterialName_" + targetMaterial, S::s( "$MaterialName_" + sourceMaterial ) + " " + S::s( "$MaterialName_" + dyeMaterial ) );
 		//strings are cached on game start, so no insert in DB but strings map
-		Strings::getInstance().insertString( "$MaterialName_" + targetMaterial, S::s( "$MaterialName_" + dyeMaterial ) + " " + S::s( "$MaterialName_" + sourceMaterial ) );
+		// "<source>, <dye>" — a Russian colour adjective in front would not agree with the noun
+		const QString dyedName = S::s( "$MaterialName_" + sourceMaterial ) + ", " + S::s( "$MaterialName_" + dyeMaterial );
+		Strings::getInstance().insertString( "$MaterialName_" + targetMaterial, dyedName );
 
 		GameState::addedMaterials.append( sourceRow );
-		
-		GameState::addedTranslations.insert( "$MaterialName_" + targetMaterial, S::s( "$MaterialName_" + dyeMaterial ) + " " + S::s( "$MaterialName_" + sourceMaterial ) );
+
+		GameState::addedTranslations.insert( "$MaterialName_" + targetMaterial, dyedName );
 	}
 	return targetMaterial;
 }

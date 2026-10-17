@@ -6,7 +6,7 @@
 	xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
 	xmlns:local="clr-namespace:IngnomiaGUI"
 	xmlns:noesis="clr-namespace:NoesisGUIExtensions;assembly=Noesis.GUI.Extensions"
-	FontFamily="Fonts/#8-bit Operator+"
+	FontFamily="Fonts/#WeblySleek UI Semibold"
 	x:Name="GameGuiRoot" Focusable="True" IsTabStop="False" d:DataContext="{d:DesignData /SampleData/GameModelSampleData.xaml}" d:DesignWidth="1920" d:DesignHeight="1080">
 	<UserControl.DataContext>
 		<local:GameModel />
@@ -17,7 +17,7 @@
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceDictionary Source="styles/mainmenu/styles.xaml" />
 				<!--<ResourceDictionary Source="localization/_.xaml" />-->
-				<ResourceDictionary Source="localization/en_US.xaml" />
+				<ResourceDictionary Source="localization/ru_RU.xaml" />
 				<!--<ResourceDictionary Source="localization/fr_FR.xaml" />-->
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
@@ -66,17 +66,17 @@
 							<ColumnDefinition Width="1*" />
 							<ColumnDefinition Width="1*" />
 						</Grid.ColumnDefinitions>
-						<ToggleButton Grid.Column="0" Style="{StaticResource ButtonStyle1}" IsChecked="{Binding RenderDesignations}">
-							D<!--<Image Source="buttons/pause.png" Stretch="None" /> -->
+						<ToggleButton Grid.Column="0" Style="{StaticResource ButtonStyle1}" IsChecked="{Binding RenderDesignations}" ToolTip="Показывать зоны">
+							З<!--<Image Source="buttons/pause.png" Stretch="None" /> -->
 						</ToggleButton>
-						<ToggleButton Grid.Column="1" Style="{StaticResource ButtonStyle1}" IsChecked="{Binding RenderJobs}">
-							J<!--<Image Source="buttons/slow.png" Stretch="None" /> -->
+						<ToggleButton Grid.Column="1" Style="{StaticResource ButtonStyle1}" IsChecked="{Binding RenderJobs}" ToolTip="Показывать задания">
+							Р<!--<Image Source="buttons/slow.png" Stretch="None" /> -->
 						</ToggleButton>
-						<ToggleButton Grid.Column="2" Style="{StaticResource ButtonStyle1}" IsChecked="{Binding RenderWalls}">
-							W<!--<Image Source="buttons/fast.png" Stretch="None" /> -->
+						<ToggleButton Grid.Column="2" Style="{StaticResource ButtonStyle1}" IsChecked="{Binding RenderWalls}" ToolTip="Показывать стены">
+							С<!--<Image Source="buttons/fast.png" Stretch="None" /> -->
 						</ToggleButton>
-						<ToggleButton Grid.Column="3" Style="{StaticResource ButtonStyle1}" IsChecked="{Binding RenderAxles}">
-							A<!--<Image Source="buttons/fast.png" Stretch="None" /> -->
+						<ToggleButton Grid.Column="3" Style="{StaticResource ButtonStyle1}" IsChecked="{Binding RenderAxles}" ToolTip="Показывать валы механизмов">
+							В<!--<Image Source="buttons/fast.png" Stretch="None" /> -->
 						</ToggleButton>
 					</Grid>
 				</Border>
@@ -98,7 +98,7 @@
 						</Grid.RowDefinitions>
 						<StackPanel Orientation="Horizontal">
 							<TextBlock Grid.Row="0"  FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Center" Text="{Binding Day}" />
-							<Button x:Name="BDbg" Content="{StaticResource GameGui_D}" MaxWidth="30" Command="{Binding CmdRightCommandButton}" CommandParameter="Debug">
+							<Button x:Name="BDbg" Content="{StaticResource GameGui_D}" MaxWidth="30" Command="{Binding CmdRightCommandButton}" CommandParameter="Debug" ToolTip="Отладка">
 							</Button>
 						</StackPanel>
 						<Grid Grid.Row="1">

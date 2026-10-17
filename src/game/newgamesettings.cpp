@@ -627,7 +627,7 @@ QString NewGameSettings::addPreset()
 {
 	// get next user name
 	int index       = 1;
-	QString newName = "Custom " + QString::number( index );
+	QString newName = "Свой набор " + QString::number( index );
 	while ( true )
 	{
 		bool conflict = false;
@@ -645,7 +645,7 @@ QString NewGameSettings::addPreset()
 			break;
 		}
 		++index;
-		newName = "Custom " + QString::number( index );
+		newName = "Свой набор " + QString::number( index );
 	}
 
 	if ( !m_selectedPreset.isEmpty() )

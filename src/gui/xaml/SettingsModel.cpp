@@ -42,8 +42,9 @@ using namespace NoesisApp;
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-LanguageEntry::LanguageEntry( QString name ) :
-	m_name( name.toStdString().c_str() )
+LanguageEntry::LanguageEntry( QString id ) :
+	m_id( id ),
+	m_name( ( id == "ru_RU" ? QString( "Русский" ) : id ).toStdString().c_str() )
 {
 }
 
@@ -140,7 +141,7 @@ void SettingsModel::setLanguage( LanguageEntry* item )
     if( item && m_selectedLanguage != item )
 	{
         m_selectedLanguage = item;
-        m_proxy->setLanguage( item->getName() );
+        m_proxy->setLanguage( item->m_id );
 	}
 }
 

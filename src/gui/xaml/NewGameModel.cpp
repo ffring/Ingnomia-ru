@@ -145,7 +145,8 @@ StartAnimal::StartAnimal( QString type, QString gender, int amount )
 {
 	_tag    = ( type + "_" + gender ).toStdString().c_str();
 	_type   = S::s( "$CreatureName_" + type ).toStdString().c_str();
-	_gender = gender.toStdString().c_str();
+	// gender stays "Male"/"Female" in the tag and settings; only the label is localized
+	_gender = ( gender == "Male" ? QString( "самец" ) : gender == "Female" ? QString( "самка" ) : gender ).toStdString().c_str();
 	_amount = QString::number( amount ).toStdString().c_str();
 }
 
@@ -217,8 +218,8 @@ NewGameModel::NewGameModel() :
 	SetSelectedAnimal( _animals->Get( 0 ) );
 
 	_genders = *new ObservableCollection<GameItem>();
-	_genders->Add( MakePtr<GameItem>( "Male", "Male" ) );
-	_genders->Add( MakePtr<GameItem>( "Female", "Female" ) );
+	_genders->Add( MakePtr<GameItem>( "Самец", "Male" ) );
+	_genders->Add( MakePtr<GameItem>( "Самка", "Female" ) );
 	SetSelectedGender( _genders->Get( 0 ) );
 
 	for ( auto vt : Global::newGameSettings->trees() )

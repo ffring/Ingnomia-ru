@@ -1,0 +1,9 @@
+{
+  "name": "Ingnomia-0.9.0-windows-x64.zip",
+  "version": "0.9.0",
+  "url": "https://github.com/rschurade/Ingnomia/releases/download/v0.9.0/Ingnomia-0.9.0-windows-x64.zip",
+  "size": 52773028,
+  "sha256": "5066991319f7336af7897084751b93644af07191f5dd49e301dfebea66275b76",
+  "upstream_source_commit": "4f99266c0f95faa847ca0db2af18cf59aff07f4b",
+  "license": "AGPL-3.0 (game code and content); bundled third-party runtimes keep their own licenses"
+}

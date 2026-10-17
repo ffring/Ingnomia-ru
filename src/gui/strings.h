@@ -74,6 +74,17 @@ public:
 
 	static void insertString( QString key, QString string );
 
+	/// @brief Returns the translation for @p key, or @p fallback when the key is missing.
+	static QString sOr( const QString& key, const QString& fallback );
+
+	/// @brief Display name for an item made of a material, e.g. "кирка (железо)". Russian
+	///        nouns do not agree with a material noun placed in front, so the material goes
+	///        into parentheses after the item.
+	static QString materialItem( const QString& materialSID, const QString& itemSID );
+
+	/// @brief Picks the Russian plural form for @p n: one (1, 21), few (2-4, 22-24), many.
+	static QString plural( int n, const QString& one, const QString& few, const QString& many );
+
 	QString numberWord( int number );
 	QString randomKingdomName();
 };

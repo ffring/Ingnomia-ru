@@ -90,10 +90,10 @@ Game::Game( QObject* parent ) :
 	GameState::season = 0; // zero based, 0-numSeasons, typically 4 can be modded
 	GameState::year   = 1;
 
-	QString dt = QString( "Day %1, %2:%3" ).arg( GameState::day, 2, 10, QChar( ' ' ) ).arg( GameState::hour, 2, 10, QChar( '0' ) ).arg( GameState::minute, 2, 10, QChar( '0' ) );
+	QString dt = QString( "День %1, %2:%3" ).arg( GameState::day, 2, 10, QChar( ' ' ) ).arg( GameState::hour, 2, 10, QChar( '0' ) ).arg( GameState::minute, 2, 10, QChar( '0' ) );
 	GameState::currentDayTime = dt;
 	GameState::seasonString = "Spring";
-	GameState::currentYearAndSeason = "Year " + QString::number( GameState::year ) + ", " + S::s( "$SeasonName_" + GameState::seasonString );
+	GameState::currentYearAndSeason = "Год " + QString::number( GameState::year ) + ", " + S::s( "$SeasonName_" + GameState::seasonString ).toLower();
 
 	calcDaylight();
 	GameState::daylight = true;
@@ -293,9 +293,9 @@ void Game::loop()
 	
 		
 		emit signalKingdomInfo( GameState::kingdomName, 
-			"Gnomes: " + QString::number( gm()->numGnomes() ), 
-			"Animals: " + QString::number( fm()->countAnimals() ),
-			"Items: "  + QString::number( inv()->numItems() ) );
+			"Гномы: " + QString::number( gm()->numGnomes() ),
+			"Животные: " + QString::number( fm()->countAnimals() ),
+			"Предметы: "  + QString::number( inv()->numItems() ) );
 
 		m_guiHeartbeat = m_guiHeartbeat + 1;
 		emit signalHeartbeat(m_guiHeartbeat);
@@ -372,24 +372,24 @@ void Game::sendClock()
 	if ( currentTimeInt < GameState::sunrise )
 	{
 		//time between midnight and sunrise
-		sunStatus        = "Sunrise: " + intToTime( GameState::sunrise );
+		sunStatus        = "Рассвет: " + intToTime( GameState::sunrise );
 		GameState::daylight = false;
 	}
 	else if ( currentTimeInt < GameState::sunset )
 	{
 		// day time
-		sunStatus        = "Sunset: " + intToTime( GameState::sunset );
+		sunStatus        = "Закат: " + intToTime( GameState::sunset );
 		GameState::daylight = true;
 	}
 	else
 	{
 		// time after sunset
-		sunStatus        = "Sunrise: " + intToTime( GameState::nextSunrise );
+		sunStatus        = "Рассвет: " + intToTime( GameState::nextSunrise );
 		GameState::daylight = false;
 	}
-	QString dt = QString( "Day %1, %2:%3" ).arg( GameState::day, 2, 10, QChar( ' ' ) ).arg( GameState::hour, 2, 10, QChar( '0' ) ).arg( GameState::minute, 2, 10, QChar( '0' ) );
+	QString dt = QString( "День %1, %2:%3" ).arg( GameState::day, 2, 10, QChar( ' ' ) ).arg( GameState::hour, 2, 10, QChar( '0' ) ).arg( GameState::minute, 2, 10, QChar( '0' ) );
 	GameState::currentDayTime = dt;
-	GameState::currentYearAndSeason = "Year " + QString::number( GameState::year ) + ", " + S::s( "$SeasonName_" + GameState::seasonString );
+	GameState::currentYearAndSeason = "Год " + QString::number( GameState::year ) + ", " + S::s( "$SeasonName_" + GameState::seasonString ).toLower();
 	emit signalTimeAndDate( GameState::minute, GameState::hour, GameState::day, S::s( "$SeasonName_" + GameState::seasonString ), GameState::year, sunStatus );
 }
 

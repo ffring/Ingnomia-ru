@@ -147,7 +147,7 @@ void AggregatorLoadGame::onRequestSaveGames( const QString path )
 
 				if ( !IO::saveCompatible( gsi.folder ) )
 				{
-					gsi.version += " - not compatible - sorry broke save games again";
+					gsi.version += " — несовместимо с этой версией игры";
 					gsi.compatible = false;
 				}
 

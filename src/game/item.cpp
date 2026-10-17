@@ -224,7 +224,7 @@ QString Item::getPixmapSID() const
  */
 QString Item::getDesignation() const
 {
-	return S::s( "$MaterialName_" + DBH::materialSID( m_materialUID ) ) + " " + S::s( "$ItemName_" + DBH::itemSID( m_itemUID ) );
+	return S::materialItem( DBH::materialSID( m_materialUID ), DBH::itemSID( m_itemUID ) );
 }
 
 /** @brief Return the item type string ID (DB key).

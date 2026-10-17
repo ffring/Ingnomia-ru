@@ -17,8 +17,8 @@
 */
 /** @file strings.cpp
  *  @brief Strings implementation: loads the Translation DB table into the in-memory lookup
- *         table, provides lookup with an obvious "Error: <key>" fallback, and generates
- *         random kingdom names by composing word-table entries per the Namerules_Rule schema.
+ *         table, provides lookup with an obvious "Ошибка: <key>" fallback, Russian display
+ *         helpers (material/item names, plural forms) and random Russian kingdom names.
  */
 #include "strings.h"
 
@@ -29,6 +29,10 @@
 #include <QDebug>
 #include <QJsonDocument>
 #include <QVariantMap>
+
+#include <chrono>
+#include <cstddef>
+#include <cstdlib>
 
 QMap<QString, QString> Strings::m_table = QMap<QString, QString>();
 QString Strings::m_language             = "";
@@ -71,7 +75,7 @@ QString Strings::s( QString key )
 	}
 	else
 	{
-		return "Error: " + key;
+		return "Ошибка: " + key;
 		//return m_table["$ERROR_TranslationKeyUnknown"].toString();
 	}
 }
@@ -85,23 +89,133 @@ void Strings::insertString( QString key, QString string )
 	m_table.insert( key, string );
 }
 
-/// @brief Generates a random kingdom name by picking one of the Namerules_Rule "Faction"
-///        entries and composing its parts via replaceNamePart().
+QString Strings::sOr( const QString& key, const QString& fallback )
+{
+	return m_table.value( key, fallback );
+}
+
+QString Strings::materialItem( const QString& materialSID, const QString& itemSID )
+{
+	return s( "$ItemName_" + itemSID ) + " (" + s( "$MaterialName_" + materialSID ) + ")";
+}
+
+QString Strings::plural( int n, const QString& one, const QString& few, const QString& many )
+{
+	const int n100 = qAbs( n ) % 100;
+	const int n10  = n100 % 10;
+	if ( n100 >= 11 && n100 <= 14 )
+	{
+		return many;
+	}
+	if ( n10 == 1 )
+	{
+		return one;
+	}
+	if ( n10 >= 2 && n10 <= 4 )
+	{
+		return few;
+	}
+	return many;
+}
+
+namespace
+{
+// Curated Russian name parts for kingdom names. The English Words_* tables can't be
+// recombined grammatically in Russian, so the Russian-first fork uses its own small set.
+struct RuNoun
+{
+	const char* nominative;
+	const char* genitive;
+	int gender; // 0 masculine, 1 feminine, 2 neuter
+};
+
+struct RuAdjective
+{
+	const char* forms[3]; // masculine, feminine, neuter
+};
+
+const RuNoun ruNouns[] = {
+	{ "Молот", "Молота", 0 },
+	{ "Котёл", "Котла", 0 },
+	{ "Утёс", "Утёса", 0 },
+	{ "Холм", "Холма", 0 },
+	{ "Перевал", "Перевала", 0 },
+	{ "Бор", "Бора", 0 },
+	{ "Ручей", "Ручья", 0 },
+	{ "Кряж", "Кряжа", 0 },
+	{ "Горн", "Горна", 0 },
+	{ "Гриб", "Гриба", 0 },
+	{ "Долина", "Долины", 1 },
+	{ "Наковальня", "Наковальни", 1 },
+	{ "Пещера", "Пещеры", 1 },
+	{ "Кирка", "Кирки", 1 },
+	{ "Чаща", "Чащи", 1 },
+	{ "Гора", "Горы", 1 },
+	{ "Жила", "Жилы", 1 },
+	{ "Шахта", "Шахты", 1 },
+	{ "Ущелье", "Ущелья", 2 },
+	{ "Озеро", "Озера", 2 },
+	{ "Подземелье", "Подземелья", 2 },
+	{ "Огниво", "Огнива", 2 },
+};
+
+const RuAdjective ruAdjectives[] = {
+	{ { "Каменный", "Каменная", "Каменное" } },
+	{ { "Медный", "Медная", "Медное" } },
+	{ { "Железный", "Железная", "Железное" } },
+	{ { "Золотой", "Золотая", "Золотое" } },
+	{ { "Серебряный", "Серебряная", "Серебряное" } },
+	{ { "Дубовый", "Дубовая", "Дубовое" } },
+	{ { "Грибной", "Грибная", "Грибное" } },
+	{ { "Тихий", "Тихая", "Тихое" } },
+	{ { "Северный", "Северная", "Северное" } },
+	{ { "Глубокий", "Глубокая", "Глубокое" } },
+	{ { "Звонкий", "Звонкая", "Звонкое" } },
+	{ { "Ржавый", "Ржавая", "Ржавое" } },
+	{ { "Мшистый", "Мшистая", "Мшистое" } },
+	{ { "Туманный", "Туманная", "Туманное" } },
+	{ { "Гранитный", "Гранитная", "Гранитное" } },
+	{ { "Хмельной", "Хмельная", "Хмельное" } },
+	{ { "Вольный", "Вольная", "Вольное" } },
+	{ { "Полночный", "Полночная", "Полночное" } },
+	{ { "Янтарный", "Янтарная", "Янтарное" } },
+	{ { "Ясный", "Ясная", "Ясное" } },
+};
+
+const char* ruPrefixes[] = { "Камне", "Медно", "Железно", "Грибо", "Мохо", "Злато", "Сребро", "Дубо", "Кремне", "Рудо" };
+const char* ruSuffixes[] = { "град", "дол", "бор", "горье" };
+
+template <typename T, std::size_t N>
+const T& pick( const T ( &list )[N] )
+{
+	return list[rand() % N];
+}
+} // namespace
+
+/// @brief Generates a random Russian kingdom name from the curated parts above.
+///        The upstream English generator (Namerules_Rule "Faction" + Words_* tables) is kept
+///        in replaceNamePart() for reference but no longer called.
 /// @return Freshly generated kingdom name.
 QString Strings::randomKingdomName()
 {
-	auto ruleList = DB::selectRows( "Namerules_Rule", "Faction" );
-
 	srand( std::chrono::system_clock::now().time_since_epoch().count() );
-	auto rule = ruleList.at( rand() % ruleList.size() ).value( "Part" ).toString().split( "|" );
-	QString name;
-	for ( auto part : rule )
+
+	const RuNoun& noun     = pick( ruNouns );
+	const RuAdjective& adj = pick( ruAdjectives );
+
+	switch ( rand() % 5 )
 	{
-		name += replaceNamePart( part );
-		name += " ";
+		case 0:
+			return QString( adj.forms[noun.gender] ) + " " + noun.nominative;
+		case 1:
+			return QString( "Королевство " ) + noun.genitive;
+		case 2:
+			return QString( adj.forms[2] ) + " королевство";
+		case 3:
+			return QString( "Земли " ) + noun.genitive;
+		default:
+			return QString( pick( ruPrefixes ) ) + pick( ruSuffixes );
 	}
-	name.remove( name.size() - 1, 1 );
-	return name;
 }
 
 /// @brief Resolves one name-rule part into an actual word. Reserved words ("The", "of",
@@ -167,24 +281,16 @@ QString Strings::replaceNamePart2( QString part, QString part2 )
 	return DB::select( part2, tableName, ra ).toString();
 }
 
-/// @brief Returns the English word for a non-negative integer up to 19 (from the
-///        Words_Numbers DB table). For values outside that range, returns the numeric
-///        string directly. Negative values return "no number".
-/// @param number Integer to spell out.
-/// @return Word form, numeric string, or "no number".
+/// @brief Returns a display form for a non-negative integer. Russian number words would
+///        need case agreement with the following noun, so digits are used instead.
+///        Negative values return "нет числа".
+/// @param number Integer to display.
+/// @return Numeric string, or "нет числа".
 QString Strings::numberWord( int number )
 {
 	if ( number >= 0 )
 	{
-		if ( number < 20 )
-		{
-			auto result = DB::select2( "Word", "Words_Numbers", "Number", number );
-			if ( result.size() > 0 )
-			{
-				return result.first().toString();
-			}
-		}
 		return QString::number( number );
 	}
-	return "no number";
+	return "нет числа";
 }

@@ -139,7 +139,7 @@
 			<TextBlock x:Name="ItemName" Text="{Binding Name}" Tag="{Binding Tag}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Grid.Column="1"/>
 			<TextBlock Text="{Binding Material1}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Grid.Column="2"/>
 			<TextBlock Text="{Binding Material2}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Grid.Column="3"/>
-			<Button  x:Name="RemoveSI"  Content="Remove" Command="{Binding ElementName=ICStartingItems, Path=DataContext.RemoveItem}" CommandParameter="{Binding ElementName=ItemName, Path=Tag}" Grid.Column="4" />
+			<Button  x:Name="RemoveSI"  Content="Убрать" Command="{Binding ElementName=ICStartingItems, Path=DataContext.RemoveItem}" CommandParameter="{Binding ElementName=ItemName, Path=Tag}" Grid.Column="4" />
 
 		</Grid>
 	</DataTemplate>
@@ -155,7 +155,7 @@
 			<TextBlock Text="{Binding Amount}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Grid.Column="0"/>
 			<TextBlock x:Name="AnimalName" Text="{Binding Name}" Tag="{Binding Tag}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" Grid.Column="1"/>
 			<TextBlock Text="{Binding Gender}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Grid.Column="2"/>
-			<Button  x:Name="RemoveSA"  Content="Remove" Command="{Binding ElementName=ICStartingAnimals, Path=DataContext.RemoveAnimal}" CommandParameter="{Binding ElementName=AnimalName, Path=Tag}" Grid.Column="4" />
+			<Button  x:Name="RemoveSA"  Content="Убрать" Command="{Binding ElementName=ICStartingAnimals, Path=DataContext.RemoveAnimal}" CommandParameter="{Binding ElementName=AnimalName, Path=Tag}" Grid.Column="4" />
 
 		</Grid>
 	</DataTemplate>
@@ -270,8 +270,79 @@
 		<Setter Property="Background" Value="{StaticResource ButtonNormalBrush}"/>
 	</Style>
 
+	<!-- Command and build-category buttons: the ID is the command, the label is mapped here
+	     so the same Russian text appears with the rebuilt fork and the unmodified 0.9.0 exe. -->
+	<Style x:Key="CommandButtonLabelStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource BuildButton}">
+		<Setter Property="Content" Value="{Binding Name}"/>
+		<Style.Triggers>
+			<DataTrigger Binding="{Binding ID}" Value="Workshop"><Setter Property="Content" Value="Мастерская"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="Wall"><Setter Property="Content" Value="Стена"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="Floor"><Setter Property="Content" Value="Пол"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="Stairs"><Setter Property="Content" Value="Лестница"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="Ramp"><Setter Property="Content" Value="Пандус"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="Fence"><Setter Property="Content" Value="Ограда"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="Containers"><Setter Property="Content" Value="Ёмкости"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="Furniture"><Setter Property="Content" Value="Мебель"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="Utility"><Setter Property="Content" Value="Обустройство"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="Deconstruct"><Setter Property="Content" Value="Разобрать"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="Mine"><Setter Property="Content" Value="Выкопать"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="ExplorativeMine"><Setter Property="Content" Value="По жиле"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="RemoveFloor"><Setter Property="Content" Value="Убрать пол"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="DigStairsDown"><Setter Property="Content" Value="Лестница вниз"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="MineStairsUp"><Setter Property="Content" Value="Лестница вверх"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="DigRampDown"><Setter Property="Content" Value="Пандус вниз"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="DigHole"><Setter Property="Content" Value="Яма"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="FellTree"><Setter Property="Content" Value="Срубить"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value=""><Setter Property="Content" Value="Посадить дерево"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="HarvestTree"><Setter Property="Content" Value="Собрать плоды"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="Forage"><Setter Property="Content" Value="Собирательство"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="RemovePlant"><Setter Property="Content" Value="Убрать растение"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="CreateStockpile"><Setter Property="Content" Value="Склад"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="CreateFarm"><Setter Property="Content" Value="Поле"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="CreateGrove"><Setter Property="Content" Value="Роща"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="CreatePasture"><Setter Property="Content" Value="Пастбище"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="CreateRoom"><Setter Property="Content" Value="Своя комната"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="CreateDorm"><Setter Property="Content" Value="Спальня"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="CreateDining"><Setter Property="Content" Value="Столовая"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="CreateHospital"><Setter Property="Content" Value="Лазарет"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="CreateNoPass"><Setter Property="Content" Value="Запрет прохода"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="CreateGuardArea"><Setter Property="Content" Value="Охрана"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="RemoveDesignation"><Setter Property="Content" Value="Снять зону"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="SuspendJob"><Setter Property="Content" Value="Приостановить"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="ResumeJob"><Setter Property="Content" Value="Возобновить"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="CancelJob"><Setter Property="Content" Value="Отменить"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="LowerPrio"><Setter Property="Content" Value="Понизить приоритет"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="RaisePrio"><Setter Property="Content" Value="Повысить приоритет"/></DataTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style x:Key="BuildCategoryLabelStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
+		<Setter Property="Text" Value="{Binding Name}"/>
+		<Style.Triggers>
+			<DataTrigger Binding="{Binding ID}" Value="Wood"><Setter Property="Text" Value="Дерево"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="Soil"><Setter Property="Text" Value="Грунт"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="Stone"><Setter Property="Text" Value="Камень"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="Metal"><Setter Property="Text" Value="Металл"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="Other"><Setter Property="Text" Value="Прочее"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="Food"><Setter Property="Text" Value="Еда"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="Craft"><Setter Property="Text" Value="Ремёсла"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="Mechanics"><Setter Property="Text" Value="Механика"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="Misc"><Setter Property="Text" Value="Разное"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="Containers"><Setter Property="Text" Value="Все"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="Chairs"><Setter Property="Text" Value="Стулья"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="Tables"><Setter Property="Text" Value="Столы"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="Beds"><Setter Property="Text" Value="Кровати"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="Cabinets"><Setter Property="Text" Value="Шкафы"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="Doors"><Setter Property="Text" Value="Двери"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="Lights"><Setter Property="Text" Value="Свет"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="Farm"><Setter Property="Text" Value="Хозяйство"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="Mechanism"><Setter Property="Text" Value="Механизмы"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="Hydraulics"><Setter Property="Text" Value="Гидравлика"/></DataTrigger>
+		</Style.Triggers>
+	</Style>
+
 	<DataTemplate x:Key="CommandButtonTemplate">
-		<Button Content="{Binding Name}" Style="{StaticResource BuildButton}"
+		<Button Style="{StaticResource CommandButtonLabelStyle}"
 			Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:GameGui}}, Path=DataContext.CmdButtonCommand }"
 			CommandParameter="{Binding ID}"/>
 	</DataTemplate>
@@ -284,7 +355,7 @@
 			CommandParameter="{Binding ID}">
 			<StackPanel>
 				<Image Source="{Binding Image}" Stretch="None" />
-				<TextBlock Text="{Binding Name}"/>
+				<TextBlock Style="{StaticResource BuildCategoryLabelStyle}"/>
 			</StackPanel>
 
 		</Button>
@@ -375,23 +446,122 @@
 		<Setter Property="VirtualizingPanel.ScrollUnit" Value="Pixel"/>
 	</Style>
 
+	<!-- Tab IDs (A/T/C/I/D/J) and terrain action texts double as command parameters,
+	     so the visible Russian labels are mapped here instead of in C++. -->
+	<Style x:Key="TITabButtonLabelStyle" TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource TabButton}">
+		<Setter Property="Content" Value="{Binding Name}"/>
+		<Style.Triggers>
+			<DataTrigger Binding="{Binding ID}" Value="A"><Setter Property="Content" Value="Всё"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="T"><Setter Property="Content" Value="Рельеф"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="C"><Setter Property="Content" Value="Существа"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="I"><Setter Property="Content" Value="Предметы"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="D"><Setter Property="Content" Value="Зона"/></DataTrigger>
+			<DataTrigger Binding="{Binding ID}" Value="J"><Setter Property="Content" Value="Задание"/></DataTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<!-- TileInfo state tokens come from C++ as fixed English words; show them in Russian. -->
+	<Style x:Key="TIDesignationTitleStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
+		<Setter Property="Text" Value="{Binding DesignationTitle}"/>
+		<Style.Triggers>
+			<DataTrigger Binding="{Binding DesignationTitle}" Value="Workshop"><Setter Property="Text" Value="Мастерская"/></DataTrigger>
+			<DataTrigger Binding="{Binding DesignationTitle}" Value="Stockpile"><Setter Property="Text" Value="Склад"/></DataTrigger>
+			<DataTrigger Binding="{Binding DesignationTitle}" Value="Grove"><Setter Property="Text" Value="Роща"/></DataTrigger>
+			<DataTrigger Binding="{Binding DesignationTitle}" Value="Farm"><Setter Property="Text" Value="Поле"/></DataTrigger>
+			<DataTrigger Binding="{Binding DesignationTitle}" Value="Pasture"><Setter Property="Text" Value="Пастбище"/></DataTrigger>
+			<DataTrigger Binding="{Binding DesignationTitle}" Value="Room"><Setter Property="Text" Value="Комната"/></DataTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style x:Key="TIMechActiveStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
+		<Setter Property="Text" Value="{Binding MechActive}"/>
+		<Style.Triggers>
+			<DataTrigger Binding="{Binding MechActive}" Value="Active"><Setter Property="Text" Value="Включён"/></DataTrigger>
+			<DataTrigger Binding="{Binding MechActive}" Value="Inactive"><Setter Property="Text" Value="Выключен"/></DataTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style x:Key="TIMechInvertStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
+		<Setter Property="Text" Value="{Binding MechInvert}"/>
+		<Style.Triggers>
+			<DataTrigger Binding="{Binding MechInvert}" Value="Inverted"><Setter Property="Text" Value="Инвертирован"/></DataTrigger>
+			<DataTrigger Binding="{Binding MechInvert}" Value="Not inverted"><Setter Property="Text" Value="Не инвертирован"/></DataTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style x:Key="TIEnclosedStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
+		<Setter Property="Text" Value="{Binding Enclosed}"/>
+		<Style.Triggers>
+			<DataTrigger Binding="{Binding Enclosed}" Value="yes"><Setter Property="Text" Value="да"/></DataTrigger>
+			<DataTrigger Binding="{Binding Enclosed}" Value="no"><Setter Property="Text" Value="нет"/></DataTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style x:Key="TIRoofedStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
+		<Setter Property="Text" Value="{Binding Roofed}"/>
+		<Style.Triggers>
+			<DataTrigger Binding="{Binding Roofed}" Value="yes"><Setter Property="Text" Value="да"/></DataTrigger>
+			<DataTrigger Binding="{Binding Roofed}" Value="no"><Setter Property="Text" Value="нет"/></DataTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style x:Key="TIToolAvailableStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
+		<Setter Property="Text" Value="{Binding RequiredToolAvailable}"/>
+		<Style.Triggers>
+			<DataTrigger Binding="{Binding RequiredToolAvailable}" Value="Yes"><Setter Property="Text" Value="да"/></DataTrigger>
+			<DataTrigger Binding="{Binding RequiredToolAvailable}" Value="No"><Setter Property="Text" Value="нет"/></DataTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style x:Key="TIWorkablePositionStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
+		<Setter Property="Text" Value="{Binding WorkablePosition}"/>
+		<Style.Triggers>
+			<DataTrigger Binding="{Binding WorkablePosition}" Value="true"><Setter Property="Text" Value="да"/></DataTrigger>
+			<DataTrigger Binding="{Binding WorkablePosition}" Value="false"><Setter Property="Text" Value="нет"/></DataTrigger>
+		</Style.Triggers>
+	</Style>
+
 	<DataTemplate x:Key="TITabButtonsTemplate">
-		<ToggleButton x:Name="TITBT_Button" Content="{Binding Name}" FontSize="12"
+		<ToggleButton x:Name="TITBT_Button" FontSize="12"
 			IsChecked="{Binding Checked}"
 			MinWidth="60" MinHeight="60"
 			MaxWidth="60" MaxHeight="60"
 			Margin="2"
-			Style="{StaticResource TabButton}"
+			Style="{StaticResource TITabButtonLabelStyle}"
 			Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:TileInfo}}, Path=DataContext.CmdTab }"
 			CommandParameter="{Binding ID}"/>
 	</DataTemplate>
 
+	<Style x:Key="TITerrainAction1Style" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+		<Setter Property="Content" Value="{Binding Action1Text}"/>
+		<Style.Triggers>
+			<DataTrigger Binding="{Binding Action1Text}" Value="Mine"><Setter Property="Content" Value="Выкопать"/></DataTrigger>
+			<DataTrigger Binding="{Binding Action1Text}" Value="Remove"><Setter Property="Content" Value="Убрать"/></DataTrigger>
+			<DataTrigger Binding="{Binding Action1Text}" Value="Harvest"><Setter Property="Content" Value="Собрать"/></DataTrigger>
+			<DataTrigger Binding="{Binding Action1Text}" Value="Replace"><Setter Property="Content" Value="Заменить"/></DataTrigger>
+			<DataTrigger Binding="{Binding Action1Text}" Value="Destroy"><Setter Property="Content" Value="Уничтожить"/></DataTrigger>
+			<DataTrigger Binding="{Binding Action1Text}" Value="Fell"><Setter Property="Content" Value="Срубить"/></DataTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style x:Key="TITerrainAction2Style" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+		<Setter Property="Content" Value="{Binding Action2Text}"/>
+		<Style.Triggers>
+			<DataTrigger Binding="{Binding Action2Text}" Value="Mine"><Setter Property="Content" Value="Выкопать"/></DataTrigger>
+			<DataTrigger Binding="{Binding Action2Text}" Value="Remove"><Setter Property="Content" Value="Убрать"/></DataTrigger>
+			<DataTrigger Binding="{Binding Action2Text}" Value="Harvest"><Setter Property="Content" Value="Собрать"/></DataTrigger>
+			<DataTrigger Binding="{Binding Action2Text}" Value="Replace"><Setter Property="Content" Value="Заменить"/></DataTrigger>
+			<DataTrigger Binding="{Binding Action2Text}" Value="Destroy"><Setter Property="Content" Value="Уничтожить"/></DataTrigger>
+			<DataTrigger Binding="{Binding Action2Text}" Value="Fell"><Setter Property="Content" Value="Срубить"/></DataTrigger>
+		</Style.Triggers>
+	</Style>
+
 	<DataTemplate x:Key="TITabTerrainTemplate">
 		<StackPanel Orientation="Horizontal">
 			<TextBlock Text="{Binding Name}" HorizontalAlignment="Left" FontSize="20" Margin="2" />
-			<Button x:Name="TITTT_Button1" Visibility="{Binding Action1Visible}" Content="{Binding Action1Text}" Margin="2"
+			<Button x:Name="TITTT_Button1" Visibility="{Binding Action1Visible}" Style="{StaticResource TITerrainAction1Style}" Margin="2"
 				Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:TileInfo}}, Path=DataContext.CmdTerrain }" CommandParameter="{Binding Action1Text}"/>
-			<Button x:Name="TITTT_Button2" Visibility="{Binding Action2Visible}" Content="{Binding Action2Text}" Margin="2"
+			<Button x:Name="TITTT_Button2" Visibility="{Binding Action2Visible}" Style="{StaticResource TITerrainAction2Style}" Margin="2"
 				Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:TileInfo}}, Path=DataContext.CmdTerrain }"  CommandParameter="{Binding Action2Text}" />
 		</StackPanel>
 	</DataTemplate>
@@ -417,7 +587,7 @@
 				<ColumnDefinition Width="Auto"/>
 			</Grid.ColumnDefinitions>
 			<TextBlock Text="{Binding Name}" HorizontalAlignment="Left" FontSize="20" Margin="2" Grid.Column="0" />
-			<Button Style="{StaticResource SquareButton}" FontSize="16" Content="Inspect" Grid.Column="1" HorizontalAlignment="Right"
+			<Button Style="{StaticResource SquareButton}" FontSize="16" Content="Осмотреть" Grid.Column="1" HorizontalAlignment="Right"
 				MinWidth="100"
 				MaxHeight= "28"
 				Margin="2"
@@ -431,7 +601,7 @@
 		<Grid>
 			<StackPanel>
 				<TextBlock Text="{Binding Name}" HorizontalAlignment="Left" FontSize="20" Margin="2" Grid.Column="0" />
-				<CheckBox Content="Refuel" IsChecked="{Binding Refuel}" HorizontalAlignment="Left" Width="150" Margin="2" FontSize="16"/>
+				<CheckBox Content="Заправлять" IsChecked="{Binding Refuel}" HorizontalAlignment="Left" Width="180" Margin="2" FontSize="16"/>
 				<ComboBox Grid.Column="1" VerticalAlignment="Center" Margin="2" HorizontalAlignment="Stretch"
 								ItemsSource="{Binding Cores}"
 								SelectedItem="{Binding SelectedCore, Mode=TwoWay}"
@@ -478,11 +648,11 @@
 					</ItemsControl.ItemsPanel>
 				</ItemsControl>
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-					<Button Content="Fill Hole" HorizontalAlignment="Right" Margin="2" Padding="2" Visibility="{Binding ShowFillHoleButton}"
+					<Button Content="Засыпать яму" HorizontalAlignment="Right" Margin="2" Padding="2" Visibility="{Binding ShowFillHoleButton}"
 						Command="{Binding Build}" CommandParameter="FillHole"/>
-					<Button Content="Replace" HorizontalAlignment="Right" Margin="2" Padding="2" Visibility="{Binding ShowReplaceButton}"
+					<Button Content="Заменить" HorizontalAlignment="Right" Margin="2" Padding="2" Visibility="{Binding ShowReplaceButton}"
 						Command="{Binding Build}" CommandParameter="Replace"/>
-					<Button Content="Build" HorizontalAlignment="Right" Margin="2" Padding="2" Command="{Binding Build}" CommandParameter="Build"/>
+					<Button Content="Построить" HorizontalAlignment="Right" Margin="2" Padding="2" Command="{Binding Build}" CommandParameter="Build"/>
 				</StackPanel>
 			</StackPanel>
 		</Grid>
@@ -548,7 +718,7 @@
 	</DataTemplate>
 
 	<DataTemplate x:Key="FilterUnrollStop">
-		<TextBlock Text="{Binding Name, StringFormat='Any \{0\}'}" HorizontalAlignment="Left" FontSize="20" Margin="2" />
+		<TextBlock Text="{Binding Name, StringFormat='\{0\}: всё'}" HorizontalAlignment="Left" FontSize="20" Margin="2" />
 	</DataTemplate>
 	<DataTemplate x:Key="FilterUnrollRecurse">
 		<ItemsControl ItemsSource="{Binding Children, UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{DynamicResource FilterUnrollTemplate}">
@@ -592,9 +762,9 @@
 						<ColumnDefinition Width="1*"/>
 					</Grid.ColumnDefinitions>
 					<ComboBox MinWidth="100" Grid.Column="0" Margin="3"  SelectedIndex="{Binding Mode}">
-						<ComboBoxItem IsSelected="True">Craft number</ComboBoxItem>
-						<ComboBoxItem>Craft to</ComboBoxItem>
-						<ComboBoxItem>Repeat</ComboBoxItem>
+						<ComboBoxItem IsSelected="True">Сделать штук</ComboBoxItem>
+						<ComboBoxItem>Довести запас до</ComboBoxItem>
+						<ComboBoxItem>Повторять</ComboBoxItem>
 					</ComboBox>
 					<TextBox x:Name="CraftNum" Grid.Column="1" MinWidth="50" MaxLength="3" Text="{Binding CraftNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="3"/>
 				</Grid>
@@ -605,7 +775,7 @@
 						</ItemsPanelTemplate>
 					</ItemsControl.ItemsPanel>
 				</ItemsControl>
-				<Button Content="Craft" HorizontalAlignment="Right" Padding="2" Command="{Binding Craft}"/>
+				<Button Content="Изготовить" HorizontalAlignment="Right" Padding="2" Command="{Binding Craft}"/>
 			</StackPanel>
 		</Expander>
 	</DataTemplate>
@@ -618,10 +788,10 @@
 			</Grid.ColumnDefinitions>
 		<Border x:Name="WsJobBorder1" Style="{StaticResource JobPanel}" MinWidth="50" MaxWidth="50" Margin="2" Grid.Column="0" >
 			<StackPanel>
-				<Button x:Name="WSJT_Button1" Content="Top" Margin="2"    Command="{Binding ButtonCmd}" CommandParameter="Top"/>
-				<Button x:Name="WSJT_Button2" Content="Up" Margin="2"     Command="{Binding ButtonCmd}" CommandParameter="Up"/>
-				<Button x:Name="WSJT_Button3" Content="Down" Margin="2"   Command="{Binding ButtonCmd}" CommandParameter="Down"/>
-				<Button x:Name="WSJT_Button4" Content="Bottom" Margin="2" Command="{Binding ButtonCmd}" CommandParameter="Bottom"/>
+				<Button x:Name="WSJT_Button1" Content="Верх" Margin="2"    Command="{Binding ButtonCmd}" CommandParameter="Top"/>
+				<Button x:Name="WSJT_Button2" Content="Выше" Margin="2"     Command="{Binding ButtonCmd}" CommandParameter="Up"/>
+				<Button x:Name="WSJT_Button3" Content="Ниже" Margin="2"   Command="{Binding ButtonCmd}" CommandParameter="Down"/>
+				<Button x:Name="WSJT_Button4" Content="Низ" Margin="2" Command="{Binding ButtonCmd}" CommandParameter="Bottom"/>
 			</StackPanel>
 		</Border>
 		<Border x:Name="WsJobBorder2" Style="{StaticResource JobPanel}" MinWidth="225" MaxWidth="225" Margin="2" Grid.Column="1" >
@@ -633,15 +803,15 @@
 						<ColumnDefinition Width="1*"/>
 					</Grid.ColumnDefinitions>
 					<ComboBox MinWidth="100" Grid.Column="0" Margin="3"  SelectedIndex="{Binding Mode}">
-						<ComboBoxItem IsSelected="True">Craft number</ComboBoxItem>
-						<ComboBoxItem>Craft to</ComboBoxItem>
-						<ComboBoxItem>Repeat</ComboBoxItem>
+						<ComboBoxItem IsSelected="True">Сделать штук</ComboBoxItem>
+						<ComboBoxItem>Довести запас до</ComboBoxItem>
+						<ComboBoxItem>Повторять</ComboBoxItem>
 					</ComboBox>
 					<TextBox x:Name="CraftNum" Grid.Column="1" MinWidth="50" MaxLength="3" Text="{Binding CraftNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="3"/>
 				</Grid>
-				<CheckBox  x:Name="CBSuspend" IsChecked="{Binding Suspended, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="Suspend"/>
-				<CheckBox  x:Name="CBMBWD" IsChecked="{Binding MoveBack, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="Move back when done"/>
-				<Button Content="Cancel" HorizontalAlignment="Right" Padding="2" Margin="3" Command="{Binding ButtonCmd}" CommandParameter="Cancel"/>
+				<CheckBox  x:Name="CBSuspend" IsChecked="{Binding Suspended, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="Приостановить"/>
+				<CheckBox  x:Name="CBMBWD" IsChecked="{Binding MoveBack, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Content="Затем в конец очереди"/>
+				<Button Content="Отменить" HorizontalAlignment="Right" Padding="2" Margin="3" Command="{Binding ButtonCmd}" CommandParameter="Cancel"/>
 			</StackPanel>
 		</Border>
 		</Grid>
@@ -752,8 +922,8 @@
 			<CheckBox Content="" IsChecked="{Binding ToButcher}">
 				<CheckBox.ToolTip>
 					<StackPanel Background="#FF365264">
-						<TextBlock Text="Mark this animal" FontSize="18" FontWeight="Bold" Foreground="#FF365264" Background="LightSkyBlue" Padding="0,2" TextAlignment="Center"/>
-						<TextBlock Text="for butchering." FontSize="18" FontWeight="Bold" Foreground="#FF365264" Background="LightSkyBlue" Padding="0,2" TextAlignment="Center"/>
+						<TextBlock Text="Отметить животное" FontSize="18" FontWeight="Bold" Foreground="#FF365264" Background="LightSkyBlue" Padding="0,2" TextAlignment="Center"/>
+						<TextBlock Text="на забой." FontSize="18" FontWeight="Bold" Foreground="#FF365264" Background="LightSkyBlue" Padding="0,2" TextAlignment="Center"/>
 					</StackPanel>
 				</CheckBox.ToolTip>
 			</CheckBox>
@@ -819,7 +989,7 @@
 					</i:EventTrigger>
 				</i:Interaction.Triggers>
 			</TextBlock>
-			<Button Style="{StaticResource GnomeSkillAllButtonStyle}" Content="A"
+			<Button Style="{StaticResource GnomeSkillAllButtonStyle}" Content="Все"
 				Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:PopulationWindow}}, Path=DataContext.CmdAllGnomes }"
 				CommandParameter="{Binding SkillID}"/>
 				<i:Interaction.Triggers>
@@ -851,8 +1021,16 @@
 			/>
 		</DataTemplate>
 
+	<!-- "Gnomad" is the built-in profession key checked by C++; only its label is localized. -->
+	<Style x:Key="ProfessionNameStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
+		<Setter Property="Text" Value="{Binding Name}"/>
+		<Style.Triggers>
+			<DataTrigger Binding="{Binding Name}" Value="Gnomad"><Setter Property="Text" Value="Гномад (всё умеет)"/></DataTrigger>
+		</Style.Triggers>
+	</Style>
+
 	<DataTemplate x:Key="PopProfessionTemplate">
-		<TextBlock Text="{Binding Name}" HorizontalAlignment="Left" VerticalAlignment="Center" MaxHeight="18" FontSize="12" />
+		<TextBlock Style="{StaticResource ProfessionNameStyle}" HorizontalAlignment="Left" VerticalAlignment="Center" MaxHeight="18" FontSize="12" />
 	</DataTemplate>
 
 	<DataTemplate x:Key="PopGnomeNameTemplate">
@@ -870,7 +1048,7 @@
 								ItemsSource="{Binding Professions, FallbackValue={x:Null}}"
 								SelectedItem="{Binding Profession, Mode=TwoWay, FallbackValue={x:Null}}"
 								ItemTemplate="{StaticResource PopProfessionTemplate}" />
-			<Button Style="{StaticResource GnomeSkillAllButtonStyle}" Content="A"
+			<Button Style="{StaticResource GnomeSkillAllButtonStyle}" Content="Все"
 				Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:PopulationWindow}}, Path=DataContext.CmdAllSkills }"
 				CommandParameter="{Binding GnomeID}">
 				<i:Interaction.Triggers>
@@ -881,8 +1059,8 @@
 				</i:Interaction.Triggers>
 				<Button.ToolTip>
 					<StackPanel Background="#FF365264">
-						<TextBlock Text="Left click to enable all skills in this row." FontSize="18" FontWeight="Bold" Foreground="#FF365264" Background="LightSkyBlue" Padding="0,2" TextAlignment="Center"/>
-						<TextBlock Text="Right click to disable all skills in this row." FontSize="18" FontWeight="Bold" Foreground="#FF365264" Background="LightSkyBlue" Padding="0,2" TextAlignment="Center"/>
+						<TextBlock Text="ЛКМ — включить все навыки в строке." FontSize="18" FontWeight="Bold" Foreground="#FF365264" Background="LightSkyBlue" Padding="0,2" TextAlignment="Center"/>
+						<TextBlock Text="ПКМ — выключить все навыки в строке." FontSize="18" FontWeight="Bold" Foreground="#FF365264" Background="LightSkyBlue" Padding="0,2" TextAlignment="Center"/>
 					</StackPanel>
 				</Button.ToolTip>
 			</Button>
@@ -910,26 +1088,41 @@
 		<Setter Property="Margin" Value="2"/>
 	</Style>
 
+	<!-- Activity letters N/E/S/T are IDs from C++; the Russian letters are О(тдых), Е(да), С(он), У(чения). -->
 	<Style x:Key="GnomeScheduleButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource GnomeScheduleHeaderButtonStyle}">
+		<Setter Property="Content" Value="{Binding Activity}"/>
 		<Style.Triggers>
 			<DataTrigger Binding="{Binding Activity}" Value="N">
 				<Setter Property="Background" Value="{StaticResource ActivityNoneBrush}"/>
+				<Setter Property="Content" Value="О"/>
 			</DataTrigger>
 			<DataTrigger Binding="{Binding Activity}" Value="E">
 				<Setter Property="Background" Value="{StaticResource ActivityEatBrush}"/>
+				<Setter Property="Content" Value="Е"/>
 			</DataTrigger>
 			<DataTrigger Binding="{Binding Activity}" Value="S">
 				<Setter Property="Background" Value="{StaticResource ActivitySleepBrush}"/>
+				<Setter Property="Content" Value="С"/>
 			</DataTrigger>
 			<DataTrigger Binding="{Binding Activity}" Value="T">
 				<Setter Property="Background" Value="{StaticResource ActivityTrainBrush}"/>
+				<Setter Property="Content" Value="У"/>
 			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style x:Key="ScheduleActivityAllButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource GnomeSkillAllButtonStyle}">
+		<Setter Property="Content" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:PopulationWindow}}, Path=DataContext.ScheduleActivity }"/>
+		<Style.Triggers>
+			<DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:PopulationWindow}}, Path=DataContext.ScheduleActivity }" Value="N"><Setter Property="Content" Value="О"/></DataTrigger>
+			<DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:PopulationWindow}}, Path=DataContext.ScheduleActivity }" Value="E"><Setter Property="Content" Value="Е"/></DataTrigger>
+			<DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:PopulationWindow}}, Path=DataContext.ScheduleActivity }" Value="S"><Setter Property="Content" Value="С"/></DataTrigger>
+			<DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:PopulationWindow}}, Path=DataContext.ScheduleActivity }" Value="T"><Setter Property="Content" Value="У"/></DataTrigger>
 		</Style.Triggers>
 	</Style>
 
 	<DataTemplate x:Key="GnomeScheduleButtonTemplate">
 		<Button x:Name="Sched_Button"
-			Content="{Binding Activity}"
 			Style="{StaticResource GnomeScheduleButtonStyle}"
 			Command="{Binding CmdSetHour}" />
 	</DataTemplate>
@@ -949,7 +1142,7 @@
 		<StackPanel Orientation="Horizontal" Height="35">
 			<TextBlock Text="{Binding Name}" HorizontalAlignment="Left" MinWidth="180" MaxWidth="180" FontSize="20" Margin="2"/>
 
-			<Button Style="{StaticResource GnomeSkillAllButtonStyle}" Content="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:PopulationWindow}}, Path=DataContext.ScheduleActivity }"
+			<Button Style="{StaticResource ScheduleActivityAllButtonStyle}"
 				Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:PopulationWindow}}, Path=DataContext.CmdAllHours }"
 				CommandParameter="{Binding GnomeID}">
 				<!--
@@ -973,10 +1166,10 @@
 				<ColumnDefinition Width="Auto"/>
 			</Grid.ColumnDefinitions>
 			<TextBlock Text="{Binding Name}" HorizontalAlignment="Left" FontSize="20" Margin="2" Grid.Column="0" />
-			<Button Content="up" MinWidth="50" MaxWidth="50" Margin="2" Grid.Column="1" HorizontalAlignment="Right"
+			<Button Content="выше" MinWidth="50" MaxWidth="50" Margin="2" Grid.Column="1" HorizontalAlignment="Right"
 				Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:PopulationWindow}}, Path=DataContext.CmdSkillUp }"
 				CommandParameter="{Binding SkillID}"/>
-			<Button Content="down" MinWidth="50"  MaxWidth="50" Margin="2" Grid.Column="2" HorizontalAlignment="Right"
+			<Button Content="ниже" MinWidth="50"  MaxWidth="50" Margin="2" Grid.Column="2" HorizontalAlignment="Right"
 				Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:PopulationWindow}}, Path=DataContext.CmdSkillDown }"
 				CommandParameter="{Binding SkillID}"/>
 			<Button Content="&gt;" MinWidth="50" MaxWidth="50" Margin="2"  Grid.Column="3" HorizontalAlignment="Right"
@@ -1016,14 +1209,14 @@
 				<TextBlock Text="{Binding Military}" FontSize="20"/>
 				<TextBlock Text="{Binding Attitude}" FontSize="20"/>
 				<StackPanel Orientation="Horizontal">
-					<Button Content="Send Ambassador" Visibility="{Binding ShowDiploButton}" FontSize="20" Margin="2"
+					<Button Content="Отправить посла" Visibility="{Binding ShowDiploButton}" FontSize="20" Margin="2"
 						Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:NeighborsGui}}, Path=DataContext.CmdDiploMission }"
 						CommandParameter="{Binding ID}" BorderBrush="Black" BorderThickness="2,2,2,2" />
-					<Button Content="Spy" Command="{Binding SpyCmd}"	CommandParameter="{Binding ID}" Visibility="{Binding ShowSpyButton}" FontSize="20" Margin="2"
+					<Button Content="Шпионаж" Command="{Binding SpyCmd}"	CommandParameter="{Binding ID}" Visibility="{Binding ShowSpyButton}" FontSize="20" Margin="2"
 						BorderBrush="Black" BorderThickness="2,2,2,2"/>
-					<Button Content="Sabotage" Command="{Binding SabotageCmd}"	CommandParameter="{Binding ID}" Visibility="{Binding ShowSabotageButton}" FontSize="20" Margin="2"
+					<Button Content="Диверсия" Command="{Binding SabotageCmd}"	CommandParameter="{Binding ID}" Visibility="{Binding ShowSabotageButton}" FontSize="20" Margin="2"
 						BorderBrush="Black" BorderThickness="2,2,2,2"/>
-					<Button Content="Raid" Command="{Binding RaidCmd}"	CommandParameter="{Binding ID}" Visibility="{Binding ShowRaidButton}" FontSize="20" Margin="2"
+					<Button Content="Набег" Command="{Binding RaidCmd}"	CommandParameter="{Binding ID}" Visibility="{Binding ShowRaidButton}" FontSize="20" Margin="2"
 						BorderBrush="Black" BorderThickness="2,2,2,2"/>
 				</StackPanel>
 			</StackPanel>
@@ -1057,29 +1250,29 @@
 			<TextBlock Text="{Binding Name}" HorizontalAlignment="Left" FontSize="20" Margin="2" MinWidth="180" />
 			<CheckBox Content="" IsChecked="{Binding Flee, Mode=TwoWay}" Margin="2">
 				<CheckBox.ToolTip>
-					<StackPanel Width="100" Background="#FF365264">
-						<TextBlock Text="Flee (Avoid combat)" FontSize="18" FontWeight="Bold" Foreground="#FF365264" Background="LightSkyBlue" Padding="0,2" TextAlignment="Center"/>
+					<StackPanel MinWidth="100" Background="#FF365264">
+						<TextBlock Text="Бежать (избегать боя)" FontSize="18" FontWeight="Bold" Foreground="#FF365264" Background="LightSkyBlue" Padding="0,2" TextAlignment="Center"/>
 					</StackPanel>
 				</CheckBox.ToolTip>
 			</CheckBox>
 			<CheckBox Content="" IsChecked="{Binding Defend, Mode=TwoWay}" Margin="2">
 				<CheckBox.ToolTip>
-					<StackPanel Width="100" Background="#FF365264">
-						<TextBlock Text="Defend (Hold position)" FontSize="18" FontWeight="Bold" Foreground="#FF365264" Background="LightSkyBlue" Padding="0,2" TextAlignment="Center"/>
+					<StackPanel MinWidth="100" Background="#FF365264">
+						<TextBlock Text="Обороняться (держать позицию)" FontSize="18" FontWeight="Bold" Foreground="#FF365264" Background="LightSkyBlue" Padding="0,2" TextAlignment="Center"/>
 					</StackPanel>
 				</CheckBox.ToolTip>
 			</CheckBox>
 			<CheckBox Content="" IsChecked="{Binding Attack, Mode=TwoWay}" Margin="2">
 				<CheckBox.ToolTip>
-					<StackPanel Width="100" Background="#FF365264">
-						<TextBlock Text="Attack on sight" FontSize="18" FontWeight="Bold" Foreground="#FF365264" Background="LightSkyBlue" Padding="0,2" TextAlignment="Center"/>
+					<StackPanel MinWidth="100" Background="#FF365264">
+						<TextBlock Text="Атаковать при встрече" FontSize="18" FontWeight="Bold" Foreground="#FF365264" Background="LightSkyBlue" Padding="0,2" TextAlignment="Center"/>
 					</StackPanel>
 				</CheckBox.ToolTip>
 			</CheckBox>
 			<CheckBox Content="" IsChecked="{Binding Hunt, Mode=TwoWay}" Margin="2">
 				<CheckBox.ToolTip>
-					<StackPanel Width="100" Background="#FF365264">
-						<TextBlock Text="Hunt" FontSize="18" FontWeight="Bold" Foreground="#FF365264" Background="LightSkyBlue" Padding="0,2" TextAlignment="Center"/>
+					<StackPanel MinWidth="100" Background="#FF365264">
+						<TextBlock Text="Охотиться" FontSize="18" FontWeight="Bold" Foreground="#FF365264" Background="LightSkyBlue" Padding="0,2" TextAlignment="Center"/>
 					</StackPanel>
 				</CheckBox.ToolTip>
 			</CheckBox>
@@ -1125,7 +1318,7 @@
 						<RowDefinition Height="1*"/>
 						<RowDefinition Height="13*"/>
 					</Grid.RowDefinitions>
-					<Button Content="Configure" MaxHeight="50" FontSize="18" Margin="2" VerticalAlignment="Top" Command="{Binding ConfigureSquadCmd }" Grid.Row="0"/>
+					<Button Content="Настроить" MaxHeight="50" FontSize="18" Margin="2" VerticalAlignment="Top" Command="{Binding ConfigureSquadCmd }" Grid.Row="0"/>
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Top"  Grid.Row="1" Margin="2">
 						<Button MaxWidth="50" MaxHeight="50" Grid.Column="2" HorizontalAlignment="Right" Margin="2" Visibility="{Binding ShowLeftArrow}"
 							Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MilitaryGui}}, Path=DataContext.MoveSquadLeftCmd }"
@@ -1189,7 +1382,7 @@
 						<RowDefinition Height="Auto"/>
 						<RowDefinition Height="12*"/>
 					</Grid.RowDefinitions>
-					<Button Content="Uniform" MaxHeight="50" FontSize="18" Margin="2" VerticalAlignment="Top" Command="{Binding ConfigureUniformCmd }" Grid.Row="0"/>
+					<Button Content="Снаряжение" MaxHeight="50" FontSize="18" Margin="2" VerticalAlignment="Top" Command="{Binding ConfigureUniformCmd }" Grid.Row="0"/>
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Top"  Grid.Row="1" Margin="2">
 						<Button Content="&lt;-" MaxWidth="50" MaxHeight="50" FontSize="20" Grid.Column="2" HorizontalAlignment="Right" Margin="2" Visibility="{Binding ShowLeftArrow}"
 							Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MilitaryGui}}, Path=DataContext.MoveRoleLeftCmd }"
@@ -1204,14 +1397,14 @@
 							CommandParameter="{Binding ID}"/>
 
 					</StackPanel>
-					<CheckBox Content="Civilian!" IsChecked="{Binding Civilian, Mode=TwoWay}" Margin="2,20,2,2" FontSize="18" Grid.Row="2">
+					<CheckBox Content="Мирная роль" IsChecked="{Binding Civilian, Mode=TwoWay}" Margin="2,20,2,2" FontSize="18" Grid.Row="2">
 						<CheckBox.ToolTip>
-							<StackPanel Width="500" Background="#FF365264">
-								<TextBlock Text="If enabled this role counts as civilian." FontSize="18" Foreground="#FF365264" Background="LightSkyBlue"
+							<StackPanel MinWidth="500" MaxWidth="900" Background="#FF365264">
+								<TextBlock Text="Если включено, роль считается мирной." FontSize="18" Foreground="#FF365264" Background="LightSkyBlue"
 									Padding="0,2" TextAlignment="Center"/>
-								<TextBlock Text="The gnome will retreat to an appropriate" FontSize="18" Foreground="#FF365264" Background="LightSkyBlue"
+								<TextBlock Text="По тревоге гном с этой ролью уходит" FontSize="18" Foreground="#FF365264" Background="LightSkyBlue"
 									Padding="0,2" TextAlignment="Center"/>
-								<TextBlock Text="area in case of an alarm." FontSize="18" Foreground="#FF365264" Background="LightSkyBlue"
+								<TextBlock Text="в отведённое для укрытия место." FontSize="18" Foreground="#FF365264" Background="LightSkyBlue"
 									Padding="0,2" TextAlignment="Center"/>
 							</StackPanel>
 						</CheckBox.ToolTip>
@@ -1232,9 +1425,9 @@
 	<DataTemplate x:Key="InvMaterialTemplate">
 		<StackPanel Orientation="Horizontal">
 			<CheckBox Content="{Binding Name}" IsChecked="{Binding Checked}" Width="150" Margin="4" FontSize="16"/>
-			<TextBlock Text="In Stock: "  FontSize="16" Margin="2" Width="80" TextAlignment="Center"/>
+			<TextBlock Text="На складе: "  FontSize="16" Margin="2" Width="100" TextAlignment="Center"/>
 			<TextBlock Text="{Binding InStock}"  FontSize="16" Margin="2" Width="100" TextAlignment="Center"/>
-			<TextBlock Text="Total: "  FontSize="16" Margin="2" Width="50" TextAlignment="Center"/>
+			<TextBlock Text="Всего: "  FontSize="16" Margin="2" Width="65" TextAlignment="Center"/>
 			<TextBlock Text="{Binding Total}"    FontSize="16" Margin="2" Width="100" TextAlignment="Center"/>
 		</StackPanel>
 	</DataTemplate>
@@ -1245,9 +1438,9 @@
 				<StackPanel Orientation="Horizontal">
 					<CheckBox IsChecked="{Binding Checked}" IsThreeState="True"/>
 					<TextBlock Text="{Binding Name}" FontSize="16" Width="150"/>
-					<TextBlock Text="In Stock: "  FontSize="16" Margin="2" Width="80" TextAlignment="Center"/>
+					<TextBlock Text="На складе: "  FontSize="16" Margin="2" Width="100" TextAlignment="Center"/>
 					<TextBlock Text="{Binding InStock}"  FontSize="16" Margin="2" Width="100" TextAlignment="Center"/>
-					<TextBlock Text="Total: "  FontSize="16" Margin="2" Width="50" TextAlignment="Center"/>
+					<TextBlock Text="Всего: "  FontSize="16" Margin="2" Width="65" TextAlignment="Center"/>
 					<TextBlock Text="{Binding Total}"    FontSize="16" Margin="2" Width="100" TextAlignment="Center"/>
 				</StackPanel>
 			</Expander.Header>
@@ -1267,9 +1460,9 @@
 				<StackPanel Orientation="Horizontal">
 					<CheckBox IsChecked="{Binding Checked}" IsThreeState="True"/>
 					<TextBlock Text="{Binding Name}" FontSize="16" Width="150"/>
-					<TextBlock Text="In Stock: "  FontSize="16" Margin="2" Width="80" TextAlignment="Center"/>
+					<TextBlock Text="На складе: "  FontSize="16" Margin="2" Width="100" TextAlignment="Center"/>
 					<TextBlock Text="{Binding InStock}"  FontSize="16" Margin="2" Width="100" TextAlignment="Center"/>
-					<TextBlock Text="Total: "  FontSize="16" Margin="2" Width="50" TextAlignment="Center"/>
+					<TextBlock Text="Всего: "  FontSize="16" Margin="2" Width="65" TextAlignment="Center"/>
 					<TextBlock Text="{Binding Total}"    FontSize="16" Margin="2" Width="100" TextAlignment="Center"/>
 				</StackPanel>
 			</Expander.Header>
@@ -1289,9 +1482,9 @@
 				<StackPanel Orientation="Horizontal">
 					<CheckBox  x:Name="ICCB" IsChecked="{Binding Checked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsThreeState="True"/>
 					<TextBlock Text="{Binding Name}" FontSize="16" Width="150"/>
-					<TextBlock Text="In Stock: "  FontSize="16" Margin="2" Width="80" TextAlignment="Center"/>
+					<TextBlock Text="На складе: "  FontSize="16" Margin="2" Width="100" TextAlignment="Center"/>
 					<TextBlock Text="{Binding InStock}"  FontSize="16" Margin="2" Width="100" TextAlignment="Center"/>
-					<TextBlock Text="Total: "  FontSize="16" Margin="2" Width="50" TextAlignment="Center"/>
+					<TextBlock Text="Всего: "  FontSize="16" Margin="2" Width="65" TextAlignment="Center"/>
 					<TextBlock Text="{Binding Total}"    FontSize="16" Margin="2" Width="100" TextAlignment="Center"/>
 				</StackPanel>
 			</Expander.Header>

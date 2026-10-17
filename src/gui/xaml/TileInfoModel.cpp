@@ -27,6 +27,7 @@
 #include "TileInfoModel.h"
 
 #include "../../base/tile.h"
+#include "../strings.h"
 #include "ProxyTileInfo.h"
 
 #include <NsApp/Application.h>
@@ -105,9 +106,9 @@ AutomatonTabItem::AutomatonTabItem( QString name, unsigned int id, bool refuel, 
 	m_proxy( proxy )
 {
 	m_coreItems = *new ObservableCollection<TITabItem>();
-	m_coreItems->Add( MakePtr<TITabItem>( "None", "" ) );
-	m_coreItems->Add( MakePtr<TITabItem>( "Automaton Core MK1", "AutomatonCoreMark1" ) );
-	m_coreItems->Add( MakePtr<TITabItem>( "Automaton Core MK2", "AutomatonCoreMark2" ) );
+	m_coreItems->Add( MakePtr<TITabItem>( "Без ядра", "" ) );
+	m_coreItems->Add( MakePtr<TITabItem>( S::s( "$ItemName_AutomatonCoreMark1" ), "AutomatonCoreMark1" ) );
+	m_coreItems->Add( MakePtr<TITabItem>( S::s( "$ItemName_AutomatonCoreMark2" ), "AutomatonCoreMark2" ) );
 
 	if( coreItem == "AutomatonCoreMark1" )
 	{
@@ -371,7 +372,7 @@ void TileInfoModel::onUpdateTileInfo( const GuiTileInfo& tileInfo )
 	m_tennant = nullptr;
 	if ( !tileInfo.possibleTennants.empty() )
 	{
-		_possibleTennants->Add( MakePtr<CreatureTabItem>( "unassigned", 0 ) );
+		_possibleTennants->Add( MakePtr<CreatureTabItem>( "никому", 0 ) );
 		for ( const auto& gnome : tileInfo.possibleTennants )
 		{
 			_possibleTennants->Add( MakePtr<CreatureTabItem>( gnome.text, gnome.id ) );
@@ -678,15 +679,15 @@ void TileInfoModel::updateMiniStockpile( const GuiStockpileInfo& info )
 {
 	m_miniStockpileName = info.name.toStdString().c_str();
 
-	m_capacity = ( "Capacity: " + QString::number( info.capacity ) ).toStdString().c_str();
-	m_itemCount = ( "Used: " + QString::number( info.itemCount ).toStdString() ).c_str();
-	m_reserved = ( "Reserved: " + QString::number( info.reserved ).toStdString() ).c_str();
+	m_capacity = ( "Вместимость: " + QString::number( info.capacity ) ).toStdString().c_str();
+	m_itemCount = ( "Занято: " + QString::number( info.itemCount ).toStdString() ).c_str();
+	m_reserved = ( "Зарезервировано: " + QString::number( info.reserved ).toStdString() ).c_str();
 
 	_miniSPContents->Clear();
 
 	for ( auto is : info.summary )
 	{
-		_miniSPContents->Add( MakePtr<IngnomiaGUI::TITabItem>( QString::number( is.count ) + " " + is.materialName + " " + is.itemName, "" ) );
+		_miniSPContents->Add( MakePtr<IngnomiaGUI::TITabItem>( QString::number( is.count ) + " × " + is.itemName + " (" + is.materialName + ")", "" ) );
 	}
 
 	OnPropertyChanged( "MiniStockpileName" );

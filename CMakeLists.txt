@@ -28,6 +28,12 @@ find_package(OpenAL REQUIRED)
 # Noesis license
 set(NOESIS_LICENSE_NAME "" CACHE STRING "Name")
 set(NOESIS_LICENSE_KEY "" CACHE STRING "Key")
+# Explicit opt-in for a keyless Noesis evaluation build (Noesis shows its own evaluation
+# warning at runtime). Without this option empty license values still fail to compile.
+option(INGNOMIA_NOESIS_EVALUATION "Allow building without a Noesis license (evaluation mode)" OFF)
+if(INGNOMIA_NOESIS_EVALUATION AND (NOESIS_LICENSE_NAME STREQUAL "" OR NOESIS_LICENSE_KEY STREQUAL ""))
+	message(WARNING "Building with Noesis in evaluation mode: no license name/key provided.")
+endif()
 
 set(BUGSPLAT_DB "" CACHE STRING "BSDB")
 
@@ -154,6 +160,8 @@ if(MSVC)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Gy /Oi /MP /GS- /W3 /permissive- /w24458 /w34456 /w24702")
 	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /CGTHREADS:8 /PROFILE")
 	set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} /Ob2")
+	# Sources contain Russian UI literals; compile them as UTF-8 and keep them UTF-8 in the binary
+	target_compile_options(${PROJECT_NAME} PRIVATE /utf-8)
 	set_target_properties(${PROJECT_NAME} PROPERTIES
 		LINK_FLAGS /SUBSYSTEM:WINDOWS
 	)

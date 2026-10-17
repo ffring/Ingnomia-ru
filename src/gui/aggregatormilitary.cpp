@@ -58,7 +58,7 @@ void AggregatorMilitary::sendSquadUpdate()
 	m_squads.clear();
 
 	GuiSquad ngs;
-	ngs.name = "no squad";
+	ngs.name = "Без отряда";
 	ngs.id = 0;
 	ngs.showLeftArrow = false;
 	ngs.showRightArrow = false;

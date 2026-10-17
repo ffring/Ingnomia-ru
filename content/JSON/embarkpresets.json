@@ -74,7 +74,7 @@
 	]
 },
 {
-	"Name": "Easy",
+	"Name": "Лёгкий",
 	"startingItems": [{
 			"Amount": 4,
 			"Components": [{
@@ -192,7 +192,7 @@
 	]
 },
 {
-	"Name": "Medium",
+	"Name": "Средний",
 	"startingItems": [{
 			"Amount": 2,
 			"Components": [{
@@ -266,7 +266,7 @@
 	]
 },
 {
-	"Name": "Hard",
+	"Name": "Тяжёлый",
 	"startingItems": [{
 			"Amount": 1,
 			"Components": [{

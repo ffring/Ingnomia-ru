@@ -86,7 +86,7 @@ void AggregatorCreatureInfo::onRequestCreatureUpdate( unsigned int id )
 		m_info.sleep = gnome->need( "Sleep" );
 		m_info.happiness = gnome->need( "Happiness" );
 
-		m_info.activity = "Doing something. tbi";
+		m_info.activity = "Чем-то занят.";
 
 		if( gnome->roleID() )
 		{
@@ -141,7 +141,7 @@ void AggregatorCreatureInfo::onRequestCreatureUpdate( unsigned int id )
 		auto monster = g->cm()->monster( id );
 		if( monster )
 		{
-			m_info.name = monster->name();
+			m_info.name = S::sOr( "$CreatureName_" + monster->name(), monster->name() );
 			m_info.id = id;
 			//m_info.profession = monster->profession();
 
@@ -157,7 +157,7 @@ void AggregatorCreatureInfo::onRequestCreatureUpdate( unsigned int id )
 			m_info.sleep = 100; //monster->need( "Sleep" );
 			m_info.happiness = 100; //monster->need( "Happiness" );
 			
-			m_info.activity = "Doing something. tbi";
+			m_info.activity = "Чем-то занят.";
 			emit signalCreatureUpdate( m_info );
 			return;
 		}
@@ -166,7 +166,7 @@ void AggregatorCreatureInfo::onRequestCreatureUpdate( unsigned int id )
 			auto animal = g->cm()->animal( id );
 			if( animal )
 			{
-				m_info.name = animal->name();
+				m_info.name = S::sOr( "$CreatureName_" + animal->name(), animal->name() );
 				m_info.id = id;
 				//m_info.profession = animal->profession();
 
@@ -182,7 +182,7 @@ void AggregatorCreatureInfo::onRequestCreatureUpdate( unsigned int id )
 				m_info.sleep = 100; //animal->need( "Sleep" );
 				m_info.happiness = 100; //animal->need( "Happiness" );
 			
-				m_info.activity = "Doing something. tbi";
+				m_info.activity = "Чем-то занят.";
 				emit signalCreatureUpdate( m_info );
 				return;
 			}

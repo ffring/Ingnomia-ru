@@ -95,7 +95,7 @@ void FarmProperties::serialize( QVariantMap& out ) const
 Farm::Farm( QList<QPair<Position, bool>> tiles, Game* game ) :
 	WorldObject( game )
 {
-	m_name = "Farm";
+	m_name = "Поле";
 
 	m_properties.jobPriorities.clear();
 	m_properties.jobPriorities.push_back( FarmJobs::Harvest );

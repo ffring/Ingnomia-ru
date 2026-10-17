@@ -6,7 +6,7 @@
 	xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
 	xmlns:local="clr-namespace:IngnomiaGUI"
 	xmlns:noesis="clr-namespace:NoesisGUIExtensions;assembly=Noesis.GUI.Extensions"
-	FontFamily="Fonts/#8-bit Operator+"
+	FontFamily="Fonts/#WeblySleek UI Semibold"
 	x:Name="MainMenuControl" Focusable="True" IsTabStop="False">
 
 	<UserControl.Resources>

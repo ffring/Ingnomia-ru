@@ -48,7 +48,7 @@ Room::Room( QList<QPair<Position, bool>> tiles, Game* game ) :
 {
 	m_id = GameState::createID();
 
-	m_name = "Room "; // + QString::number( m_id );
+	m_name = "Комната "; // + QString::number( m_id );
 
 	int i = 1;
 	for ( auto p : tiles )

@@ -325,7 +325,7 @@ void AggregatorAgri::onUpdatePasture( unsigned int id )
 
 					for( auto mat : mats )
 					{
-						QString name = S::s( "$MaterialName_" + mat ) + " " + S::s( "$ItemName_" + food );
+						QString name = S::materialItem( mat, food );
 						GuiPastureFoodItem pfi;
 						pfi.itemSID = food;
 						pfi.materialSID = mat;

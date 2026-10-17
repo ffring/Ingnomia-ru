@@ -102,170 +102,57 @@ MissionInfo::MissionInfo( const Mission& mission ) :
 	m_id( mission.id ),
 	m_idString( QString::number( mission.id ).toStdString().c_str() )
 {
-	QString qTime;	
+	QString qTime;
 
 	switch( mission.type )
 	{
-	case MissionType::EXPLORE: 
-		m_title = "Explore"; 
-		switch( mission.step )
-		{
-			case MissionStep::LEAVE_MAP:
-				m_currentAction = "Leaving the area.";
-				qTime = "I haven't left yet.";
-				break;
-			case MissionStep::TRAVEL:
-				m_currentAction = "Exploring the surrounding lands.";
-				qTime = "It's been " + QString::number( qMax( 1, mission.time ) ) + " hours since I left.";
-				break;
-			case MissionStep::RETURN:
-				m_currentAction = "Returning from the mission.";
-				qTime = "It's been " + QString::number( qMax( 1, mission.time ) ) + " hours since I left.";
-				break;
-			case MissionStep::RETURNED:
-			{
-				bool success = mission.result.value( "Success" ).toBool();
-				if( success )
-				{
-					m_currentAction = "I found a neighboring kingdom.";
-				}
-				else
-				{
-					m_currentAction = "I failed to find something new.";
-				}
-				qTime = "It took " + S::gi().numberWord( mission.result.value( "TotalTime" ).toInt() / 24 ) + " days.";
-				break;
-			}
-		}
+	case MissionType::EXPLORE:
+		m_title = "Исследование";
 		break;
-	case MissionType::SPY: 
-		m_title = "Spy"; 
-		switch( mission.step )
-		{
-			case MissionStep::LEAVE_MAP:
-				m_currentAction = "Leaving the area.";
-				qTime = "I haven't left yet.";
-				break;
-			case MissionStep::TRAVEL:
-				m_currentAction = "Traveling to the kingdom.";
-				qTime = "It's been " + QString::number( qMax( 1, mission.time ) ) + " hours since I left.";
-				break;
-			case MissionStep::RETURN:
-				m_currentAction = "Returning from the mission.";
-				qTime = "It's been " + QString::number( qMax( 1, mission.time ) ) + " hours since I left.";
-				break;
-			case MissionStep::RETURNED:
-			{
-				bool success = mission.result.value( "Success" ).toBool();
-				if( success )
-				{
-					m_currentAction = "Success.";
-				}
-				else
-				{
-					m_currentAction = "Failure.";
-				}
-				qTime = "It took " + S::gi().numberWord( mission.result.value( "TotalTime" ).toInt() / 24 ) + " days.";
-				break;
-			}
-		}
+	case MissionType::SPY:
+		m_title = "Шпионаж";
 		break;
-	case MissionType::EMISSARY: 
-		m_title = "Emissary";
-		switch( mission.step )
-		{
-			case MissionStep::LEAVE_MAP:
-				m_currentAction = "Leaving the area.";
-				qTime = "I haven't left yet.";
-				break;
-			case MissionStep::TRAVEL:
-				m_currentAction = "Traveling to the kingdom.";
-				qTime = "It's been " + QString::number( qMax( 1, mission.time ) ) + " hours since I left.";
-				break;
-			case MissionStep::RETURN:
-				m_currentAction = "Returning from the mission.";
-				qTime = "It's been " + QString::number( qMax( 1, mission.time ) ) + " hours since I left.";
-				break;
-			case MissionStep::RETURNED:
-			{
-				bool success = mission.result.value( "Success" ).toBool();
-				if( success )
-				{
-					m_currentAction = "Success." ;
-				}
-				else
-				{
-					m_currentAction = "Failure.";
-				}
-				qTime = "It took " + S::gi().numberWord( mission.result.value( "TotalTime" ).toInt() / 24 ) + " days.";
-				break;
-			}
-		}
+	case MissionType::EMISSARY:
+		m_title = "Посольство";
 		break;
-	case MissionType::RAID: 
-		m_title = "Raid";
-		switch( mission.step )
-		{
-			case MissionStep::LEAVE_MAP:
-				m_currentAction = "Leaving the area.";
-				qTime = "We haven't left yet.";
-				break;
-			case MissionStep::TRAVEL:
-				m_currentAction = "Traveling to the kingdom.";
-				qTime = "It's been " + QString::number( qMax( 1, mission.time ) ) + " hours since we left.";
-				break;
-			case MissionStep::RETURN:
-				m_currentAction = "Returning from the mission.";
-				qTime = "It's been " + QString::number( qMax( 1, mission.time ) ) + " hours since we left.";
-				break;
-			case MissionStep::RETURNED:
-			{
-				bool success = mission.result.value( "Success" ).toBool();
-				if( success )
-				{
-					m_currentAction = "Success.";
-				}
-				else
-				{
-					m_currentAction = "Failure.";
-				}
-				qTime = "It took " + S::gi().numberWord( mission.result.value( "TotalTime" ).toInt() / 24 ) + " days.";
-				break;
-			}
-		}
+	case MissionType::RAID:
+		m_title = "Набег";
 		break;
-	case MissionType::SABOTAGE: 
-		m_title = "Sabotage"; 
-		switch( mission.step )
-		{
-			case MissionStep::LEAVE_MAP:
-				m_currentAction = "Leaving the area.";
-				qTime = "We haven't left yet.";
-				break;
-			case MissionStep::TRAVEL:
-				m_currentAction = "Traveling to the kingdom.";
-				qTime = "It's been " + QString::number( qMax( 1, mission.time ) ) + " hours since we left.";
-				break;
-			case MissionStep::RETURN:
-				m_currentAction = "Returning from the mission.";
-				qTime = "It's been " + QString::number( qMax( 1, mission.time ) ) + " hours since we left.";
-				break;
-			case MissionStep::RETURNED:
-			{
-				bool success = mission.result.value( "Success" ).toBool();
-				if( success )
-				{
-					m_currentAction = "Success.";
-				}
-				else
-				{
-					m_currentAction = "Failure.";
-				}
-				qTime = "It took " + S::gi().numberWord( mission.result.value( "TotalTime" ).toInt() / 24 ) + " days.";
-				break;
-			}
-		}
+	case MissionType::SABOTAGE:
+		m_title = "Диверсия";
 		break;
+	}
+
+	const int hours = qMax( 1, mission.time );
+	switch( mission.step )
+	{
+		case MissionStep::LEAVE_MAP:
+			m_currentAction = "Покидают окрестности.";
+			qTime = "Ещё не вышли за пределы карты.";
+			break;
+		case MissionStep::TRAVEL:
+			m_currentAction = ( mission.type == MissionType::EXPLORE ) ? "Исследуют окрестные земли." : "В пути к королевству.";
+			qTime = "В пути: " + QString::number( hours ) + " " + S::plural( hours, "час", "часа", "часов" ) + ".";
+			break;
+		case MissionStep::RETURN:
+			m_currentAction = "Возвращаются с задания.";
+			qTime = "В пути: " + QString::number( hours ) + " " + S::plural( hours, "час", "часа", "часов" ) + ".";
+			break;
+		case MissionStep::RETURNED:
+		{
+			bool success = mission.result.value( "Success" ).toBool();
+			if( mission.type == MissionType::EXPLORE )
+			{
+				m_currentAction = success ? "Найдено соседнее королевство." : "Ничего нового найти не удалось.";
+			}
+			else
+			{
+				m_currentAction = success ? "Успех." : "Неудача.";
+			}
+			const int days = mission.result.value( "TotalTime" ).toInt() / 24;
+			qTime = "Заняло " + QString::number( days ) + " " + S::plural( days, "день", "дня", "дней" ) + ".";
+			break;
+		}
 	}
 
 	m_time = qTime.toStdString().c_str();
@@ -356,7 +243,7 @@ void NeighborsModel::onPageCmd( BaseComponent* param )
 ///        for an emissary mission against the kingdom whose UID is encoded in @p param.
 void NeighborsModel::onDiploMissionCmd( BaseComponent* param )
 {
-	m_missionTitle = "New diplomatic mission to";
+	m_missionTitle = "Новое посольство в королевство";
 	OnPropertyChanged( "MissionTitle" );
 
 	for( int i = 0; i < m_neighborList->Count(); ++i )
@@ -376,10 +263,10 @@ void NeighborsModel::onDiploMissionCmd( BaseComponent* param )
 
 	m_actionList->Clear();
 
-	m_actionList->Add( MakePtr<AvailableGnome>( (int)MissionAction::IMPROVE, "Improve Relations" ) );
-	m_actionList->Add( MakePtr<AvailableGnome>( (int)MissionAction::INSULT, "Insult" ) );
-	m_actionList->Add( MakePtr<AvailableGnome>( (int)MissionAction::INVITE_TRADER, "Invite Trader" ) );
-	m_actionList->Add( MakePtr<AvailableGnome>( (int)MissionAction::INVITE_AMBASSADOR, "Invite Ambassador" ) );
+	m_actionList->Add( MakePtr<AvailableGnome>( (int)MissionAction::IMPROVE, S::s( "$GUI_Action_Improve" ) ) );
+	m_actionList->Add( MakePtr<AvailableGnome>( (int)MissionAction::INSULT, S::s( "$GUI_Action_Insult" ) ) );
+	m_actionList->Add( MakePtr<AvailableGnome>( (int)MissionAction::INVITE_TRADER, S::s( "$GUI_Action_InviteTrader" ) ) );
+	m_actionList->Add( MakePtr<AvailableGnome>( (int)MissionAction::INVITE_AMBASSADOR, S::s( "$GUI_Action_InviteAmbassador" ) ) );
 
 	OnPropertyChanged( "MissionActions" );
 

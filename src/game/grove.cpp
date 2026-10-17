@@ -100,7 +100,7 @@ void GroveProperties::serialize( QVariantMap& out ) const
 Grove::Grove( QList<QPair<Position, bool>> tiles, Game* game ) :
 	WorldObject( game )
 {
-	m_name = "Grove";
+	m_name = "Роща";
 
 	m_properties.jobPriorities.clear();
 	m_properties.jobPriorities.push_back( GroveJobs::PlantTree );

@@ -38,7 +38,7 @@
 		]
 	},
     {
-        "Name": "Miner",
+        "Name": "Шахтёр",
         "Skills": [
             "Mining",
             "Construction",
@@ -46,7 +46,7 @@
         ]
     },
     {
-        "Name": "Farmer",
+        "Name": "Фермер",
         "Skills": [
             "Horticulture",
             "Farming",
@@ -54,7 +54,7 @@
         ]
     },
     {
-        "Name": "Woodcutter",
+        "Name": "Лесоруб",
         "Skills": [
             "Woodcutting",
             "Carpentry",
@@ -63,7 +63,7 @@
         ]
     },
     {
-        "Name": "Mason",
+        "Name": "Каменщик",
         "Skills": [
             "Masonry",
             "Construction",

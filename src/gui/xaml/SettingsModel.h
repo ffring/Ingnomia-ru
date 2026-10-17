@@ -52,9 +52,10 @@ namespace IngnomiaGUI
 struct LanguageEntry : public Noesis::BaseComponent
 {
 public:
-	LanguageEntry( QString name );
+	LanguageEntry( QString id );
 
-	Noesis::String m_name; ///< Display name (e.g. "English", "Deutsch").
+	QString m_id;          ///< Language ID stored in the config (e.g. "ru_RU").
+	Noesis::String m_name; ///< Display name (e.g. "Русский").
 
     const char* getName() const;
 

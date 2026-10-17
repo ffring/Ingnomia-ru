@@ -39,7 +39,7 @@
 Stockpile::Stockpile( Game* game ) :
 	WorldObject( game )
 {
-	m_name = "Stockpile";
+	m_name = "Склад";
 }
 
 /// @brief Constructs a stockpile from a list of (position, included) tile pairs.
@@ -49,7 +49,7 @@ Stockpile::Stockpile( Game* game ) :
 Stockpile::Stockpile( QList<QPair<Position, bool>> tiles, Game* game ) :
 	WorldObject( game )
 {
-	m_name = "Stockpile"; // + QString::number( m_id );
+	m_name = "Склад"; // + QString::number( m_id );
 
 	int i = 1;
 	for ( auto p : tiles )

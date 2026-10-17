@@ -81,7 +81,7 @@ DebugModel::DebugModel()
 	m_spawnItemCmd.SetExecuteFunc( MakeDelegate( this, &DebugModel::onSpawnItemCmd ) );
 
 	m_gnomeList = *new ObservableCollection<NameEntry>();
-	m_gnomeList->Add( MakePtr<NameEntry>( "All Gnomes", 0 ) );
+	m_gnomeList->Add( MakePtr<NameEntry>( "Все гномы", 0 ) );
 
 	m_windowSizes = *new ObservableCollection<WSEntry>();
 	m_windowSizes->Add( MakePtr<WSEntry>( 1920, 1080 ) );
@@ -102,7 +102,7 @@ DebugModel::DebugModel()
 void DebugModel::updateGnomeList()
 {
 	m_gnomeList->Clear();
-	m_gnomeList->Add( MakePtr<NameEntry>( "All Gnomes", 0 ) );
+	m_gnomeList->Add( MakePtr<NameEntry>( "Все гномы", 0 ) );
 	m_proxy->requestGnomeList();
 }
 

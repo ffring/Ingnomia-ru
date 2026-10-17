@@ -66,16 +66,16 @@ void AggregatorNeighbors::onRequestNeighborsUpdate()
 		{
 			gni.discovered = true;
 
-			QString name = kingdom.name + ", ";
+			QString name = kingdom.name + " — ";
 			switch( kingdom.type )
 			{
 				case KingdomType::GNOME:
-				name += " a gnome kingdom";
+				name += "королевство гномов";
 				gni.diploMission = true;
 				break;
 			case KingdomType::GOBLIN:
-				name += " a goblin kingdom";
-				
+				name += "королевство гоблинов";
+
 				gni.spyMission = true;
 				gni.sabotageMission = true;
 				gni.raidMission = true;
@@ -83,104 +83,102 @@ void AggregatorNeighbors::onRequestNeighborsUpdate()
 
 				break;
 			default:
-				name += " we don't know what they are";
+				name += "кто они, мы не знаем";
 				break;
 			}
 
 			gni.name = name;
 
-			QString distance = "It takes about ";
-			distance += S::gi().numberWord( kingdom.distance / 24 );
-			distance += " days to travel there.";
-			gni.distance = distance;
-			
-			QString wealth = "They are ";
-			switch ( kingdom.wealth )	
+			const int days = kingdom.distance / 24;
+			gni.distance = "Дорога туда займёт около " + QString::number( days ) + " " + S::plural( days, "дня", "дней", "дней" ) + ".";
+
+			QString wealth = "Достаток: ";
+			switch ( kingdom.wealth )
 			{
 				case KingdomWealth::VERYPOOR:
-				wealth += "very poor.";
+				wealth += "очень бедны.";
 				break;
 			case KingdomWealth::POOR:
-				wealth += "poor.";
+				wealth += "бедны.";
 				break;
 			case KingdomWealth::AVERAGE:
-				wealth += "doing ok.";
+				wealth += "живут неплохо.";
 				break;
 			case KingdomWealth::RICH:
-				wealth += "rich.";
+				wealth += "богаты.";
 				break;
 			case KingdomWealth::VERYRICH:
-				wealth += "very rich.";
+				wealth += "очень богаты.";
 				break;
 			}
 			gni.wealth = wealth;
 
-			QString economy = "They specialize in ";
+			QString economy = "Основное занятие: ";
 			switch (kingdom.economy )
 			{
 				case KingdomEconomy::FARMING:
-				economy += "farming.";
+				economy += "земледелие.";
 				break;
 			case KingdomEconomy::LOGGING:
-				economy += "logging.";
+				economy += "лесозаготовка.";
 				break;
 			case KingdomEconomy::MINING:
-				economy += "mining.";
+				economy += "горное дело.";
 				break;
 			case KingdomEconomy::ANIMALBREEDING:
-				economy += "breeding animals.";
+				economy += "животноводство.";
 				break;
 			case KingdomEconomy::TRADING:
-				economy += "trading.";
+				economy += "торговля.";
 				break;
 			}
 			gni.economy = economy;
 
-			QString military = "Their military is ";
-			switch ( kingdom.military )	
+			QString military = "Армия: ";
+			switch ( kingdom.military )
 			{
 				case KingdomMilitary::VERYWEAK:
-				military += "very weak.";
+				military += "очень слабая.";
 				break;
 			case KingdomMilitary::WEAK:
-				military += "weak.";
+				military += "слабая.";
 				break;
 			case KingdomMilitary::AVERAGE:
-				military += "about average.";
+				military += "средняя.";
 				break;
 			case KingdomMilitary::STRONG:
-				military += "strong.";
+				military += "сильная.";
 				break;
 			case KingdomMilitary::VERYSTRONG:
-				military += "very strong.";
+				military += "очень сильная.";
 				break;
 			}
 			gni.military = military;
-	
-			QString attitude = "They are neutral towards us.";
+
+			QString attitude = "Относятся к нам нейтрально.";
 			if( kingdom.attitude < -75 )
 			{
-				attitude = "They consider us their enemies.";
+				attitude = "Считают нас врагами.";
 			}
 			else if( kingdom.attitude < -50  )
 			{
-				attitude = "They are very hostile.";
+				attitude = "Настроены очень враждебно.";
 			}
 			else if( kingdom.attitude < -25 )
 			{
-				attitude = "They are hostile.";
+				attitude = "Настроены враждебно.";
 			}
 			else if( kingdom.attitude > 25 )
 			{
-				attitude = "They are friendly.";
+				attitude = "Настроены дружелюбно.";
 			}
 			else if( kingdom.attitude > 50 )
 			{
-				attitude = "They are very friendly";
+				attitude = "Настроены очень дружелюбно.";
 			}
 			else if( kingdom.attitude > 75 )
 			{
-				attitude = "They consider us their friends.";
+				attitude = "Считают нас друзьями.";
 			}
 			gni.attitude = attitude;
 		}

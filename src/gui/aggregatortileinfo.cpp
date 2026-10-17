@@ -122,34 +122,34 @@ void AggregatorTileInfo::onUpdateTileInfo( unsigned int tileID )
 		{
 			QString wallSID = DBH::materialSID( tile.wallMaterial );
 			QString wType   = DB::select( "Type", "Materials", wallSID ).toString();
-			m_tileInfo.wall = "Wall: " + S::s( "$MaterialName_" + wallSID ) + " " + S::s( "$GroupName_" + wType ).toLower();
+			m_tileInfo.wall = "Стена: " + S::s( "$MaterialName_" + wallSID ) + " (" + S::s( "$GroupName_" + wType ).toLower() + ")";
 		}
 
 		if ( tile.embeddedMaterial )
 		{
 			QString embeddedSID = DBH::materialSID( tile.embeddedMaterial );
 			QString eType       = DB::select( "Type", "Materials", embeddedSID ).toString();
-			m_tileInfo.embedded = "Embedded: " + S::s( "$MaterialName_" + embeddedSID ) + " " + S::s( "$GroupName_" + eType ).toLower();
+			m_tileInfo.embedded = "Вкрапление: " + S::s( "$MaterialName_" + embeddedSID ) + " (" + S::s( "$GroupName_" + eType ).toLower() + ")";
 		}
 
 		if ( tile.floorMaterial )
 		{
 			QString floorSID = DBH::materialSID( tile.floorMaterial );
 			QString fType    = DB::select( "Type", "Materials", floorSID ).toString();
-			m_tileInfo.floor = "Floor: " + S::s( "$MaterialName_" + floorSID ) + " " + S::s( "$GroupName_" + fType ).toLower();
+			m_tileInfo.floor = "Пол: " + S::s( "$MaterialName_" + floorSID ) + " (" + S::s( "$GroupName_" + fType ).toLower() + ")";
 		}
 
 		if ( g->w()->plants().contains( pos.toInt() ) )
 		{
 			Plant& plant                  = g->w()->plants()[pos.toInt()];
-			m_tileInfo.plant              = "Plant: " + plant.getDesignation();
+			m_tileInfo.plant              = "Растение: " + plant.getDesignation();
 			m_tileInfo.plantIsTree        = plant.isTree();
 			m_tileInfo.plantIsHarvestable = plant.harvestable();
 		}
 
 		if ( tile.fluidLevel )
 		{
-			m_tileInfo.water = "Water: " + QString::number( ( 100 / 10 ) * tile.fluidLevel ) + "% ";
+			m_tileInfo.water = "Вода: " + QString::number( ( 100 / 10 ) * tile.fluidLevel ) + "% ";
 		}
 
 		m_tileInfo.creatures.clear();
@@ -165,28 +165,32 @@ void AggregatorTileInfo::onUpdateTileInfo( unsigned int tileID )
 			for ( auto item : pe )
 			{
 				QString itext = "";
-				QString info = S::s( "$MaterialName_" + g->inv()->materialSID( item ) ) + " " + S::s( "$ItemName_" + g->inv()->itemSID( item ) );
-				
+				QString info = S::materialItem( g->inv()->materialSID( item ), g->inv()->itemSID( item ) );
+
 				if( g->inv()->isInStockpile( item ) )
 				{
-					itext += "s";
+					itext += "на складе";
 				}
 				if( g->inv()->isInContainer( item ) )
 				{
-					itext += "c";
+					if( itext.size() )
+					{
+						itext += ", ";
+					}
+					itext += "в ёмкости";
 				}
 				if( itext.size() )
 				{
-					info += "(";
+					info += " [";
 					info += itext;
-					info += ")";
+					info += "]";
 				}
 				counter.add( info );
 			}
 			for ( auto key : counter.keys() )
 			{
 				GuiItemInfo git;
-				git.text = QString::number( counter.count( key ) ) + "x " + key;
+				git.text = QString::number( counter.count( key ) ) + " × " + key;
 				//git.id = item;
 				m_tileInfo.items.append( git );
 			}
@@ -198,7 +202,7 @@ void AggregatorTileInfo::onUpdateTileInfo( unsigned int tileID )
 			if ( door )
 			{
 				GuiItemInfo git;
-				git.text = S::s( "$MaterialName_" + door->source.materialSID ) + " " + S::s( "$ItemName_" + door->source.itemSID ) + "(b)";
+				git.text = S::materialItem( door->source.materialSID, door->source.itemSID ) + " [установлено]";
 				m_tileInfo.items.append( git );
 			}
 		}
@@ -208,7 +212,7 @@ void AggregatorTileInfo::onUpdateTileInfo( unsigned int tileID )
 		{
 			unsigned int id = g->mcm()->mechanismID( pos );
 			m_tileInfo.mechInfo = g->mcm()->mechanismData( id );
-			m_tileInfo.mechInfo.name = S::s( "$MaterialName_" + m_tileInfo.mechInfo.materialSID ) + " " + S::s( "$ItemName_" + m_tileInfo.mechInfo.itemSID );
+			m_tileInfo.mechInfo.name = S::materialItem( m_tileInfo.mechInfo.materialSID, m_tileInfo.mechInfo.itemSID );
 		}
 		else
 		{
@@ -224,7 +228,7 @@ void AggregatorTileInfo::onUpdateTileInfo( unsigned int tileID )
 			{
 				SourceMaterial sm = SourceMaterial::deserialize( constr.value( "Source" ).toMap() );
 				GuiItemInfo git;
-				git.text = S::s( "$MaterialName_" + sm.materialSID ) + " " + S::s( "$ItemName_" + sm.itemSID ) + "(b)";
+				git.text = S::materialItem( sm.materialSID, sm.itemSID ) + " [установлено]";
 				m_tileInfo.items.append( git );
 			}
 		}
@@ -236,7 +240,7 @@ void AggregatorTileInfo::onUpdateTileInfo( unsigned int tileID )
 			{
 				SourceMaterial sm = SourceMaterial::deserialize( constr.value( "Source" ).toMap() );
 				GuiItemInfo git;
-				git.text = S::s( "$MaterialName_" + sm.materialSID ) + " " + S::s( "$ItemName_" + sm.itemSID ) + "(b)";
+				git.text = S::materialItem( sm.materialSID, sm.itemSID ) + " [установлено]";
 				m_tileInfo.items.append( git );
 			}
 		}
@@ -248,13 +252,13 @@ void AggregatorTileInfo::onUpdateTileInfo( unsigned int tileID )
 				for ( auto gnome : g->gm()->gnomesAtPosition( pos ) )
 				{
 					GuiTICreatureInfo gct;
-					gct.text = "Gnome: " + gnome->name();
+					gct.text = "Гном: " + gnome->name();
 					gct.id   = gnome->id();
 					gct.type = gnome->type();
 					if( gct.type == CreatureType::AUTOMATON )
 					{
 						auto automat = dynamic_cast<Automaton*>( gnome );
-						gct.text = "Automaton: " + gnome->name();
+						gct.text = "Автоматон: " + gnome->name();
 						gct.refuel = automat->getRefuelFlag();
 						gct.coreItem = automat->coreType();
 					}
@@ -267,7 +271,7 @@ void AggregatorTileInfo::onUpdateTileInfo( unsigned int tileID )
 				for ( auto animal : g->cm()->animalsAtPosition( pos ) )
 				{
 					GuiTICreatureInfo gct;
-					gct.text = "Animal: " + S::s( "$CreatureName_" + animal->name() );
+					gct.text = "Животное: " + S::s( "$CreatureName_" + animal->name() );
 					gct.id   = animal->id();
 					m_tileInfo.creatures.append( gct );
 				}
@@ -277,7 +281,7 @@ void AggregatorTileInfo::onUpdateTileInfo( unsigned int tileID )
 				for ( auto monster : g->cm()->monstersAtPosition( pos ) )
 				{
 					GuiTICreatureInfo gct;
-					gct.text = "Monster: " + S::s( "$CreatureName_" + monster->name() );
+					gct.text = "Чудовище: " + S::s( "$CreatureName_" + monster->name() );
 					gct.id   = monster->id();
 					m_tileInfo.creatures.append( gct );
 				}
@@ -294,7 +298,8 @@ void AggregatorTileInfo::onUpdateTileInfo( unsigned int tileID )
 		m_tileInfo.workPositions = "";
 		if ( job )
 		{
-			m_tileInfo.jobName = job->type();
+			// jobName is only displayed (the job tab checks isEmpty()), so it can be localized here
+			m_tileInfo.jobName = S::sOr( "$JobName_" + job->type(), job->type() );
 			auto gnome         = g->gm()->gnome( job->workedBy() );
 			if ( gnome )
 			{
@@ -304,11 +309,11 @@ void AggregatorTileInfo::onUpdateTileInfo( unsigned int tileID )
 			auto rt = job->requiredTool();
 			if ( !rt.type.isEmpty() )
 			{
-				m_tileInfo.requiredTool = rt.type + " level " + QString::number( rt.level );
+				m_tileInfo.requiredTool = S::sOr( "$ItemName_" + rt.type, rt.type ) + ", уровень " + QString::number( rt.level );
 			}
 
 			m_tileInfo.jobPriority           = QString::number( job->priority() );
-			m_tileInfo.requiredSkill         = job->requiredSkill();
+			m_tileInfo.requiredSkill         = S::sOr( "$SkillName_" + job->requiredSkill(), job->requiredSkill() );
 			m_tileInfo.requiredToolAvailable = rt.available ? "Yes" : "No";
 
 			for ( auto rim : job->requiredItems() )

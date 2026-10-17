@@ -430,21 +430,30 @@ void AggregatorWorkshop::updateTraderStock( const QList<TraderItem>& source )
 		if( item.type == "Animal" )
 		{
 			gti.materialSIDorGender = item.gender;
-			gti.name = 	gti.materialSIDorGender + " " + S::s( "$CreatureName_" + gti.itemSID ) + " (" + QString::number( gti.value ) + ")";
+			QString genderName = gti.materialSIDorGender;
+			if( genderName == "Male" )
+			{
+				genderName = "самец";
+			}
+			else if( genderName == "Female" )
+			{
+				genderName = "самка";
+			}
+			gti.name = S::s( "$CreatureName_" + gti.itemSID ) + " (" + genderName + ") — " + QString::number( gti.value );
 		}
 		else
 		{
 			gti.materialSIDorGender = item.materialSID;
-			
+
 			QString qName;
 			QString qID;
 			if( DB::select( "HasQuality", "Items", gti.itemSID ).toBool() )
 			{
 				qID = DBH::qualitySID( 3 );
-				qName= S::s( "$QualityName_" + qID ) + " ";
+				qName= ", качество: " + S::s( "$QualityName_" + qID );
 			}
 
-			gti.name = qName + S::s( "$MaterialName_" + gti.materialSIDorGender ) + " " + S::s( "$ItemName_" + gti.itemSID ) + " (" + QString::number( gti.value ) + ")";
+			gti.name = S::materialItem( gti.materialSIDorGender, gti.itemSID ) + qName + " — " + QString::number( gti.value );
 		}
 		m_traderStock.append( gti );
 	}
@@ -498,16 +507,16 @@ void AggregatorWorkshop::updatePlayerStock( unsigned int workshopID )
 							if( DB::select( "HasQuality", "Items", item ).toBool() )
 							{
 								qID = DBH::qualitySID( (int)key );
-								qName= S::s( "$QualityName_" + qID ) + " ";
+								qName= ", качество: " + S::s( "$QualityName_" + qID );
 							}
 
 							gti.itemSID = item;
 							gti.materialSIDorGender = mat;
 							gti.value = g->inv()->getTradeValue( item, mat, key );
-							gti.quality = key; 
+							gti.quality = key;
 							gti.count = vlItems[(int)key].size();
 
-							gti.name = qName + S::s( "$MaterialName_" + mat ) + " " + S::s( "$ItemName_" + item ) + " (" + QString::number( gti.value ) + ")";
+							gti.name = S::materialItem( mat, item ) + qName + " — " + QString::number( gti.value );
 							
 							m_playerStock.append( gti );
 						}

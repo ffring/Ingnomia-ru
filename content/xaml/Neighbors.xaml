@@ -16,7 +16,7 @@
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceDictionary Source="styles/mainmenu/styles.xaml" />
 				<!--<ResourceDictionary Source="localization/_.xaml" />-->
-				<ResourceDictionary Source="localization/en_US.xaml" />
+				<ResourceDictionary Source="localization/ru_RU.xaml" />
 				<!--<ResourceDictionary Source="localization/fr_FR.xaml" />-->
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
@@ -140,7 +140,7 @@
 				<TextBlock Text="{Binding MissionTarget}" FontSize="20" Margin="4" Grid.Row="1" />
 
 				<StackPanel Orientation="Horizontal" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
-					<TextBlock Text="Select gnome:" FontSize="20" Margin="4" />
+					<TextBlock Text="Гном:" FontSize="20" Margin="4" />
 					<ComboBox x:Name="MissionGnome1Selector"
 					Margin="8,0,0,0" MinHeight="50" MaxHeight="50" MinWidth="300"
 					ItemsSource="{Binding MissionGnomes}"
@@ -149,7 +149,7 @@
 				</StackPanel>
 
 				<StackPanel Orientation="Horizontal" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center">
-					<TextBlock Text="Select action:" FontSize="20" Margin="4" />
+					<TextBlock Text="Действие:" FontSize="20" Margin="4" />
 					<ComboBox x:Name="MissionActionSelector"
 					Margin="8,0,0,0" MinHeight="50" MaxHeight="50" MinWidth="300"
 					ItemsSource="{Binding MissionActions}"
@@ -164,8 +164,8 @@
 						<ColumnDefinition Width="1*" />
 					</Grid.ColumnDefinitions>
 
-					<Button Content="Back" Command="{Binding CmdNewMissionBack}" Grid.Column="0" HorizontalAlignment="Left" FontSize="20" />
-					<Button Content="Start" Command="{Binding CmdNewMissionStart}" Grid.Column="1" HorizontalAlignment="Right" FontSize="20" />
+					<Button Content="Назад" Command="{Binding CmdNewMissionBack}" Grid.Column="0" HorizontalAlignment="Left" FontSize="20" />
+					<Button Content="Отправить" Command="{Binding CmdNewMissionStart}" Grid.Column="1" HorizontalAlignment="Right" FontSize="20" />
 				</Grid>
 			</Grid>
 		</Border>

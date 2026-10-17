@@ -16,7 +16,7 @@
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceDictionary Source="styles/mainmenu/styles.xaml" />
 				<!--<ResourceDictionary Source="localization/_.xaml" />-->
-				<ResourceDictionary Source="localization/en_US.xaml" />
+				<ResourceDictionary Source="localization/ru_RU.xaml" />
 				<!--<ResourceDictionary Source="localization/fr_FR.xaml" />-->
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
@@ -132,7 +132,7 @@
 										<ColumnDefinition Width="1*" />
 										<ColumnDefinition Width="1*" />
 									</Grid.ColumnDefinitions>
-									<TextBlock  Grid.Column="1" FontSize="10" VerticalAlignment="Center" Text="Mousewheel behavior"/>
+									<TextBlock  Grid.Column="1" FontSize="10" VerticalAlignment="Center" Text="Колесо мыши: масштаб вместо уровня"/>
 									<CheckBox   Grid.Column="2" VerticalAlignment="Center" Content="" IsChecked="{Binding MouseWheelBehavior}"/>
 								</Grid>
 							</StackPanel>

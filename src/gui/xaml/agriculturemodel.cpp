@@ -21,6 +21,8 @@
 #include "agricultureproxy.h"
 #include "../strings.h"
 
+#include <QStringList>
+
 #include <NsApp/Application.h>
 #include <NsCore/Log.h>
 #include <NsCore/ReflectionImplement.h>
@@ -196,19 +198,23 @@ PastureAnimalEntry::PastureAnimalEntry( const GuiPastureAnimal& animal, Agricult
 	m_isYoung = animal.isYoung;
 	m_gender = animal.gender;
 
-	QString qName;
+	QString qName = animal.name;
+	QStringList details;
 	if( m_gender == Gender::MALE )
 	{
-		qName += "Male ";
+		details.append( "самец" );
 	}
 	else if( m_gender == Gender::FEMALE )
 	{
-		qName += "Female ";
+		details.append( "самка" );
 	}
-	qName += animal.name;
 	if( m_isYoung )
 	{
-		qName += " (young)";
+		details.append( "молодняк" );
+	}
+	if( !details.isEmpty() )
+	{
+		qName += " (" + details.join( ", " ) + ")";
 	}
 	m_name      = qName.toStdString().c_str();
 }
@@ -308,7 +314,7 @@ AgricultureModel::AgricultureModel()
 	m_prios = *new ObservableCollection<AcPriority>();
 	for ( int i = 0; i < 2; ++i )
 	{
-		m_prios->Add( MakePtr<AcPriority>( ( QString( "Priority " ) + QString::number( i + 1 ) ).toStdString().c_str() ) );
+		m_prios->Add( MakePtr<AcPriority>( ( QString( "Приоритет " ) + QString::number( i + 1 ) ).toStdString().c_str() ) );
 	}
 	m_selectedPrio = m_prios->Get( 0 );
 
@@ -409,7 +415,7 @@ void AgricultureModel::updateStandardInfo( unsigned int ID, AgriType type, QStri
 		m_prios->Clear();
 		for ( int i = 0; i < maxPriority; ++i )
 		{
-			m_prios->Add( MakePtr<AcPriority>( ( QString( "Priority " ) + QString::number( i + 1 ) ).toStdString().c_str() ) );
+			m_prios->Add( MakePtr<AcPriority>( ( QString( "Приоритет " ) + QString::number( i + 1 ) ).toStdString().c_str() ) );
 		}
 		OnPropertyChanged( "Priorities" );
 	}
@@ -591,8 +597,8 @@ void AgricultureModel::updateGroveInfo( const GuiGroveInfo& info )
 	m_plantTrees = info.plantTrees;
 	m_fellTrees  = info.fellTrees;
 	m_pickFruits = info.pickFruits;
-	m_numPlants  = ( "Planted trees: " + QString::number( info.planted ) ).toStdString().c_str();
-	m_numPlots   = ( "Num plots: " + QString::number( info.numPlots ) ).toStdString().c_str();
+	m_numPlants  = ( "Посажено деревьев: " + QString::number( info.planted ) ).toStdString().c_str();
+	m_numPlots   = ( "Участков: " + QString::number( info.numPlots ) ).toStdString().c_str();
 
 	OnPropertyChanged( "PlantTrees" );
 	OnPropertyChanged( "FellTrees" );
