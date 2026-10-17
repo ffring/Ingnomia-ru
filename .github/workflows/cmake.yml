@@ -43,12 +43,29 @@ jobs:
     - name: English literal audit in C++ (report only)
       run: python3 tools/l10n/ru_locale.py scan-cpp --repo .
 
+  mood-rules:
+    # The mood rules (src/game/moodrules.cpp) are Qt-free; the same file is compiled into
+    # the game. Runs on every push/PR, needs no secrets or game dependencies.
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Build mood rules tests (ASan/UBSan)
+      run: >
+        g++ -std=c++17 -Wall -Wextra -Werror -g
+        -fsanitize=address,undefined -fno-sanitize-recover=all
+        -o "${RUNNER_TEMP}/moodrules_test"
+        tests/mood/moodrules_test.cpp src/game/moodrules.cpp
+
+    - name: Run mood rules tests
+      run: '"${RUNNER_TEMP}/moodrules_test"'
+
   windows-native:
     # Windows-only for 0.9.0. The Qt6 + GLAD + Noesis 3.0.12 + C++23 stack has not
     # been validated on Linux yet. Started manually so ordinary pushes never fail on
     # a missing Noesis license.
     if: github.event_name == 'workflow_dispatch'
-    needs: localization
+    needs: [localization, mood-rules]
     runs-on: windows-2022
 
     steps:

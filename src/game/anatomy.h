@@ -69,7 +69,7 @@ public:
 	QVariantMap serialize() const;
 	void deserialize( QVariantMap state );
 
-	void damage( Equipment* eq, DamageType dt, AnatomyHeight da, AnatomySide ds, int strength );
+	bool damage( Equipment* eq, DamageType dt, AnatomyHeight da, AnatomySide ds, int strength );
 
 	void heal();
 

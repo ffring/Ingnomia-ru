@@ -181,8 +181,9 @@ void Anatomy::deserialize( QVariantMap in )
  * @param da The height of the attack (low, middle, high).
  * @param ds The side of the attack (left, right, center/front/back).
  * @param strength The raw damage value of the attack.
+ * @return True if the hit was lethal or did damage after armor; false if fully absorbed.
  */
-void Anatomy::damage( Equipment* eq, DamageType dt, AnatomyHeight da, AnatomySide ds, int strength )
+bool Anatomy::damage( Equipment* eq, DamageType dt, AnatomyHeight da, AnatomySide ds, int strength )
 {
 	// get part that is hit
 	CreaturePart hitPart = KCP_NONE;
@@ -317,7 +318,7 @@ void Anatomy::damage( Equipment* eq, DamageType dt, AnatomyHeight da, AnatomySid
 							{
 								m_status        = AnatomyStatus( m_status | AS_DEAD );
 								m_statusChanged = true;
-								return;
+								return true;
 							}
 						}
 					}
@@ -325,7 +326,7 @@ void Anatomy::damage( Equipment* eq, DamageType dt, AnatomyHeight da, AnatomySid
 					{
 						m_status        = AnatomyStatus( m_status | AS_DEAD );
 						m_statusChanged = true;
-						return;
+						return true;
 					}
 				}
 			}
@@ -333,7 +334,7 @@ void Anatomy::damage( Equipment* eq, DamageType dt, AnatomyHeight da, AnatomySid
 			{
 				m_status        = AnatomyStatus( m_status | AS_DEAD );
 				m_statusChanged = true;
-				return;
+				return true;
 			}
 		}
 
@@ -360,7 +361,9 @@ void Anatomy::damage( Equipment* eq, DamageType dt, AnatomyHeight da, AnatomySid
 				m_statusChanged = true;
 			}
 		}
+		return finalDamage > 0;
 	}
+	return false;
 }
 
 /**

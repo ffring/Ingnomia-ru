@@ -85,6 +85,20 @@ void AggregatorCreatureInfo::onRequestCreatureUpdate( unsigned int id )
 		m_info.thirst = gnome->need( "Thirst" );
 		m_info.sleep = gnome->need( "Sleep" );
 		m_info.happiness = gnome->need( "Happiness" );
+		m_info.moodStatus.clear();
+		m_info.thoughts.clear();
+		if ( gnome->type() == CreatureType::GNOME )
+		{
+			const auto& mood = gnome->mood();
+			m_info.happiness = mood.mood();
+			m_info.moodStatus = QString::fromStdString( mood.statusText() );
+			QStringList lines;
+			for ( const auto& line : mood.thoughtLines( 4 ) )
+			{
+				lines.append( QString::fromStdString( line ) );
+			}
+			m_info.thoughts = lines.join( "\n" );
+		}
 
 		m_info.activity = "Чем-то занят.";
 
@@ -138,6 +152,11 @@ void AggregatorCreatureInfo::onRequestCreatureUpdate( unsigned int id )
 	}
 	else
 	{
+		// Start from an empty payload so no gnome profession, equipment or mood stays visible
+		// for a monster or animal; the next gnome rebuilds its equipment pictures.
+		m_info = GuiCreatureInfo();
+		m_previousID = 0;
+
 		auto monster = g->cm()->monster( id );
 		if( monster )
 		{

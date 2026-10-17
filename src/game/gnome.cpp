@@ -95,6 +95,25 @@ Gnome::Gnome( QVariantMap& in, Game* game ) :
 
 	m_needs = in.value( "Needs" ).toMap();
 
+	// Saves without a valid "Mood" record (older saves) start from their stored Happiness
+	if ( !m_mood.deserialize( in.value( "Mood" ).toString().toStdString() ) && m_needs.contains( "Happiness" ) )
+	{
+		m_mood.setMood( m_needs.value( "Happiness" ).toDouble() );
+	}
+	if ( m_needs.contains( "Happiness" ) )
+	{
+		m_needs.insert( "Happiness", m_mood.mood() );
+	}
+
+	// Bed chosen by the last FindBed, so a sleep resumed by the restored behavior tree is
+	// judged correctly. Older saves lack it: that one resumed sleep gets no floor penalty.
+	QString sleepBed   = in.value( "SleepBedPos" ).toString();
+	m_sleepBedPosKnown = sleepBed.split( " " ).size() == 3;
+	if ( m_sleepBedPosKnown )
+	{
+		m_sleepBedPos = Position( sleepBed );
+	}
+
 	if ( in.contains( "Profession" ) )
 	{
 		m_profession = in.value( "Profession" ).toString();
@@ -171,6 +190,15 @@ void Gnome::serialize( QVariantMap& out )
 	out.insert( "SkillPriorities", m_skillPriorities );
 	//basic needs
 	out.insert( "Needs", m_needs );
+	out.insert( "Mood", QString::fromStdString( m_mood.serialize() ) );
+	if ( m_sleepBedPosKnown )
+	{
+		out.insert( "SleepBedPos", m_sleepBedPos.toString() );
+	}
+	else
+	{
+		out.remove( "SleepBedPos" );
+	}
 	out.insert( "Equipment", m_equipment.serialize() );
 
 	out.insert( "Profession", m_profession );
@@ -614,6 +642,13 @@ void Gnome::initTaskMap()
 /// @param level Initial or new level value.
 void Gnome::addNeed( QString id, float level )
 {
+	if ( id == "Happiness" )
+	{
+		// Happiness mirrors the mood rules; setting it (new gnome, debug tool) sets the mood
+		m_mood.setMood( level );
+		m_needs.insert( id, m_mood.mood() );
+		return;
+	}
 	m_needs.insert( id, level );
 }
 
@@ -932,8 +967,37 @@ bool Gnome::evalNeeds( bool seasonChanged, bool dayChanged, bool hourChanged, bo
 				}
 			}
 		}
+		// Automatons and traders have their own onTick and never get here; the type check
+		// keeps the rules limited to colony gnomes anyway
+		if ( m_type == CreatureType::GNOME && !isDead() )
+		{
+			evalMood();
+		}
 	}
 	return true;
+}
+
+/// @brief Advances the mood rules by one game minute from the current needs, logs break
+///        start/end and mirrors the mood into the Happiness need shown in the UI.
+void Gnome::evalMood()
+{
+	Mood::NeedSample sample;
+	sample.hunger = m_needs.value( "Hunger", 100 ).toDouble();
+	sample.thirst = m_needs.value( "Thirst", 100 ).toDouble();
+	sample.sleep  = m_needs.value( "Sleep", 100 ).toDouble();
+
+	switch ( m_mood.tickMinute( sample ) )
+	{
+		case Mood::Transition::BreakStarted:
+			log( "Срыв: отказ от новой работы." );
+			break;
+		case Mood::Transition::BreakEnded:
+			log( "Срыв позади, снова берёт работу." );
+			break;
+		default:
+			break;
+	}
+	m_needs.insert( "Happiness", m_mood.mood() );
 }
 
 /// @brief Updates tile lighting when the gnome moves (currently disabled/stub).
@@ -1165,7 +1229,11 @@ bool Gnome::attack( DamageType dt, AnatomyHeight da, int skill, int strength, Po
 	if ( hit )
 	{
 		Global::logger().log( LogType::COMBAT, m_name + " took " + QString::number( strength ) + " damage.", m_id );
-		m_anatomy.damage( &m_equipment, dt, da, ds, strength );
+		// only a hit that gets through the armor is remembered as an injury
+		if ( m_anatomy.damage( &m_equipment, dt, da, ds, strength ) && m_type == CreatureType::GNOME )
+		{
+			m_mood.noteEvent( Mood::Thought::Injured );
+		}
 	}
 	else
 	{

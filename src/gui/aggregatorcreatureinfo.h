@@ -46,6 +46,8 @@ struct GuiCreatureInfo
 	int thirst = 0;         ///< Current thirst level.
 	int sleep = 0;          ///< Current sleep level.
 	int happiness = 0;      ///< Current happiness level.
+	QString moodStatus;     ///< Mood or break status line (colony gnomes only).
+	QString thoughts;       ///< Recent remembered thoughts, one per line (colony gnomes only).
 
 	QString activity;       ///< Short description of what the gnome is doing right now.
 

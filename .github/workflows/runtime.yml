@@ -1,8 +1,8 @@
 name: Runtime proof (existing package)
 
 # Manual Windows diagnostic: re-run the launch-only runtime proof against a package that an
-# earlier "CMake" run already built. Nothing is compiled, the downloaded ZIP is not modified,
-# and no gameplay is tested (the helper never sends input).
+# earlier "CMake" run already built. Nothing is compiled and the downloaded ZIP is not
+# modified. The optional colony check clicks New Game in the isolated test copy only.
 
 on:
   workflow_dispatch:
@@ -18,6 +18,10 @@ on:
           - evaluation
           - licensed
         default: evaluation
+      start_colony:
+        description: "Also create and capture a small test colony (does not test mood/job behavior)"
+        type: boolean
+        default: false
 
 permissions:
   actions: read
@@ -43,6 +47,7 @@ jobs:
       env:
         MESA_URL: https://github.com/pal1000/mesa-dist-win/releases/download/26.2.4/mesa3d-26.2.4-release-msvc.7z
         MESA_SHA256: 351fc8c8b695878ffb3eaa044b3ead08672a48b1a045e3c3e3975811df0f6695
+        START_COLONY: ${{ inputs.start_colony }}
       run: |
         $ErrorActionPreference = 'Stop'
         $proof = Join-Path $env:RUNNER_TEMP 'runtime-proof'
@@ -96,7 +101,7 @@ jobs:
         $env:ALSOFT_LOGFILE = Join-Path $proof 'openal.log'
         Get-ChildItem $game -File | Select-Object Name, Length | Format-Table -AutoSize | Out-String -Width 200 |
           Set-Content -Encoding UTF8 (Join-Path $proof 'game-root-files.txt')
-        & ./tools/qa/verify_windows.ps1 -GameRoot $game -OutputDir $proof
+        & ./tools/qa/verify_windows.ps1 -GameRoot $game -OutputDir $proof -StartColony:($env:START_COLONY -eq 'true')
 
     - name: Upload runtime proof
       if: always()

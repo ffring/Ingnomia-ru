@@ -99,6 +99,9 @@ BT_RESULT Gnome::actionSleep( bool halt )
 
 	if ( thoughtBubble() != "Sleeping" )
 	{
+		// thoughtBubble is not saved, so this also runs when a loaded sleep resumes;
+		// m_sleepBedPos is saved, and only a legacy save leaves the bed unknown
+		m_sleepingInBed = !m_sleepBedPosKnown || ( !m_sleepBedPos.isZero() && m_sleepBedPos == m_position );
 		m_gainFromSleep = ( DB::select( "GainFromSleep", "Needs", "Sleep" ).toFloat() / Global::util->ticksPerMinute );
 		setThoughtBubble( "Sleeping" );
 		m_log.append( "Going to sleep." );
@@ -130,6 +133,11 @@ BT_RESULT Gnome::actionSleep( bool halt )
 		else
 		{
 			m_log.append( "Woke up." );
+			// a full night without a bed is remembered once per wake-up
+			if ( !m_sleepingInBed && m_type == CreatureType::GNOME )
+			{
+				m_mood.noteEvent( Mood::Thought::SleptOnFloor );
+			}
 		}
 
 		g->rm()->releaseBed( m_id );
@@ -163,6 +171,8 @@ BT_RESULT Gnome::actionFindBed( bool halt )
 	{
 		bedPos = g->rm()->findFreeDormBed( m_id );
 	}
+	m_sleepBedPos      = bedPos;
+	m_sleepBedPosKnown = true;
 
 	if ( !bedPos.isZero() )
 	{
@@ -579,6 +589,13 @@ BT_RESULT Gnome::actionGetJob( bool halt )
 {
 	if ( Global::debugMode )
 		log( "actionGetJob" );
+
+	// A mood break refuses new jobs only. A job already held is finished or aborted by the
+	// usual tree, and alarm, combat, missions and needs come before Jobs in gnome_standard.xml.
+	if ( m_mood.refusesWork() )
+	{
+		return BT_RESULT::FAILURE;
+	}
 
 	if ( m_jobCooldown > 0 )
 	{

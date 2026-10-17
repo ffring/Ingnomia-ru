@@ -110,16 +110,26 @@ void CreatureInfoModel::updateInfo( const GuiCreatureInfo& info )
 	m_thirst = std::to_string( info.thirst ).c_str();
 	m_sleep = std::to_string( info.sleep ).c_str();
 	m_happiness = std::to_string( info.happiness ).c_str();
+	m_moodStatus = info.moodStatus.toStdString().c_str();
+	m_thoughts = info.thoughts.toStdString().c_str();
 
+	bool professionFound = false;
 	for( int i = 0; i < m_professions->Count(); ++i )
 	{
 		if( m_professions->Get( i )->GetName() == info.profession )
 		{
 			SetProfession( m_professions->Get( i ) );
+			professionFound = true;
 			break;
 		}
 	}
-	
+	if( !professionFound && m_selectedProfession )
+	{
+		// monsters and animals have no profession; do not keep showing the last gnome's
+		m_selectedProfession = nullptr;
+		OnPropertyChanged( "Profession" );
+	}
+
 	m_activity = info.activity.toStdString().c_str();
 
 	OnPropertyChanged( "Name" );
@@ -133,6 +143,8 @@ void CreatureInfoModel::updateInfo( const GuiCreatureInfo& info )
 	OnPropertyChanged( "Thirst" );
 	OnPropertyChanged( "Sleep" );
 	OnPropertyChanged( "Happiness" );
+	OnPropertyChanged( "MoodStatus" );
+	OnPropertyChanged( "Thoughts" );
 	OnPropertyChanged( "Activity" );
 
 	m_bitmapHead  = m_bitmapHeadEmpty;
@@ -258,6 +270,8 @@ const char* CreatureInfoModel::GetHunger() const { return m_hunger.Str(); }
 const char* CreatureInfoModel::GetThirst() const { return m_thirst.Str(); }
 const char* CreatureInfoModel::GetSleep() const { return m_sleep.Str(); }
 const char* CreatureInfoModel::GetHappiness() const { return m_happiness.Str(); }
+const char* CreatureInfoModel::GetMoodStatus() const { return m_moodStatus.Str(); }
+const char* CreatureInfoModel::GetThoughts() const { return m_thoughts.Str(); }
 const char* CreatureInfoModel::GetActivity() const { return m_activity.Str(); }
 
 
@@ -306,6 +320,8 @@ NS_IMPLEMENT_REFLECTION( CreatureInfoModel, "IngnomiaGUI.CreatureInfoModel" )
 	NsProp( "Thirst", &CreatureInfoModel::GetThirst );
 	NsProp( "Sleep", &CreatureInfoModel::GetSleep );
 	NsProp( "Happiness", &CreatureInfoModel::GetHappiness );
+	NsProp( "MoodStatus", &CreatureInfoModel::GetMoodStatus );
+	NsProp( "Thoughts", &CreatureInfoModel::GetThoughts );
 
 	NsProp( "Activity", &CreatureInfoModel::GetActivity );
 

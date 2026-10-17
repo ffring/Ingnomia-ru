@@ -83,6 +83,8 @@ private:
 	Noesis::String m_thirst    = "0";
 	Noesis::String m_sleep     = "0";
 	Noesis::String m_happiness = "0";
+	Noesis::String m_moodStatus;
+	Noesis::String m_thoughts;
 	Noesis::String m_activity;
 
 	const char* GetName() const;
@@ -96,6 +98,8 @@ private:
 	const char* GetThirst() const;
 	const char* GetSleep() const;
 	const char* GetHappiness() const;
+	const char* GetMoodStatus() const;
+	const char* GetThoughts() const;
 
 	const char* GetActivity() const;
 

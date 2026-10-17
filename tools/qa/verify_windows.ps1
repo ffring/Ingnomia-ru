@@ -1,9 +1,11 @@
 param(
     [Parameter(Mandatory=$true)][string]$GameRoot,
-    [Parameter(Mandatory=$true)][string]$OutputDir
+    [Parameter(Mandatory=$true)][string]$OutputDir,
+    [switch]$StartColony
 )
-# Launch-only runtime proof for a packaged Ingnomia: starts the game once, waits for its window,
-# captures it and collects logs. It does not test gameplay and never sends input.
+# Runtime proof for an isolated, disposable package copy on a Windows test runner.
+# By default it captures the menu. -StartColony also clicks New Game in this process only,
+# waits for world generation and captures the colony. It does not verify mood or job behavior.
 $ErrorActionPreference = 'Stop'
 $GameRoot = (Resolve-Path $GameRoot).Path
 New-Item -ItemType Directory -Force -Path $OutputDir | Out-Null
@@ -18,6 +20,18 @@ $config.WindowPosX = 0
 $config.WindowPosY = 0
 $config.framelessWindow = 'false'
 $config | ConvertTo-Json -Depth 20 | Set-Content -Encoding UTF8 $configPath
+if ($StartColony) {
+    # Test-copy settings only; the original package and its default embark are untouched.
+    $newGamePath = Join-Path $GameRoot 'content/JSON/newgame.json'
+    $newGame = Get-Content -Raw -Encoding UTF8 $newGamePath | ConvertFrom-Json
+    $newGame.dimX = 64
+    $newGame.dimY = 64
+    $newGame.numAnimals = 8
+    $newGame.oceanSize = 0
+    $newGame.numGnomes = 3
+    $newGame.peaceful = $true
+    $newGame | ConvertTo-Json -Depth 20 | Set-Content -Encoding UTF8 $newGamePath
+}
 Add-Type -AssemblyName System.Drawing
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type @'
@@ -25,10 +39,37 @@ using System;
 using System.Runtime.InteropServices;
 public static class GameWindowProof {
     [StructLayout(LayoutKind.Sequential)] public struct RECT { public int Left, Top, Right, Bottom; }
+    [StructLayout(LayoutKind.Sequential)] public struct POINT { public int X, Y; }
     [DllImport("user32.dll")] public static extern bool GetWindowRect(IntPtr hwnd, out RECT rect);
+    [DllImport("user32.dll")] public static extern bool GetClientRect(IntPtr hwnd, out RECT rect);
+    [DllImport("user32.dll")] public static extern bool ClientToScreen(IntPtr hwnd, ref POINT point);
+    [DllImport("user32.dll")] public static extern bool SetCursorPos(int x, int y);
+    [DllImport("user32.dll", CharSet=CharSet.Unicode)] public static extern bool PostMessageW(IntPtr hwnd, uint msg, IntPtr wparam, IntPtr lparam);
     [DllImport("user32.dll")] public static extern bool PrintWindow(IntPtr hwnd, IntPtr hdc, uint flags);
 }
 '@
+
+function Save-GameWindow([IntPtr]$Handle, [string]$Name) {
+    if ($Handle -eq [IntPtr]::Zero) { throw 'Cannot capture a zero window handle' }
+    $rect = New-Object GameWindowProof+RECT
+    if (-not [GameWindowProof]::GetWindowRect($Handle, [ref]$rect)) { throw 'GetWindowRect failed' }
+    $width = $rect.Right - $rect.Left
+    $height = $rect.Bottom - $rect.Top
+    if ($width -lt 100 -or $height -lt 100) { throw 'Game window dimensions are invalid' }
+    $bitmap = New-Object System.Drawing.Bitmap($width, $height)
+    $graphics = [System.Drawing.Graphics]::FromImage($bitmap)
+    try {
+        $hdc = $graphics.GetHdc()
+        try { $printed = [GameWindowProof]::PrintWindow($Handle, $hdc, 2) }
+        finally { $graphics.ReleaseHdc($hdc) }
+        $bitmap.Save((Join-Path $OutputDir $Name), [System.Drawing.Imaging.ImageFormat]::Png)
+        $colors = New-Object 'System.Collections.Generic.HashSet[int]'
+        for ($y=30; $y -lt $height; $y+=17) {
+            for ($x=10; $x -lt $width; $x+=17) { [void]$colors.Add($bitmap.GetPixel($x,$y).ToArgb()) }
+        }
+        return [ordered]@{ width=$width; height=$height; printWindowSucceeded=$printed; sampledColors=$colors.Count; variedPixels=($colors.Count -gt 20) }
+    } finally { $graphics.Dispose(); $bitmap.Dispose() }
+}
 
 # main.cpp opens log.txt before the user data folder exists; on a fresh machine the startup
 # log is therefore written to the working directory (GameRoot), later runs use Documents.
@@ -44,6 +85,8 @@ $report = [ordered]@{
     screenshot = $false
     variedPixels = $false
     gameplayTested = $false
+    colonyRequested = [bool]$StartColony
+    colonyGenerated = $false
 }
 $failure = $null
 try {
@@ -60,28 +103,9 @@ try {
     $report.windowFound = $true
     $report.windowTitle = $proc.MainWindowTitle
     Start-Sleep -Seconds 12
-    $rect = New-Object GameWindowProof+RECT
-    if (-not [GameWindowProof]::GetWindowRect($proc.MainWindowHandle, [ref]$rect)) { throw 'GetWindowRect failed' }
-    $width = $rect.Right - $rect.Left
-    $height = $rect.Bottom - $rect.Top
-    if ($width -lt 100 -or $height -lt 100) { throw 'Game window dimensions are invalid' }
-    $report.width = $width
-    $report.height = $height
-    $bitmap = New-Object System.Drawing.Bitmap($width, $height)
-    $graphics = [System.Drawing.Graphics]::FromImage($bitmap)
-    try {
-        $hdc = $graphics.GetHdc()
-        try { $report.printWindowSucceeded = [GameWindowProof]::PrintWindow($proc.MainWindowHandle, $hdc, 2) }
-        finally { $graphics.ReleaseHdc($hdc) }
-        $bitmap.Save((Join-Path $OutputDir 'window.png'), [System.Drawing.Imaging.ImageFormat]::Png)
-        $colors = New-Object 'System.Collections.Generic.HashSet[int]'
-        for ($y=30; $y -lt $height; $y+=17) {
-            for ($x=10; $x -lt $width; $x+=17) { [void]$colors.Add($bitmap.GetPixel($x,$y).ToArgb()) }
-        }
-        $report.sampledColors = $colors.Count
-        $report.variedPixels = $colors.Count -gt 20
-        $report.screenshot = $true
-    } finally { $graphics.Dispose(); $bitmap.Dispose() }
+    $menu = Save-GameWindow $proc.MainWindowHandle 'window.png'
+    foreach ($key in $menu.Keys) { $report[$key] = $menu[$key] }
+    $report.screenshot = $true
     $screen = [System.Windows.Forms.SystemInformation]::VirtualScreen
     $desktop = New-Object System.Drawing.Bitmap($screen.Width,$screen.Height)
     $dg = [System.Drawing.Graphics]::FromImage($desktop)
@@ -91,6 +115,43 @@ try {
     } finally { $dg.Dispose(); $desktop.Dispose() }
     $proc.Refresh()
     $report.runningAfterCapture = -not $proc.HasExited
+    if ($proc.HasExited) { throw 'Game exited after menu capture' }
+    if ($StartColony) {
+        $client = New-Object GameWindowProof+RECT
+        $handle = $proc.MainWindowHandle
+        if ($handle -eq [IntPtr]::Zero -or -not [GameWindowProof]::GetClientRect($handle, [ref]$client)) { throw 'No owned game client area for New Game' }
+        # MainPage.xaml second centered button, observed in the menu proof: New Game.
+        $x = [int](($client.Right - $client.Left) * 0.5)
+        $y = [int](($client.Bottom - $client.Top) * 0.4)
+        $point = New-Object GameWindowProof+POINT
+        $point.X = $x; $point.Y = $y
+        if (-not [GameWindowProof]::ClientToScreen($handle, [ref]$point)) { throw 'ClientToScreen failed' }
+        if (-not [GameWindowProof]::SetCursorPos($point.X, $point.Y)) { throw 'SetCursorPos failed on the test runner' }
+        $xy = [IntPtr](($y -shl 16) -bor ($x -band 0xffff))
+        foreach ($message in @(@(0x0200,0), @(0x0201,1), @(0x0202,0))) {
+            if (-not [GameWindowProof]::PostMessageW($handle, [uint32]$message[0], [IntPtr]$message[1], $xy)) { throw 'New Game mouse message failed' }
+            Start-Sleep -Milliseconds 150
+        }
+        $report.newGameClick = [ordered]@{ clientX=$x; clientY=$y; pid=$proc.Id }
+        $deadline = (Get-Date).AddSeconds(120)
+        while ((Get-Date) -lt $deadline) {
+            Start-Sleep -Seconds 2
+            $proc.Refresh()
+            if ($proc.HasExited) { throw 'Game exited while creating the colony' }
+            foreach ($path in @($localLog, $documentsLog)) {
+                if ((Test-Path $path) -and (Select-String -Quiet -SimpleMatch 'world generator - life - done' -Path $path)) {
+                    $report.colonyGenerated = $true
+                }
+            }
+            if ($report.colonyGenerated) { break }
+        }
+        if (-not $report.colonyGenerated) { throw 'World generation did not finish within 120 seconds' }
+        Start-Sleep -Seconds 10
+        $proc.Refresh()
+        if ($proc.HasExited) { throw 'Game exited after world generation' }
+        $report.colonyCapture = Save-GameWindow $proc.MainWindowHandle 'colony.png'
+        $report.runningAfterColonyCapture = $true
+    }
 } catch {
     $failure = $_
     $report.error = $_.Exception.Message

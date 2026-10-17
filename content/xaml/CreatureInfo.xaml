@@ -233,6 +233,8 @@
 										<TextBlock  FontSize="20" Text="{Binding Happiness}" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" />
 									</Grid>
 								</Grid>
+								<TextBlock  FontSize="13" TextWrapping="Wrap" Margin="4,0,4,2" Text="{Binding MoodStatus}" />
+								<TextBlock  FontSize="12" TextWrapping="Wrap" Margin="4,0,4,4" Text="{Binding Thoughts}" />
 								<TextBlock  FontSize="16" TextWrapping="Wrap" Text="{Binding Activity}" />
 							</StackPanel>
 						</Border>

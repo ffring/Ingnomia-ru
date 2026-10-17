@@ -23,6 +23,7 @@
 
 #include "../base/behaviortree/bt_node.h"
 #include "canwork.h"
+#include "moodrules.h"
 
 #include <QHash>
 
@@ -64,6 +65,11 @@ public:
 
 	void addNeed( QString id, float level );
 	int need( QString id );
+
+	const Mood::MoodState& mood() const
+	{
+		return m_mood;
+	}
 
 	void selectProfession( QString profession );
 
@@ -134,6 +140,13 @@ protected:
 	unsigned char m_carriedDrinks   = 0;
 
 	QList<ScheduleActivity> m_schedule;
+
+	// Mood memories and work-refusal break, see moodrules.h; mirrored into the Happiness need
+	Mood::MoodState m_mood;
+	void evalMood();
+	Position m_sleepBedPos;           ///< Bed found by the last FindBed, zero if none; saved as "SleepBedPos".
+	bool m_sleepBedPosKnown = true;   ///< False only after loading a save without "SleepBedPos" until the next FindBed.
+	bool m_sleepingInBed    = true;   ///< Decided when sleep starts (also when a loaded sleep resumes).
 
 	void initTaskMap();
 
