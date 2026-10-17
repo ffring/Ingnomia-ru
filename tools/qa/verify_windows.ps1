@@ -107,7 +107,8 @@ try {
         try {
             $proc.WaitForExit(10000) | Out-Null
             $report.exitCode = $proc.ExitCode
-            $report.exitCodeHex = ('0x{0:X8}' -f ([int64]$proc.ExitCode -band 0xFFFFFFFF))
+            $unsignedExitCode = [BitConverter]::ToUInt32([BitConverter]::GetBytes([int]$proc.ExitCode), 0)
+            $report.exitCodeHex = ('0x{0:X8}' -f $unsignedExitCode)
             $report.exitTime = $proc.ExitTime.ToString('o')
         } catch {
             $report.exitCodeError = $_.Exception.Message

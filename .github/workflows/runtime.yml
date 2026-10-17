@@ -89,6 +89,10 @@ jobs:
         $env:LIBGL_ALWAYS_SOFTWARE = '1'
         $env:QT_OPENGL = 'desktop'
         $env:QT_DEBUG_PLUGINS = '1'
+        # Hosted runners have no playback device. Use OpenAL Soft's null backend only here.
+        $env:ALSOFT_DRIVERS = 'null'
+        $env:ALSOFT_LOGLEVEL = '3'
+        $env:ALSOFT_LOGFILE = Join-Path $proof 'openal.log'
         Get-ChildItem $game -File | Select-Object Name, Length | Format-Table -AutoSize | Out-String -Width 200 |
           Set-Content -Encoding UTF8 (Join-Path $proof 'game-root-files.txt')
         & ./tools/qa/verify_windows.ps1 -GameRoot $game -OutputDir $proof
