@@ -718,7 +718,7 @@
 	</DataTemplate>
 
 	<DataTemplate x:Key="FilterUnrollStop">
-		<TextBlock Text="{Binding Name, StringFormat='\{0\}: всё'}" HorizontalAlignment="Left" FontSize="20" Margin="2" />
+		<TextBlock Text="{Binding Name, StringFormat='{}\{0\}: всё'}" HorizontalAlignment="Left" FontSize="20" Margin="2" />
 	</DataTemplate>
 	<DataTemplate x:Key="FilterUnrollRecurse">
 		<ItemsControl ItemsSource="{Binding Children, UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{DynamicResource FilterUnrollTemplate}">
