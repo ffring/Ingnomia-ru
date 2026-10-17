@@ -1,7 +1,7 @@
 // Tests for src/game/moodrules.cpp, the production mood rules used by Gnome::evalNeeds.
 // Qt-free; build and run (see docs/MOOD.md):
-//   c++ -std=c++17 -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all \
-//       -o moodrules_test tests/mood/moodrules_test.cpp src/game/moodrules.cpp && ./moodrules_test
+//   c++ -std=c++17 -Wall -Wextra -Werror -fsanitize=address,undefined -fno-sanitize-recover=all -o moodrules_test tests/mood/moodrules_test.cpp src/game/moodrules.cpp
+//   ./moodrules_test
 
 #include "../../src/game/moodrules.h"
 
