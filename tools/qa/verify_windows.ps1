@@ -2,6 +2,8 @@ param(
     [Parameter(Mandatory=$true)][string]$GameRoot,
     [Parameter(Mandatory=$true)][string]$OutputDir
 )
+# Launch-only runtime proof for a packaged Ingnomia: starts the game once, waits for its window,
+# captures it and collects logs. It does not test gameplay and never sends input.
 $ErrorActionPreference = 'Stop'
 $GameRoot = (Resolve-Path $GameRoot).Path
 New-Item -ItemType Directory -Force -Path $OutputDir | Out-Null
@@ -27,15 +29,31 @@ public static class GameWindowProof {
     [DllImport("user32.dll")] public static extern bool PrintWindow(IntPtr hwnd, IntPtr hdc, uint flags);
 }
 '@
+
+# main.cpp opens log.txt before the user data folder exists; on a fresh machine the startup
+# log is therefore written to the working directory (GameRoot), later runs use Documents.
+$localLog = Join-Path $GameRoot 'log.txt'
+$documentsLog = Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'My Games\Ingnomia\log.txt'
+
 $proc = $null
-$report = [ordered]@{ executable = $exe; windowFound = $false; screenshot = $false; variedPixels = $false; gameplayTested = $false }
+$startTime = Get-Date
+$report = [ordered]@{
+    executable = $exe
+    startTime = $startTime.ToString('o')
+    windowFound = $false
+    screenshot = $false
+    variedPixels = $false
+    gameplayTested = $false
+}
+$failure = $null
 try {
     $proc = Start-Process -FilePath $exe -WorkingDirectory $GameRoot -PassThru -RedirectStandardOutput (Join-Path $OutputDir 'stdout.log') -RedirectStandardError (Join-Path $OutputDir 'stderr.log')
+    $report.pid = $proc.Id
     $deadline = (Get-Date).AddSeconds(45)
     while ((Get-Date) -lt $deadline) {
         Start-Sleep -Seconds 1
         $proc.Refresh()
-        if ($proc.HasExited) { $report.exitCode = $proc.ExitCode; throw 'Game exited before a window was available' }
+        if ($proc.HasExited) { throw 'Game exited before a window was available' }
         if ($proc.MainWindowHandle -ne [IntPtr]::Zero) { break }
     }
     if ($proc.MainWindowHandle -eq [IntPtr]::Zero) { throw 'No game window appeared within 45 seconds' }
@@ -74,19 +92,63 @@ try {
     $proc.Refresh()
     $report.runningAfterCapture = -not $proc.HasExited
 } catch {
+    $failure = $_
     $report.error = $_.Exception.Message
-    throw
 } finally {
+    # tear down only the process this script started
     if ($null -ne $proc) {
         $proc.Refresh()
-        if (-not $proc.HasExited) { Stop-Process -Id $proc.Id -Force }
+        if (-not $proc.HasExited) {
+            Stop-Process -Id $proc.Id -Force
+            $report.stoppedByHelper = $true
+        } else {
+            $report.stoppedByHelper = $false
+        }
+        try {
+            $proc.WaitForExit(10000) | Out-Null
+            $report.exitCode = $proc.ExitCode
+            $report.exitCodeHex = ('0x{0:X8}' -f ([int64]$proc.ExitCode -band 0xFFFFFFFF))
+            $report.exitTime = $proc.ExitTime.ToString('o')
+        } catch {
+            $report.exitCodeError = $_.Exception.Message
+        }
     }
-    # Ingnomia is a GUI-subsystem app: its own log goes to Documents\My Games\Ingnomia\log.txt
-    $gameLog = Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'My Games\Ingnomia\log.txt'
-    $report.gameLogCopied = $false
-    if (Test-Path $gameLog) {
-        Copy-Item $gameLog (Join-Path $OutputDir 'ingnomia-log.txt') -Force
-        $report.gameLogCopied = $true
+
+    # both log locations, kept separately
+    $report.startupLocalLogCopied = $false
+    if (Test-Path $localLog) {
+        Copy-Item $localLog (Join-Path $OutputDir 'startup-local-log.txt') -Force
+        $report.startupLocalLogCopied = $true
     }
+    $report.documentsLogCopied = $false
+    if (Test-Path $documentsLog) {
+        Copy-Item $documentsLog (Join-Path $OutputDir 'documents-log.txt') -Force
+        $report.documentsLogCopied = $true
+    }
+
+    # Windows Application error events for Ingnomia.exe since the test started (WER needs a moment)
+    $report.applicationEvents = 0
+    try {
+        Start-Sleep -Seconds 5
+        # levels 1-4: Application Error (1000) is an error, the WER report (1001) is informational
+        $events = @(Get-WinEvent -FilterHashtable @{ LogName = 'Application'; StartTime = $startTime.AddSeconds(-2); Level = 1,2,3,4 } -ErrorAction Stop |
+            Where-Object { $_.Message -match 'Ingnomia\.exe' })
+        if ($null -ne $report.pid -and $events.Count -gt 0) {
+            # keep events that name our PID, or that carry no PID at all (e.g. WER summaries)
+            $pidHex = '0x{0:x}' -f $report.pid
+            $owned = @($events | Where-Object { $_.Message -match [regex]::Escape($pidHex) -or $_.Message -notmatch '(?i)process id' })
+            if ($owned.Count -gt 0) { $events = $owned }
+        }
+        $report.applicationEvents = $events.Count
+        if ($events.Count -gt 0) {
+            $events | Select-Object TimeCreated, Id, ProviderName, LevelDisplayName, Message |
+                ConvertTo-Json -Depth 4 | Set-Content -Encoding UTF8 (Join-Path $OutputDir 'application-events.json')
+        }
+    } catch [System.Exception] {
+        # "no events found" also lands here; it must not replace the original failure
+        $report.applicationEventsNote = $_.Exception.Message
+    }
+
     $report | ConvertTo-Json -Depth 8 | Set-Content -Encoding UTF8 (Join-Path $OutputDir 'runtime-proof.json')
 }
+if ($null -ne $failure) { throw $failure }
