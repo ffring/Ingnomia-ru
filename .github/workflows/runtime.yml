@@ -87,7 +87,8 @@ jobs:
         # diagnostics for this test process only; nothing is written into the package
         $env:GALLIUM_DRIVER = 'llvmpipe'
         $env:LIBGL_ALWAYS_SOFTWARE = '1'
-        $env:QT_OPENGL = 'desktop'
+        $env:QT_OPENGL = 'software'
+        $env:QT_OPENGL_DLL = Join-Path $game 'opengl32.dll'
         $env:QT_DEBUG_PLUGINS = '1'
         # Hosted runners have no playback device. Use OpenAL Soft's null backend only here.
         $env:ALSOFT_DRIVERS = 'null'
