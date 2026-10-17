@@ -14,6 +14,8 @@ on:
         default: evaluation
 
 env:
+  # Russian filenames and validation messages must also work on English Windows runners.
+  PYTHONUTF8: '1'
   # CMake build type (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: RelWithDebInfo
   # Base URL for prebuilt dependency packages
